@@ -1,0 +1,65 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 600
+  ClientWidth = 400
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object Button1: TButton
+    Align = Top
+    Size.Width = 400.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    Text = 'Log'
+    TextSettings.Trimming = None
+    OnClick = Button1Click
+  end
+  object Button5: TButton
+    Align = Top
+    Position.Y = 81.000000000000000000
+    Size.Width = 400.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = 'Information'
+    TextSettings.Trimming = None
+    OnClick = Button5Click
+  end
+  object Button4: TButton
+    Align = Top
+    Position.Y = 162.000000000000000000
+    Size.Width = 400.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'Warning'
+    TextSettings.Trimming = None
+    OnClick = Button4Click
+  end
+  object Button3: TButton
+    Align = Top
+    Position.Y = 243.000000000000000000
+    Size.Width = 400.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'Error'
+    TextSettings.Trimming = None
+    OnClick = Button3Click
+  end
+  object Button2: TButton
+    Align = Top
+    Position.Y = 324.000000000000000000
+    Size.Width = 400.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Fatal Error'
+    TextSettings.Trimming = None
+    OnClick = Button2Click
+  end
+end
