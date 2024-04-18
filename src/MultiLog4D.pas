@@ -150,13 +150,15 @@ class procedure TMultiLog4D.Tag(const ATag: string);
 begin
   if not ATag.IsEmpty
   then FTag := ATag
-  else FTag := 'TADRAndroidLog';
+  else FTag := 'TMultiLog4D';
 end;
 
 class procedure TMultiLog4D.LogWriteFatalError(const AMsg: string);
 begin
   LogWrite(AMsg, TLogType.ltFatalError);
 end;
+
+//teste
 
 
 end.
