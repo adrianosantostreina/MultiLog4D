@@ -51,22 +51,22 @@ end;
 
 procedure TForm2.Button2Click(Sender: TObject);
 begin
-  TADRAndroidLog.LogWriteFatalError('Fatal Error');
+  TMultiLog4D.LogWriteFatalError('Fatal Error');
 end;
 
 procedure TForm2.Button3Click(Sender: TObject);
 begin
-  TADRAndroidLog.LogWriteError('Error');
+  TMultiLog4D.LogWriteError('Error');
 end;
 
 procedure TForm2.Button4Click(Sender: TObject);
 begin
-  TADRAndroidLog.LogWriteWarning('Warning');
+  TMultiLog4D.LogWriteWarning('Warning');
 end;
 
 procedure TForm2.Button5Click(Sender: TObject);
 begin
-  TADRAndroidLog.LogWriteInformation('Information');
+  TMultiLog4D.LogWriteInformation('Information');
 end;
 
 end.

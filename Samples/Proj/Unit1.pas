@@ -3,15 +3,37 @@ unit Unit1;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs;
+  System.SysUtils,
+  System.Types,
+  System.UITypes,
+  System.Classes,
+  System.Variants,
+  FMX.Types,
+  FMX.Controls,
+  FMX.Forms,
+  FMX.Graphics,
+  FMX.Dialogs,
+  FMX.Controls.Presentation,
+  FMX.StdCtrls,
+
+  MultiLog4D.Types,
+  MultiLog4D.Util;
+
+
+  //MultiLog4D.Types,
+  //MultiLog4D.Factory,
+  //MultiLog4D.Interfaces;
 
 type
   TForm1 = class(TForm)
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
+    //Logger: IMultiLog4D;
   public
     { Public declarations }
+    //constructor Create(AOwner: TComponent); override;
   end;
 
 var
@@ -20,5 +42,20 @@ var
 implementation
 
 {$R *.fmx}
+
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  TMultiLog4DUtil.Logger.LogWrite('Botão Clicado', ltInformation);
+
+//  Logger.Tag('MultiLog4D');
+//  Logger.LogWrite('Log message here', ltInformation);
+end;
+
+//constructor TForm1.Create(AOwner: TComponent);
+//begin
+//  inherited Create(AOwner);
+//  Logger := TLogFactory.GetLogger;
+//end;
 
 end.
