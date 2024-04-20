@@ -1,0 +1,14 @@
+{
+	"hash": "d41d8cd98f00b204e9800998ecf8427e",
+	"updated": "2024-04-20T17:46:06.2311313-03:00",
+	"installedModules": {
+		"github.com/adrianosantostreina/multilog4d": {
+			"name": "multilog4d",
+			"version": "v1.0.4",
+			"hash": "fcd904b9d1fac78066afaec7502673cc",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}

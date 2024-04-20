@@ -2,6 +2,7 @@ program DefaultSample;
 
 uses
   System.StartUpCopy,
+  MultiLog4D.Util,
   FMX.Forms,
   Unit1 in 'Unit1.pas' {Form1};
 
