@@ -22,8 +22,16 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,10 +50,7 @@ procedure TForm1.Button1Click(Sender: TObject);
 begin
   TMultiLog4DUtil
    .Logger
-     .LogWriteWarning('Warning')
      .LogWriteInformation('Information')
-     .LogWriteError('Error')
-     .LogWriteFatalError('Fatal Error');
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -53,7 +58,7 @@ begin
   try
     TMultiLog4DUtil
       .Logger
-        .LogWriteInformation('Usuário clicou no botão LOGIN');
+        .LogWriteWarning('Usuário clicou no botão LOGIN');
 
     //Ação do login
 
@@ -64,8 +69,47 @@ begin
     begin
       TMultiLog4DUtil
         .Logger
-          .LogWriteInformation('Ocorreram erros durante o login')
-          .LogWriteInformation(E.ClassName + ' | ' + E.Message);
+          .LogWriteError('Ocorreram erros durante o login')
+          .LogWriteFatalError(E.ClassName + ' | ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  TMultiLog4DUtil
+   .Logger
+     .LogWriteError('Error')
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+  TMultiLog4DUtil
+   .Logger
+     .LogWriteFatalError('Faltal Error')
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+begin
+  TMultiLog4DUtil
+   .Logger
+     .LogWriteWarning('Warning')
+end;
+
+procedure TForm1.Button6Click(Sender: TObject);
+begin
+  try
+    TMultiLog4DUtil
+      .Logger
+        .LogWriteWarning('Converte um número');
+
+    StrToInt('MultiLog4D');
+  except on E:Exception do
+    begin
+      TMultiLog4DUtil
+        .Logger
+          .LogWriteError('Ocorreram erros:')
+          .LogWriteFatalError(E.ClassName + ' | ' + E.Message);
     end;
   end;
 end;
