@@ -18,22 +18,16 @@ uses
 
   MultiLog4D.Types,
   MultiLog4D.Util;
-
-
-  //MultiLog4D.Types,
-  //MultiLog4D.Factory,
-  //MultiLog4D.Interfaces;
-
 type
   TForm1 = class(TForm)
     Button1: TButton;
+    Button2: TButton;
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
-    //Logger: IMultiLog4D;
   public
     { Public declarations }
-    //constructor Create(AOwner: TComponent); override;
   end;
 
 var
@@ -46,16 +40,34 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  TMultiLog4DUtil.Logger.LogWrite('Botão Clicado', ltInformation);
-
-//  Logger.Tag('MultiLog4D');
-//  Logger.LogWrite('Log message here', ltInformation);
+  TMultiLog4DUtil
+   .Logger
+     .LogWriteWarning('Warning')
+     .LogWriteInformation('Information')
+     .LogWriteError('Error')
+     .LogWriteFatalError('Fatal Error');
 end;
 
-//constructor TForm1.Create(AOwner: TComponent);
-//begin
-//  inherited Create(AOwner);
-//  Logger := TLogFactory.GetLogger;
-//end;
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  try
+    TMultiLog4DUtil
+      .Logger
+        .LogWriteInformation('Usuário clicou no botão LOGIN');
+
+    //Ação do login
+
+    TMultiLog4DUtil
+      .Logger
+        .LogWriteInformation('Login efetuado com sucesso!');
+  except on E:Exception do
+    begin
+      TMultiLog4DUtil
+        .Logger
+          .LogWriteInformation('Ocorreram erros durante o login')
+          .LogWriteInformation(E.ClassName + ' | ' + E.Message);
+    end;
+  end;
+end;
 
 end.

@@ -3,7 +3,7 @@
         <ProjectGuid>{8E71FF84-0BA8-49FB-91D8-45D71870F705}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="Samples\Proj\ProjS.dproj">
+        <Projects Include="Samples\Proj\DefaultSample.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Samples\Android\AndroidMultiLog4D.dproj">
@@ -17,14 +17,14 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="ProjS">
-        <MSBuild Projects="Samples\Proj\ProjS.dproj"/>
+    <Target Name="DefaultSample">
+        <MSBuild Projects="Samples\Proj\DefaultSample.dproj"/>
     </Target>
-    <Target Name="ProjS:Clean">
-        <MSBuild Projects="Samples\Proj\ProjS.dproj" Targets="Clean"/>
+    <Target Name="DefaultSample:Clean">
+        <MSBuild Projects="Samples\Proj\DefaultSample.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="ProjS:Make">
-        <MSBuild Projects="Samples\Proj\ProjS.dproj" Targets="Make"/>
+    <Target Name="DefaultSample:Make">
+        <MSBuild Projects="Samples\Proj\DefaultSample.dproj" Targets="Make"/>
     </Target>
     <Target Name="AndroidMultiLog4D">
         <MSBuild Projects="Samples\Android\AndroidMultiLog4D.dproj"/>
@@ -36,13 +36,13 @@
         <MSBuild Projects="Samples\Android\AndroidMultiLog4D.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="ProjS;AndroidMultiLog4D"/>
+        <CallTarget Targets="DefaultSample;AndroidMultiLog4D"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ProjS:Clean;AndroidMultiLog4D:Clean"/>
+        <CallTarget Targets="DefaultSample:Clean;AndroidMultiLog4D:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ProjS:Make;AndroidMultiLog4D:Make"/>
+        <CallTarget Targets="DefaultSample:Make;AndroidMultiLog4D:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

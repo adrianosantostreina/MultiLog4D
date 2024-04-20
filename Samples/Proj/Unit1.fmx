@@ -16,4 +16,12 @@ object Form1: TForm1
     TextSettings.Trimming = None
     OnClick = Button1Click
   end
+  object Button2: TButton
+    Position.X = 112.000000000000000000
+    Position.Y = 24.000000000000000000
+    TabOrder = 2
+    Text = 'Button2'
+    TextSettings.Trimming = None
+    OnClick = Button2Click
+  end
 end
