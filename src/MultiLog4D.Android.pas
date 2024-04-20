@@ -53,10 +53,10 @@ begin
   LMsg := EmptyStr; //FormatDateTime('yyyy-mm-dd hh:nn:ss.zzz', Now) + ' '; // Add timestamp
 
   case ALogType of
-    ltWarning:     LMsg := LMsg + FTag + ' WARNING: ' + AMsg;
-    ltError:       LMsg := LMsg + FTag + ' ERROR: ' + AMsg;
-    ltFatalError:  LMsg := LMsg + FTag + ' FATAL ERROR: ' + AMsg;
-    else           LMsg := LMsg + FTag + ' INFO: ' + AMsg;
+    ltWarning:     LMsg := LMsg + 'WARNING: ' + AMsg;
+    ltError:       LMsg := LMsg + 'ERROR: ' + AMsg;
+    ltFatalError:  LMsg := LMsg + 'FATAL ERROR: ' + AMsg;
+    else           LMsg := LMsg + 'INFO: ' + AMsg;
   end;
 
   EventLog(LMsg);
