@@ -22,20 +22,14 @@ type
     procedure EventLog(const AMsg: string; AIsForceBroadcast: Boolean = False); override;
     procedure EventLogConsole(const AMsg: string); override;
   public
-    procedure Tag(const ATag: string); override;
-    procedure LogWrite(const AMsg: string; const ALogType: TLogType); override;
-    procedure LogWriteInformation(const AMsg: string); override;
-    procedure LogWriteWarning(const AMsg: string); override;
-    procedure LogWriteError(const AMsg: string); override;
-    procedure LogWriteFatalError(const AMsg: string); override;
+    function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; override;
+    function LogWriteInformation(const AMsg: string): IMultiLog4D; override;
+    function LogWriteWarning(const AMsg: string): IMultiLog4D; override;
+    function LogWriteError(const AMsg: string): IMultiLog4D; override;
+    function LogWriteFatalError(const AMsg: string): IMultiLog4D; override;
   end;
 
 implementation
-
-procedure TMultiLog4DAndroid.Tag(const ATag: string);
-begin
-  FTag := ATag;
-end;
 
 procedure TMultiLog4DAndroid.EventLog(const AMsg: string; AIsForceBroadcast: Boolean);
 begin
@@ -51,39 +45,44 @@ begin
   {$ENDIF}
 end;
 
-procedure TMultiLog4DAndroid.LogWrite(const AMsg: string; const ALogType: TLogType);
+function TMultiLog4DAndroid.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 var
   LMsg: string;
 begin
+  Result := Self as IMultiLog4D;
   LMsg := EmptyStr; //FormatDateTime('yyyy-mm-dd hh:nn:ss.zzz', Now) + ' '; // Add timestamp
 
   case ALogType of
-    ltWarning:     LMsg := LMsg + 'WARNING: ' + AMsg;
-    ltError:       LMsg := LMsg + 'ERROR: ' + AMsg;
-    ltFatalError:  LMsg := LMsg + 'FATAL ERROR: ' + AMsg;
-    else           LMsg := LMsg + 'INFO: ' + AMsg;
+    ltWarning:     LMsg := LMsg + FTag + ' WARNING: ' + AMsg;
+    ltError:       LMsg := LMsg + FTag + ' ERROR: ' + AMsg;
+    ltFatalError:  LMsg := LMsg + FTag + ' FATAL ERROR: ' + AMsg;
+    else           LMsg := LMsg + FTag + ' INFO: ' + AMsg;
   end;
 
   EventLog(LMsg);
 end;
 
-procedure TMultiLog4DAndroid.LogWriteInformation(const AMsg: string);
+function TMultiLog4DAndroid.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
+  Result := Self as IMultiLog4D;
   LogWrite(AMsg, ltInformation);
 end;
 
-procedure TMultiLog4DAndroid.LogWriteWarning(const AMsg: string);
+function TMultiLog4DAndroid.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
+  Result := Self as IMultiLog4D;
   LogWrite(AMsg, ltWarning);
 end;
 
-procedure TMultiLog4DAndroid.LogWriteError(const AMsg: string);
+function TMultiLog4DAndroid.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
+  Result := Self as IMultiLog4D;
   LogWrite(AMsg, ltError);
 end;
 
-procedure TMultiLog4DAndroid.LogWriteFatalError(const AMsg: string);
+function TMultiLog4DAndroid.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
+  Result := Self as IMultiLog4D;
   LogWrite(AMsg, ltFatalError);
 end;
 

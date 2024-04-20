@@ -12,12 +12,12 @@ uses
 type
   IMultiLog4D = interface
     ['{85313A35-9033-4179-8046-B22AD3E36E60}']
-    procedure Tag(const ATag: string);
-    procedure LogWrite(const AMsg: string; const ALogType: TLogType);
-    procedure LogWriteInformation(const AMsg: string);
-    procedure LogWriteWarning(const AMsg: string);
-    procedure LogWriteError(const AMsg: string);
-    procedure LogWriteFatalError(const AMsg: string);
+    function Tag(const ATag: string): IMultiLog4D;
+    function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
+    function LogWriteInformation(const AMsg: string): IMultiLog4D;
+    function LogWriteWarning(const AMsg: string): IMultiLog4D;
+    function LogWriteError(const AMsg: string): IMultiLog4D;
+    function LogWriteFatalError(const AMsg: string): IMultiLog4D;
     procedure EventLog(const AMsg: string; AIsForceBroadcast: Boolean = False);
     procedure EventLogConsole(const AMsg: string);
   end;

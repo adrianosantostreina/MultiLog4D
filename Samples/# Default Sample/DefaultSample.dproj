@@ -8,7 +8,7 @@
         <Platform Condition="'$(Platform)'==''">Android</Platform>
         <TargetedPlatforms>693267</TargetedPlatforms>
         <AppType>Application</AppType>
-        <MainSource>ProjS.dpr</MainSource>
+        <MainSource>DefaultSample.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -106,7 +106,7 @@
         <AUP_READ_PHONE_STATE>true</AUP_READ_PHONE_STATE>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
-        <SanitizedProjectName>ProjS</SanitizedProjectName>
+        <SanitizedProjectName>DefaultSample</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_UsePackage>SampleListViewMultiDetailAppearancePackage;fmx;DbxCommonDriver;bindengine;IndyIPCommon;emsclient;IndyProtocols;dbxcds;FireDACSqliteDriver;DbxClientDriver;soapmidas;dbexpress;inet;FireDACDBXDriver;CustomIPTransport;IndySystem;FireDACCommon;bindcompdbx;rtl;DBXSqliteDriver;DataSnapFireDAC;FireDAC;xmlrtl;dsnap;DataSnapNativeClient;FireDACCommonDriver;IndyIPClient;bindcompfmx;fmxFireDAC;DataSnapCommon;fmxase;dbrtl;DBXInterBaseDriver;bindcomp;IndyCore;RESTBackendComponents;RESTComponents;IndyIPServer;dsnapxml;DataSnapClient;DataSnapProviderClient;emsclientfiredac;FireDACDSDriver;tethering;CloudService;soaprtl;soapserver;FireDACIBDriver;$(DCC_UsePackage)</DCC_UsePackage>
@@ -300,14 +300,6 @@
         <DCCReference Include="Unit1.pas">
             <Form>Form1</Form>
         </DCCReference>
-        <DCCReference Include="..\..\src\MultiLog4D.pas"/>
-        <DCCReference Include="..\..\src\MultiLog4D.Interfaces.pas"/>
-        <DCCReference Include="..\..\src\MultiLog4D.Types.pas"/>
-        <DCCReference Include="..\..\src\MultiLog4D.Base.pas"/>
-        <DCCReference Include="..\..\src\MultiLog4D.Android.pas"/>
-        <DCCReference Include="..\..\src\MultiLog4D.Java.Interfaces.pas"/>
-        <DCCReference Include="..\..\src\MultiLog4D.Factory.pas"/>
-        <DCCReference Include="..\..\src\MultiLog4D.Util.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -326,7 +318,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">ProjS.dpr</Source>
+                    <Source Name="MainSource">DefaultSample.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="4">
@@ -500,7 +492,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Debug\ProjS.classes" Configuration="Debug" Class="AndroidClasses">
+                <DeployFile LocalName="Android\Debug\DefaultSample.classes" Configuration="Debug" Class="AndroidClasses">
                     <Platform Name="Android">
                         <Operation>64</Operation>
                         <Overwrite>true</Overwrite>
@@ -528,9 +520,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Debug\libProjS.so" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Android\Debug\libDefaultSample.so" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Android">
-                        <RemoteName>libProjS.so</RemoteName>
+                        <RemoteName>libDefaultSample.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -567,9 +559,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\ProjS.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\DefaultSample.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>ProjS.exe</RemoteName>
+                        <RemoteName>DefaultSample.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
