@@ -10,7 +10,7 @@ object Form1: TForm1
   DesignerMasterStyle = 0
   object Button1: TButton
     Position.X = 24.000000000000000000
-    Position.Y = 24.000000000000000000
+    Position.Y = 22.000000000000000000
     Size.Width = 161.000000000000000000
     Size.Height = 49.000000000000000000
     Size.PlatformDefault = False
@@ -69,9 +69,19 @@ object Form1: TForm1
     Size.Width = 161.000000000000000000
     Size.Height = 43.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 6
+    TabOrder = 5
     Text = 'Error Simulation'
     TextSettings.Trimming = None
     OnClick = Button6Click
+  end
+  object Button7: TButton
+    Position.X = 24.000000000000000000
+    Position.Y = 360.000000000000000000
+    Size.Width = 161.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Text = 'Outra Abordagem'
+    TextSettings.Trimming = None
   end
 end

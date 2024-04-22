@@ -26,6 +26,7 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
+    Button7: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
@@ -93,6 +94,7 @@ procedure TForm1.Button5Click(Sender: TObject);
 begin
   TMultiLog4DUtil
    .Logger
+     .Tag('MeuAplicativo')
      .LogWriteWarning('Warning')
 end;
 

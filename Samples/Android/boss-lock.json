@@ -4,8 +4,8 @@
 	"installedModules": {
 		"github.com/adrianosantostreina/multilog4d": {
 			"name": "multilog4d",
-			"version": "v1.0.3",
-			"hash": "bae8fb9a16e4799fc4c43fef23de657d",
+			"version": "v1.0.5",
+			"hash": "7e81ed34971ee956a41c52f1f1d9e6a3",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
