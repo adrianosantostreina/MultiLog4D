@@ -6,6 +6,6 @@
 	"mainsrc": "./src",
 	"projects": [],
 	"dependencies": {
-		"github.com/adrianosantostreina/multilog4d": "^v1.0.3"
+		"github.com/adrianosantostreina/multilog4d": "^v1.0.5"
 	}
 }

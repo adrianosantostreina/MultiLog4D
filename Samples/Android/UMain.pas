@@ -3,7 +3,8 @@ unit UMain;
 interface
 
 uses
-  MultiLog4D,
+  MultiLog4D.Types,
+  MultiLog4D.Util,
   System.SysUtils,
   System.Types,
   System.UITypes,
@@ -45,28 +46,38 @@ implementation
 
 procedure TForm2.Button1Click(Sender: TObject);
 begin
-  TMultiLog4D.Tag('MeuAplicativo');
-  TMultiLog4D.LogWrite('Primeiro Log', ltInformation);
+  TMultiLog4DUtil
+    .Logger
+      .Tag('MyApp')
+      .LogWrite('First Log', ltInformation);
 end;
 
 procedure TForm2.Button2Click(Sender: TObject);
 begin
-  TMultiLog4D.LogWriteFatalError('Fatal Error');
+  TMultiLog4DUtil
+    .Logger
+      .LogWriteFatalError('Fatal Error');
 end;
 
 procedure TForm2.Button3Click(Sender: TObject);
 begin
-  TMultiLog4D.LogWriteError('Error');
+  TMultiLog4DUtil
+    .Logger
+      .LogWriteError('Error');
 end;
 
 procedure TForm2.Button4Click(Sender: TObject);
 begin
-  TMultiLog4D.LogWriteWarning('Warning');
+  TMultiLog4DUtil
+    .Logger
+      .LogWriteWarning('Warning');
 end;
 
 procedure TForm2.Button5Click(Sender: TObject);
 begin
-  TMultiLog4D.LogWriteInformation('Information');
+  TMultiLog4DUtil
+    .Logger
+      .LogWriteInformation('Information');
 end;
 
 end.
