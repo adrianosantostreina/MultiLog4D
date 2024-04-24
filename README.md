@@ -44,10 +44,8 @@ Replace <TAG> with the tag entered in MultiLog4D, for example:
 ```bash
 adb logcat MyAppAndroid:D *:S
 ```
-
-[![Watch the video](https://github.com/adrianosantostreina/MultiLog4D/blob/master/MultiLog4d%20Apresenta%C3%A7%C3%A3o.png)](https://youtu.be/wYnMtSVkRtE?si=KBhKDxnJdNFbOWwe)
-
-
+Presentation
+[![Watch the video](https://github.com/adrianosantostreina/MultiLog4D/blob/master/Play.png)](https://youtu.be/wYnMtSVkRtE?si=KBhKDxnJdNFbOWwe)
 
 
 ## Documentation Languages
