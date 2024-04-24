@@ -54,3 +54,4 @@ Presentation
 
 ## ⚠️ License
 `MultiLog4D` is free and open-source library licensed under the [MIT License](https://github.com/adrianosantostreina/MultiLog4D/blob/main/LICENSE.md). 
+
