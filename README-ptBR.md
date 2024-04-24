@@ -51,7 +51,7 @@ Apresentação
 
 ## Linguagens da Documentação
 [English (en)](https://github.com/adrianosantostreina/MultiLog4D/blob/main/README.md)<br>
-[Português (ptBR)](https://github.com/adrianosantostreina/MultiLogD/blob/main/README-ptBR.md)<br>
+[Português (ptBR)](https://github.com/adrianosantostreina/MultiLog4D/blob/master/README-ptBR.md)<br>
 
 ## ⚠️ Licença
 `MultiLog4D` é uma biblioteca gratuita e de código aberto licenciada sob a [MIT License](https://github.com/adrianosantostreina/MultiLog4D/blob/main/LICENSE.md). 
