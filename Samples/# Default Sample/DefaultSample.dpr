@@ -11,7 +11,7 @@ uses
 begin
   TMultiLog4DUtil
    .Logger
-     .Tag('MultiLog4D')
+     .Tag('MultiLog4D');
      .LogWriteInformation('Inicializando o sistema...');
 
   Application.Initialize;
