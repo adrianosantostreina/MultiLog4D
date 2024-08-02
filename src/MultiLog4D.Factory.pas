@@ -20,6 +20,9 @@ uses
   {$IFDEF ANDROID}
     MultiLog4D.Android;
   {$ENDIF}
+  {$IFDEF IOS}
+    MultiLog4D.IOS;
+  {$ENDIF}
 
 class constructor TLogFactory.Create;
 begin
@@ -32,6 +35,9 @@ begin
   begin
     {$IFDEF ANDROID}
       FLogger := TMultiLog4DAndroid.Create;
+    {$ENDIF}
+    {$IFDEF IOS}
+      FLogger := TMultiLog4DiOS.Create;
     {$ENDIF}
   end;
   Result := FLogger;

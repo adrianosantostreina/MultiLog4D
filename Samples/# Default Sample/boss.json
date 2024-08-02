@@ -5,7 +5,5 @@
 	"homepage": "",
 	"mainsrc": "./src",
 	"projects": [],
-	"dependencies": {
-		"github.com/adrianosantostreina/multilog4d": "^v1.0.5"
-	}
+	"dependencies": {}
 }

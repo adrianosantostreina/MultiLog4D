@@ -6,7 +6,6 @@ uses
   System.StrUtils,
   System.SysUtils,
   System.Classes,
-
   MultiLog4D.Types;
 
 type
@@ -18,8 +17,6 @@ type
     function LogWriteWarning(const AMsg: string): IMultiLog4D;
     function LogWriteError(const AMsg: string): IMultiLog4D;
     function LogWriteFatalError(const AMsg: string): IMultiLog4D;
-    procedure EventLog(const AMsg: string; AIsForceBroadcast: Boolean = False);
-    procedure EventLogConsole(const AMsg: string);
   end;
 
 implementation

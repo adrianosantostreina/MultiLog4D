@@ -26,15 +26,22 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
-    Button7: TButton;
+    Button8: TButton;
+    radioInformation: TRadioButton;
+    radioWarning: TRadioButton;
+    radioError: TRadioButton;
+    radioFatalError: TRadioButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+    FCont: Integer;
   public
     { Public declarations }
   end;
@@ -44,6 +51,12 @@ var
 
 implementation
 
+{$IFDEF IOS}
+uses
+  iOSapi.Foundation,
+  Macapi.Helpers;
+{$ENDIF}
+
 {$R *.fmx}
 
 
@@ -51,7 +64,7 @@ procedure TForm1.Button1Click(Sender: TObject);
 begin
   TMultiLog4DUtil
    .Logger
-     .LogWriteInformation('Information')
+   .LogWriteInformation('LogWrite Information');
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -59,18 +72,16 @@ begin
   try
     TMultiLog4DUtil
       .Logger
-        .LogWriteWarning('Usuário clicou no botão LOGIN');
-
-    //Ação do login
+        .LogWriteWarning('User clicked on login button');
 
     TMultiLog4DUtil
       .Logger
-        .LogWriteInformation('Login efetuado com sucesso!');
+        .LogWriteInformation('Login ok');
   except on E:Exception do
     begin
       TMultiLog4DUtil
         .Logger
-          .LogWriteError('Ocorreram erros durante o login')
+          .LogWriteError('Errors detected')
           .LogWriteFatalError(E.ClassName + ' | ' + E.Message);
     end;
   end;
@@ -80,22 +91,21 @@ procedure TForm1.Button3Click(Sender: TObject);
 begin
   TMultiLog4DUtil
    .Logger
-     .LogWriteError('Error')
+   .LogWriteError('LogWrite Error');
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);
 begin
   TMultiLog4DUtil
    .Logger
-     .LogWriteFatalError('Faltal Error')
+   .LogWriteFatalError('Faltal Error')
 end;
 
 procedure TForm1.Button5Click(Sender: TObject);
 begin
   TMultiLog4DUtil
    .Logger
-     .Tag('MeuAplicativo')
-     .LogWriteWarning('Warning')
+   .LogWriteWarning('LogWrite Warning');
 end;
 
 procedure TForm1.Button6Click(Sender: TObject);
@@ -103,17 +113,42 @@ begin
   try
     TMultiLog4DUtil
       .Logger
-        .LogWriteWarning('Converte um número');
+        .LogWriteWarning('Convert error');
 
     StrToInt('MultiLog4D');
   except on E:Exception do
     begin
       TMultiLog4DUtil
         .Logger
-          .LogWriteError('Ocorreram erros:')
+          .LogWriteError('Errors detected:')
           .LogWriteFatalError(E.ClassName + ' | ' + E.Message);
     end;
   end;
+end;
+
+procedure TForm1.Button8Click(Sender: TObject);
+var
+  LTypeMsg : TLogType;
+begin
+  Inc(FCont);
+
+  if radioInformation.IsChecked then
+    LTypeMsg := TLogType.ltInformation
+  else if radioWarning.IsChecked then
+    LTypeMsg := TLogType.ltWarning
+  else if radioError.IsChecked then
+    LTypeMsg := TLogType.ltError
+  else
+    LTypeMsg := TLogType.ltFatalError;
+
+  TMultiLog4DUtil
+   .Logger
+   .LogWrite('LogWrite: ' + IntToStr(FCont), LTypeMsg);
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  FCont := 1;
 end;
 
 end.
