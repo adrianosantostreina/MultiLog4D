@@ -23,6 +23,7 @@ uses
   {$IFDEF IOS}
     MultiLog4D.IOS;
   {$ENDIF}
+  System.Classes;
 
 class constructor TLogFactory.Create;
 begin

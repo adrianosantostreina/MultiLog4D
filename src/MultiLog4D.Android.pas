@@ -7,10 +7,13 @@ uses
 
   Multilog4D.Base,
   Multilog4D.Types,
-  Multilog4D.Interfaces,
-  Androidapi.Helpers,
-  Androidapi.JNI.JavaTypes,
-  Androidapi.JNI.Util;
+  Multilog4D.Interfaces
+  {$IFDEF ANDROID}
+  ,Androidapi.Helpers
+  ,Androidapi.JNI.JavaTypes
+  ,Androidapi.JNI.Util
+  {$ENDIF}
+  ;
 
 type
   TMultiLog4DAndroid = class(TMultiLog4DBase)
