@@ -18,7 +18,6 @@ type
   private
 
   protected
-    class var FCont : Integer;
     class var FTag: string;
     class var FTagSet: Boolean;
     function GetDefaultTag: string;
@@ -44,7 +43,6 @@ end;
 
 function TMultiLog4DBase.Tag(const ATag: string): IMultiLog4D;
 begin
-  FCont := 0;
   if (ATag <> EmptyStr) and not FTagSet then
   begin
     FTag := ATag;
