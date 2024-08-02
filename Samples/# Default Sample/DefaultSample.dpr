@@ -2,6 +2,7 @@ program DefaultSample;
 
 uses
   System.StartUpCopy,
+  MultiLog4D.Types,
   MultiLog4D.Util,
   FMX.Forms,
   Unit1 in 'Unit1.pas' {Form1};
@@ -11,8 +12,8 @@ uses
 begin
   TMultiLog4DUtil
    .Logger
-     .Tag('MultiLog4D');
-     .LogWriteInformation('Inicializando o sistema...');
+     .Tag('MultiLog4D')
+     .LogWrite('Inicializando o sistema...', ltInformation);
 
   Application.Initialize;
   Application.CreateForm(TForm1, Form1);

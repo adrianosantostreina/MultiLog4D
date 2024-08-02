@@ -18,20 +18,19 @@ type
   private
 
   protected
+    class var FCont : Integer;
     class var FTag: string;
     class var FTagSet: Boolean;
     function GetDefaultTag: string;
+  protected
+    function GetLogPrefix(const ALogType: TLogType): string;
   public
     function Tag(const ATag: string): IMultiLog4D; virtual;
-
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; virtual; abstract;
     function LogWriteInformation(const AMsg: string): IMultiLog4D; virtual; abstract;
     function LogWriteWarning(const AMsg: string): IMultiLog4D; virtual; abstract;
     function LogWriteError(const AMsg: string): IMultiLog4D; virtual; abstract;
     function LogWriteFatalError(const AMsg: string): IMultiLog4D; virtual; abstract;
-
-    procedure EventLog(const AMsg: string; AIsForceBroadcast: Boolean = False); virtual; abstract;
-    procedure EventLogConsole(const AMsg: string); virtual; abstract;
     class procedure ResetTag;
   end;
 
@@ -39,32 +38,13 @@ implementation
 
 function TMultiLog4DBase.GetDefaultTag: string;
 begin
-  {$IFDEF MSWINDOWS}
-    Result := TPath.GetFileNameWithoutExtension(ParamStr(0)); // Nome do executável
-  {$ENDIF}
-
-  {$IFDEF ANDROID}
-    Result := JStringToString(TAndroidHelper.Context.getPackageName); // Nome do pacote no Android
-  {$ENDIF}
-
-  {$IFDEF IOS}
-    Result := 'MultiLog4D'; // Pode precisar de ajuste para obter informações específicas do iOS
-  {$ENDIF}
-
-  {$IFDEF MACOS}
-    Result := 'MultiLog4D'; // Pode precisar de ajuste para macOS
-  {$ENDIF}
-
-  {$IFDEF LINUX}
-    Result := 'MultiLog4D'; // Pode precisar de ajuste para Linux
-  {$ENDIF}
-
-  if Result.IsEmpty then
-    Result := 'MultiLog4D'; // Nome padrão se todas as outras falhas
+  FTag := 'MultiLog4D';
+  Result := FTag;
 end;
 
 function TMultiLog4DBase.Tag(const ATag: string): IMultiLog4D;
 begin
+  FCont := 0;
   if (ATag <> EmptyStr) and not FTagSet then
   begin
     FTag := ATag;
@@ -74,12 +54,20 @@ begin
   Result := Self as IMultiLog4D;
 end;
 
+function TMultiLog4DBase.GetLogPrefix(const ALogType: TLogType): string;
+begin
+  case ALogType of
+    ltWarning:     Result := ' | WAR | ';
+    ltError:       Result := ' | ERR | ';
+    ltFatalError:  Result := ' | FAT | ';
+    else           Result := ' | INF | ';
+  end;
+end;
+
 class procedure TMultiLog4DBase.ResetTag;
 begin
   FTag := EmptyStr;
   FTagSet := False;
 end;
-
-
 
 end.
