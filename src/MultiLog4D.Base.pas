@@ -9,9 +9,11 @@ uses
   {$IFDEF ANDROID}
    ,Androidapi.Helpers
   {$ENDIF}
-
+  {$IFDEF MSWINDOWS}
+    ,Winapi.Windows
+  {$ENDIF}
   ,MultiLog4D.Types,
-   Winapi.Windows,
+
   MultiLog4D.Interfaces;
 
 type
@@ -26,8 +28,8 @@ type
     {$IFDEF ML4D_SERVICE}
     FEventCategory: TEventCategory;
     FEventID: DWORD;
-    {$ENDIF}
     function GetCategoryName: string;
+    {$ENDIF}
     function GetLogPrefix(const ALogType: TLogType): string;
   public
     function Tag(const ATag: string): IMultiLog4D; virtual;
@@ -62,12 +64,12 @@ begin
   Result := Self as IMultiLog4D;
 end;
 
+{$IFDEF ML4D_SERVICE}
 function TMultiLog4DBase.GetCategoryName: string;
 begin
   Result := EventCategoryNames[FEventCategory];
 end;
 
-{$IFDEF ML4D_SERVICE}
 function TMultiLog4DBase.Category(const AEventCategory: TEventCategory): IMultiLog4D;
 begin
   FEventCategory := AEventCategory;
