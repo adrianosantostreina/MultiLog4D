@@ -18,10 +18,23 @@ implementation
 
 uses
   {$IFDEF ANDROID}
-    MultiLog4D.Android;
+    MultiLog4D.Android,
   {$ENDIF}
   {$IFDEF IOS}
-    MultiLog4D.IOS;
+    MultiLog4D.IOS,
+  {$ENDIF}
+  {$IFDEF MSWINDOWS}
+    {$IFDEF CONSOLE}
+
+    {$ENDIF}
+
+    {$IFDEF FILE}
+
+    {$ENDIF}
+
+    {$IFDEF ML4D_SERVICE}
+      MultiLog4D.Windows.Services,
+    {$ENDIF}
   {$ENDIF}
   System.Classes;
 
@@ -40,8 +53,22 @@ begin
     {$IFDEF IOS}
       FLogger := TMultiLog4DiOS.Create;
     {$ENDIF}
+    {$IFDEF MSWINDOWS}
+      {$IFDEF CONSOLE}
+
+      {$ENDIF}
+      {$IFDEF FILE}
+
+      {$ENDIF}
+
+      {$IFDEF ML4D_SERVICE}
+        FLogger := TMultiLog4DWindowsServices.Create;
+      {$ENDIF}
+    {$ENDIF}
   end;
+
   Result := FLogger;
 end;
+
 
 end.
