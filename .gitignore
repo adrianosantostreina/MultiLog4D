@@ -68,3 +68,7 @@ __recovery/
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
 src/src.zip
+Samples/# Default Sample/iOSDevice64/Debug/DefaultSample.dSYM
+Samples/# Default Sample/iOSSimARM64/Debug/DefaultSample.dSYM
+Samples/# Default Sample/iOSDevice64/Debug/DefaultSample
+Samples/# Default Sample/iOSSimARM64/Debug/DefaultSample
