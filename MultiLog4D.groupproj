@@ -12,6 +12,9 @@
         <Projects Include="D:\Downloads\Logger\Logger.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Samples\console\multilod4d_console.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -47,14 +50,23 @@
     <Target Name="Logger:Make">
         <MSBuild Projects="D:\Downloads\Logger\Logger.dproj" Targets="Make"/>
     </Target>
+    <Target Name="multilod4d_console">
+        <MSBuild Projects="Samples\console\multilod4d_console.dproj"/>
+    </Target>
+    <Target Name="multilod4d_console:Clean">
+        <MSBuild Projects="Samples\console\multilod4d_console.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="multilod4d_console:Make">
+        <MSBuild Projects="Samples\console\multilod4d_console.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AndroidMultiLog4D;DefaultSample;Logger"/>
+        <CallTarget Targets="AndroidMultiLog4D;DefaultSample;Logger;multilod4d_console"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AndroidMultiLog4D:Clean;DefaultSample:Clean;Logger:Clean"/>
+        <CallTarget Targets="AndroidMultiLog4D:Clean;DefaultSample:Clean;Logger:Clean;multilod4d_console:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AndroidMultiLog4D:Make;DefaultSample:Make;Logger:Make"/>
+        <CallTarget Targets="AndroidMultiLog4D:Make;DefaultSample:Make;Logger:Make;multilod4d_console:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
