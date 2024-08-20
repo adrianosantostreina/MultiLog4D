@@ -365,7 +365,6 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <VerInfo_BundleId>br.com.adrianosantostreina.MultiLog4D</VerInfo_BundleId>
-        <DCC_UnitSearchPath>..\..\src\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <PF_DevDebug>Apple Development: adrianosantospro@gmail.com (S885332266)</PF_DevDebug>
         <PF_MobileProvisionDebug>5fc1969e-d5d3-4879-8e09-662994259d2c</PF_MobileProvisionDebug>
         <PF_AutoMobileProvisionDebug>False</PF_AutoMobileProvisionDebug>
@@ -380,6 +379,7 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_Define>ML4D_SERVICE;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>

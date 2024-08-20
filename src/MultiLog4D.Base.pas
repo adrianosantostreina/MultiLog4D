@@ -11,6 +11,7 @@ uses
   {$ENDIF}
 
   ,MultiLog4D.Types,
+   Winapi.Windows,
   MultiLog4D.Interfaces;
 
 type
@@ -22,9 +23,18 @@ type
     class var FTagSet: Boolean;
     function GetDefaultTag: string;
   protected
+    {$IFDEF ML4D_SERVICE}
+    FEventCategory: TEventCategory;
+    FEventID: DWORD;
+    {$ENDIF}
+    function GetCategoryName: string;
     function GetLogPrefix(const ALogType: TLogType): string;
   public
     function Tag(const ATag: string): IMultiLog4D; virtual;
+    {$IFDEF ML4D_SERVICE}
+    function Category(const AEventCategory: TEventCategory): IMultiLog4D;
+    function EventID(const AEventID: DWORD): IMultiLog4D;
+    {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; virtual; abstract;
     function LogWriteInformation(const AMsg: string): IMultiLog4D; virtual; abstract;
     function LogWriteWarning(const AMsg: string): IMultiLog4D; virtual; abstract;
@@ -51,6 +61,25 @@ begin
 
   Result := Self as IMultiLog4D;
 end;
+
+function TMultiLog4DBase.GetCategoryName: string;
+begin
+  Result := EventCategoryNames[FEventCategory];
+end;
+
+{$IFDEF ML4D_SERVICE}
+function TMultiLog4DBase.Category(const AEventCategory: TEventCategory): IMultiLog4D;
+begin
+  FEventCategory := AEventCategory;
+  Result := Self;
+end;
+
+function TMultiLog4DBase.EventID(const AEventID: DWORD): IMultiLog4D;
+begin
+  FEventID := AEventID;
+  Result := Self;
+end;
+{$ENDIF}
 
 function TMultiLog4DBase.GetLogPrefix(const ALogType: TLogType): string;
 begin

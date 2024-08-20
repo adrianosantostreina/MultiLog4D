@@ -9,6 +9,9 @@
         <Projects Include="Samples\# Default Sample\DefaultSample.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="D:\Downloads\Logger\Logger.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="DefaultSample:Make">
         <MSBuild Projects="Samples\# Default Sample\DefaultSample.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Logger">
+        <MSBuild Projects="D:\Downloads\Logger\Logger.dproj"/>
+    </Target>
+    <Target Name="Logger:Clean">
+        <MSBuild Projects="D:\Downloads\Logger\Logger.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Logger:Make">
+        <MSBuild Projects="D:\Downloads\Logger\Logger.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AndroidMultiLog4D;DefaultSample"/>
+        <CallTarget Targets="AndroidMultiLog4D;DefaultSample;Logger"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AndroidMultiLog4D:Clean;DefaultSample:Clean"/>
+        <CallTarget Targets="AndroidMultiLog4D:Clean;DefaultSample:Clean;Logger:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AndroidMultiLog4D:Make;DefaultSample:Make"/>
+        <CallTarget Targets="AndroidMultiLog4D:Make;DefaultSample:Make;Logger:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
