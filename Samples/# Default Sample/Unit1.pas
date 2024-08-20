@@ -133,8 +133,14 @@ begin
   TMultiLog4DUtil
     .Logger
     .Tag('MultiLog4D')
+    {$IFDEF ML4D_SERVICE}
     .Category(TEventCategory.ecNone)
-    .EventID(123456)
+    .EventID(1)
+    {$ENDIF}
+    {$IFDEF MSWINDOWS}
+    //.UserName('Adriano Santos')
+    //.UserName(EmptyStr)
+    {$ENDIF}
     .LogWriteFatalError('Teste4');
 end;
 

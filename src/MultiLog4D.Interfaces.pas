@@ -21,6 +21,9 @@ type
     function Category(const AEventCategory: TEventCategory): IMultiLog4D;
     function EventID(const AEventID: DWORD): IMultiLog4D;
     {$ENDIF}
+    {$IFDEF MSWINDOWS}
+    function UserName(const AUserName: string): IMultiLog4D;
+    {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
     function LogWriteInformation(const AMsg: string): IMultiLog4D;
     function LogWriteWarning(const AMsg: string): IMultiLog4D;

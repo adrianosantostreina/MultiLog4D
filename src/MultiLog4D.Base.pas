@@ -14,28 +14,33 @@ uses
   {$ENDIF}
   ,MultiLog4D.Types,
 
+  MultiLog4D.Common,
   MultiLog4D.Interfaces;
 
 type
   TMultiLog4DBase = class(TInterfacedObject, IMultiLog4D)
   private
-
   protected
     class var FTag: string;
     class var FTagSet: Boolean;
-    function GetDefaultTag: string;
-  protected
+    {$IFDEF MSWINDOWS}
+    FUserName: string;
+    {$ENDIF}
     {$IFDEF ML4D_SERVICE}
     FEventCategory: TEventCategory;
     FEventID: DWORD;
     function GetCategoryName: string;
     {$ENDIF}
+    function GetDefaultTag: string;
     function GetLogPrefix(const ALogType: TLogType): string;
   public
     function Tag(const ATag: string): IMultiLog4D; virtual;
     {$IFDEF ML4D_SERVICE}
     function Category(const AEventCategory: TEventCategory): IMultiLog4D;
     function EventID(const AEventID: DWORD): IMultiLog4D;
+    {$ENDIF}
+    {$IFDEF MSWINDOWS}
+    function UserName(const AUserName: string): IMultiLog4D;
     {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; virtual; abstract;
     function LogWriteInformation(const AMsg: string): IMultiLog4D; virtual; abstract;
@@ -79,6 +84,17 @@ end;
 function TMultiLog4DBase.EventID(const AEventID: DWORD): IMultiLog4D;
 begin
   FEventID := AEventID;
+  Result := Self;
+end;
+{$ENDIF}
+
+{$IFDEF MSWINDOWS}
+function TMultiLog4DBase.UserName(const AUserName: string): IMultiLog4D;
+begin
+  if not AUserName.IsEmpty
+  then FUserName := AUserName
+  else FUserName := TMultiLog4DCommon.GetCurrentUserName;
+
   Result := Self;
 end;
 {$ENDIF}

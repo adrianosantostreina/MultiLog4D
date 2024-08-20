@@ -26,6 +26,9 @@ type
     class procedure SetCategory(const AEventCategory: TEventCategory); static;
     class procedure SetEventID(const AEventID: DWORD); static;
     {$ENDIF}
+    {$IFDEF MSWINDOWS}
+    class procedure SetUserName(const AUserName: string); static;
+    {$ENDIF}
   end;
 
 implementation
@@ -52,6 +55,14 @@ class procedure TMultiLog4DUtil.SetEventID(const AEventID: DWORD);
 begin
   if Supports(FLogger, IMultiLog4D) then
     (FLogger as IMultiLog4D).EventID(AEventID);
+end;
+{$ENDIF}
+
+{$IFDEF MSWINDOWS}
+class procedure TMultiLog4DUtil.SetUserName(const AUserName: string);
+begin
+  if Supports(FLogger, IMultiLog4D) then
+    (FLogger as IMultiLog4D).UserName(AUserName);
 end;
 {$ENDIF}
 
