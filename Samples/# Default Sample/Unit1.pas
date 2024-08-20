@@ -31,6 +31,7 @@ type
     radioWarning: TRadioButton;
     radioError: TRadioButton;
     radioFatalError: TRadioButton;
+    Button7: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
@@ -39,6 +40,7 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
   private
     { Private declarations }
     FCont: Integer;
@@ -124,6 +126,22 @@ begin
           .LogWriteFatalError(E.ClassName + ' | ' + E.Message);
     end;
   end;
+end;
+
+procedure TForm1.Button7Click(Sender: TObject);
+begin
+  TMultiLog4DUtil
+    .Logger
+    .Tag('MultiLog4D')
+    {$IFDEF ML4D_SERVICE}
+    .Category(TEventCategory.ecNone)
+    .EventID(1)
+    {$ENDIF}
+    {$IFDEF MSWINDOWS}
+    //.UserName('Adriano Santos')
+    //.UserName(EmptyStr)
+    {$ENDIF}
+    .LogWriteFatalError('Teste4');
 end;
 
 procedure TForm1.Button8Click(Sender: TObject);

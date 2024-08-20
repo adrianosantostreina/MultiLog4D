@@ -111,4 +111,15 @@ object Form1: TForm1
     TabOrder = 10
     Text = 'Fatal Error'
   end
+  object Button7: TButton
+    Position.X = 16.000000000000000000
+    Position.Y = 370.000000000000000000
+    Size.Width = 161.000000000000000000
+    Size.Height = 43.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 12
+    Text = 'LogViewer'
+    TextSettings.Trimming = None
+    OnClick = Button7Click
+  end
 end
