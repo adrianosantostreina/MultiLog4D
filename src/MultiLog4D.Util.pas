@@ -7,7 +7,7 @@ uses
   System.SysUtils,
   System.Classes,
   {$IFDEF MSWINDOWS}
-    {$IFDEF ML4D_SERVICE}
+    {$IF DEFINED(ML4D_SERVICE) OR DEFINED(CONSOLE)}
       Winapi.Windows,
     {$ENDIF}
   {$ENDIF}
@@ -22,7 +22,7 @@ type
     class constructor Create;
   public
     class function Logger: IMultiLog4D; static;
-    {$IFDEF ML4D_SERVICE}
+    {$IF DEFINED(ML4D_SERVICE) OR DEFINED(CONSOLE)}
     class procedure SetCategory(const AEventCategory: TEventCategory); static;
     class procedure SetEventID(const AEventID: DWORD); static;
     {$ENDIF}
@@ -43,8 +43,7 @@ begin
   Result := FLogger;
 end;
 
-{$IFDEF ML4D_SERVICE}
-
+{$IF DEFINED(ML4D_SERVICE) OR DEFINED(CONSOLE)}
 class procedure TMultiLog4DUtil.SetCategory(const AEventCategory: TEventCategory);
 begin
   if Supports(FLogger, IMultiLog4D) then

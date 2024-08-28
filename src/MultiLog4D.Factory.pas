@@ -3,6 +3,7 @@ unit MultiLog4D.Factory;
 interface
 
 uses
+  System.SysUtils,
   MultiLog4D.Interfaces;
 
 type
@@ -24,12 +25,12 @@ uses
     MultiLog4D.IOS,
   {$ENDIF}
   {$IFDEF MSWINDOWS}
-    {$IFDEF CONSOLE}
-
+    {$IFDEF ML4D_CONSOLE}
+      MultiLog4D.Windows.Console,
     {$ENDIF}
 
-    {$IFDEF FILE}
-
+    {$IFDEF ML4D_FILES}
+      MultiLog4D.Windows.Files,
     {$ENDIF}
 
     {$IFDEF ML4D_SERVICE}
@@ -54,13 +55,12 @@ begin
       FLogger := TMultiLog4DiOS.Create;
     {$ENDIF}
     {$IFDEF MSWINDOWS}
-      {$IFDEF CONSOLE}
-
+      {$IFDEF ML4D_CONSOLE}
+        FLogger := TMultiLog4DWindowsConsole.Create;
       {$ENDIF}
-      {$IFDEF FILE}
-
+      {$IFDEF ML4D_FILES}
+        FLogger := TMultiLog4DWindowsFile.Create(EmptyStr);
       {$ENDIF}
-
       {$IFDEF ML4D_SERVICE}
         FLogger := TMultiLog4DWindowsServices.Create;
       {$ENDIF}

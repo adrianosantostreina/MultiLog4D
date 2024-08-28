@@ -10,6 +10,7 @@ uses
 type
   TLogType = (ltInformation, ltWarning, ltError, ltFatalError);
   TEventCategory = (ecNone, ecApplication, ecSecurity, ecPerformance, ecError, ecWarning, ecDebug, ecTransaction, ecNetwork);
+  TLogOutPut = (loBoth, loConsole, loFile);
 
 const
   EventCategoryNames: array[TEventCategory] of string = (
