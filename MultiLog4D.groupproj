@@ -15,6 +15,9 @@
         <Projects Include="Samples\console\multilod4d_console.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Samples\horse_server\srv_horse.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +62,23 @@
     <Target Name="multilod4d_console:Make">
         <MSBuild Projects="Samples\console\multilod4d_console.dproj" Targets="Make"/>
     </Target>
+    <Target Name="srv_horse">
+        <MSBuild Projects="Samples\horse_server\srv_horse.dproj"/>
+    </Target>
+    <Target Name="srv_horse:Clean">
+        <MSBuild Projects="Samples\horse_server\srv_horse.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="srv_horse:Make">
+        <MSBuild Projects="Samples\horse_server\srv_horse.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AndroidMultiLog4D;DefaultSample;Logger;multilod4d_console"/>
+        <CallTarget Targets="AndroidMultiLog4D;DefaultSample;Logger;multilod4d_console;srv_horse"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AndroidMultiLog4D:Clean;DefaultSample:Clean;Logger:Clean;multilod4d_console:Clean"/>
+        <CallTarget Targets="AndroidMultiLog4D:Clean;DefaultSample:Clean;Logger:Clean;multilod4d_console:Clean;srv_horse:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AndroidMultiLog4D:Make;DefaultSample:Make;Logger:Make;multilod4d_console:Make"/>
+        <CallTarget Targets="AndroidMultiLog4D:Make;DefaultSample:Make;Logger:Make;multilod4d_console:Make;srv_horse:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

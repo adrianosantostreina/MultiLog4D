@@ -32,6 +32,7 @@ type
     radioError: TRadioButton;
     radioFatalError: TRadioButton;
     Button7: TButton;
+    Button9: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
@@ -41,6 +42,7 @@ type
     procedure Button8Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button7Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
   private
     { Private declarations }
     FCont: Integer;
@@ -162,6 +164,14 @@ begin
   TMultiLog4DUtil
    .Logger
    .LogWrite('LogWrite: ' + IntToStr(FCont), LTypeMsg);
+end;
+
+procedure TForm1.Button9Click(Sender: TObject);
+begin
+  TMultiLog4DUtil
+    .Logger
+    .Output(loBoth)
+    .LogWriteInformation('Adriano');
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

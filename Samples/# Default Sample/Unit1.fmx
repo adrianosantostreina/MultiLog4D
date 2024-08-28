@@ -122,4 +122,15 @@ object Form1: TForm1
     TextSettings.Trimming = None
     OnClick = Button7Click
   end
+  object Button9: TButton
+    Position.X = 16.000000000000000000
+    Position.Y = 432.000000000000000000
+    Size.Width = 161.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 14
+    Text = 'Button9'
+    TextSettings.Trimming = None
+    OnClick = Button9Click
+  end
 end
