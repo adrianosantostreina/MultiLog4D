@@ -369,6 +369,7 @@
         <PF_MobileProvisionDebug>5fc1969e-d5d3-4879-8e09-662994259d2c</PF_MobileProvisionDebug>
         <PF_AutoMobileProvisionDebug>False</PF_AutoMobileProvisionDebug>
         <PF_AutoCertificateDebug>False</PF_AutoCertificateDebug>
+        <DCC_Define>ML4D_DESKTOP;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_iOSSimARM64)'!=''">
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>

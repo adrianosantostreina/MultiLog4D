@@ -29,7 +29,7 @@ uses
       MultiLog4D.Windows.Console,
     {$ENDIF}
 
-    {$IFDEF ML4D_FILES}
+    {$IFDEF ML4D_DESKTOP}
       MultiLog4D.Windows.Files,
     {$ENDIF}
 
@@ -48,24 +48,50 @@ class function TLogFactory.GetLogger: IMultiLog4D;
 begin
   if not Assigned(FLogger) then
   begin
+    {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+      //{$IFDEF MSWINDOWS}
+        {$IFDEF ML4D_CONSOLE}
+          FLogger := TMultiLog4DWindowsConsole.Create;
+        {$ENDIF}
+        {$IFDEF ML4D_DESKTOP}
+          FLogger := TMultiLog4DWindowsFile.Create(EmptyStr);
+        {$ENDIF}
+        {$IFDEF ML4D_SERVICE}
+          FLogger := TMultiLog4DWindowsServices.Create;
+        {$ENDIF}
+      //{$ENDIF}
+    {$ELSE}
+      {$IFDEF ANDROID}
+        FLogger := TMultiLog4DAndroid.Create;
+      {$ENDIF}
+      {$IFDEF IOS}
+        FLogger := TMultiLog4DiOS.Create;
+      {$ENDIF}
+    {$ENDIF}
+  end;
+
+(*
+  if not Assigned(FLogger) then
+  begin
     {$IFDEF ANDROID}
       FLogger := TMultiLog4DAndroid.Create;
     {$ENDIF}
     {$IFDEF IOS}
       FLogger := TMultiLog4DiOS.Create;
     {$ENDIF}
-    {$IFDEF MSWINDOWS}
+    //{$IFDEF MSWINDOWS}
       {$IFDEF ML4D_CONSOLE}
         FLogger := TMultiLog4DWindowsConsole.Create;
       {$ENDIF}
-      {$IFDEF ML4D_FILES}
+      {$IFDEF ML4D_DESKTOP}
         FLogger := TMultiLog4DWindowsFile.Create(EmptyStr);
       {$ENDIF}
       {$IFDEF ML4D_SERVICE}
         FLogger := TMultiLog4DWindowsServices.Create;
       {$ENDIF}
-    {$ENDIF}
+    //{$ENDIF}
   end;
+*)
 
   Result := FLogger;
 end;
