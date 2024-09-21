@@ -1,0 +1,139 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 600
+  ClientWidth = 400
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object Layout1: TLayout
+    Align = Top
+    Margins.Left = 8.000000000000000000
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 8.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 384.000000000000000000
+    Size.Height = 157.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object Label1: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 384.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Choose LogType'
+      TabOrder = 0
+    end
+    object radioError: TRadioButton
+      Position.X = 8.000000000000000000
+      Position.Y = 93.000000000000000000
+      TabOrder = 10
+      Text = 'Error'
+    end
+    object radioFatalError: TRadioButton
+      Position.X = 8.000000000000000000
+      Position.Y = 120.000000000000000000
+      TabOrder = 11
+      Text = 'Fatal Error'
+    end
+    object radioInformation: TRadioButton
+      IsChecked = True
+      Position.X = 8.000000000000000000
+      Position.Y = 39.000000000000000000
+      TabOrder = 8
+      Text = 'Information'
+    end
+    object radioWarning: TRadioButton
+      Position.X = 8.000000000000000000
+      Position.Y = 66.000000000000000000
+      TabOrder = 9
+      Text = 'Warning'
+    end
+    object Button1: TButton
+      Position.X = 224.000000000000000000
+      Position.Y = 104.000000000000000000
+      Size.Width = 144.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Text = 'Log Write'
+      TextSettings.Trimming = None
+      OnClick = Button1Click
+    end
+  end
+  object Layout2: TLayout
+    Align = Client
+    Margins.Left = 8.000000000000000000
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 8.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Size.Width = 384.000000000000000000
+    Size.Height = 411.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    object Button2: TButton
+      Align = Top
+      Position.Y = 210.000000000000000000
+      Size.Width = 384.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Fatal Error'
+      TextSettings.Trimming = None
+      OnClick = Button2Click
+    end
+    object Button3: TButton
+      Align = Top
+      Position.Y = 150.000000000000000000
+      Size.Width = 384.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Error'
+      TextSettings.Trimming = None
+      OnClick = Button3Click
+    end
+    object Button4: TButton
+      Align = Top
+      Position.Y = 90.000000000000000000
+      Size.Width = 384.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Warning'
+      TextSettings.Trimming = None
+      OnClick = Button4Click
+    end
+    object Button5: TButton
+      Align = Top
+      Position.Y = 30.000000000000000000
+      Size.Width = 384.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Information'
+      TextSettings.Trimming = None
+      OnClick = Button5Click
+    end
+    object Label2: TLabel
+      Align = Top
+      AutoSize = True
+      Margins.Left = 4.000000000000000000
+      Margins.Top = 4.000000000000000000
+      Margins.Right = 4.000000000000000000
+      Margins.Bottom = 4.000000000000000000
+      Position.X = 4.000000000000000000
+      Position.Y = 4.000000000000000000
+      Size.Width = 376.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Using other methods'
+      TabOrder = 0
+    end
+  end
+end

@@ -3,12 +3,14 @@ unit MultiLog4D.Util;
 interface
 
 uses
-  System.StrUtils,
   System.SysUtils,
   System.Classes,
   {$IFDEF MSWINDOWS}
-    {$IF DEFINED(ML4D_SERVICE) OR DEFINED(CONSOLE)}
-      Winapi.Windows,
+    Winapi.Windows,
+  {$ENDIF}
+  {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+    {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+
     {$ENDIF}
   {$ENDIF}
   MultiLog4D.Interfaces,
@@ -22,12 +24,13 @@ type
     class constructor Create;
   public
     class function Logger: IMultiLog4D; static;
-    {$IF DEFINED(ML4D_SERVICE) OR DEFINED(CONSOLE)}
-    class procedure SetCategory(const AEventCategory: TEventCategory); static;
-    class procedure SetEventID(const AEventID: DWORD); static;
-    {$ENDIF}
-    {$IFDEF MSWINDOWS}
-    class procedure SetUserName(const AUserName: string); static;
+    {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+        class procedure SetCategory(const AEventCategory: TEventCategory); static;
+        class procedure SetEventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}); static;
+        class procedure SetUserName(const AUserName: string); static;
+        class procedure SetFileName(const AFileName: string); static;
+      {$ENDIF}
     {$ENDIF}
   end;
 
@@ -43,26 +46,33 @@ begin
   Result := FLogger;
 end;
 
-{$IF DEFINED(ML4D_SERVICE) OR DEFINED(CONSOLE)}
+{$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
 class procedure TMultiLog4DUtil.SetCategory(const AEventCategory: TEventCategory);
 begin
   if Supports(FLogger, IMultiLog4D) then
     (FLogger as IMultiLog4D).Category(AEventCategory);
 end;
 
-class procedure TMultiLog4DUtil.SetEventID(const AEventID: DWORD);
+class procedure TMultiLog4DUtil.SetEventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF});
 begin
   if Supports(FLogger, IMultiLog4D) then
     (FLogger as IMultiLog4D).EventID(AEventID);
 end;
-{$ENDIF}
 
-{$IFDEF MSWINDOWS}
 class procedure TMultiLog4DUtil.SetUserName(const AUserName: string);
 begin
   if Supports(FLogger, IMultiLog4D) then
     (FLogger as IMultiLog4D).UserName(AUserName);
 end;
+
+class procedure TMultiLog4DUtil.SetFileName(const AFileName: string);
+begin
+  if Supports(FLogger, IMultiLog4D) then
+    (FLogger as IMultiLog4D).Output(TLogOutput.loFile)
+      .FileName(AFileName);
+end;
+{$ENDIF}
 {$ENDIF}
 
 initialization
@@ -74,3 +84,5 @@ finalization
 TMultiLog4DUtil.FLogger := nil;
 
 end.
+
+

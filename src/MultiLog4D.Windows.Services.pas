@@ -5,22 +5,30 @@ interface
 uses
   System.SysUtils,
   System.StrUtils,
+  System.Math,
   MultiLog4D.Base,
-  MultiLog4D.Types,
   MultiLog4D.Interfaces,
+  MultiLog4D.Types,
   MultiLog4D.Common,
+  MultiLog4D.Common.WriteToFile,
   Windows;
 
 type
   TMultiLog4DWindowsServices = class(TMultiLog4DBase)
   private
     procedure WriteToEventViewer(const AMessage: string; AType: Integer);
+  protected
+    procedure LogWriteToDestination(const AMsg: string; const ALogType: TLogType);
   public
-    {$IFDEF ML4D_SERVICE}
-    function Category(const AEventCategory: TEventCategory): IMultiLog4D;
-    function EventID(const AEventID: DWORD): IMultiLog4D;
+    constructor Create;
+    {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+        function Category(const AEventCategory: TEventCategory): IMultiLog4D; override;
+        function EventID(const AEventID: DWORD): IMultiLog4D; override;
+        function UserName(const AUserName: string): IMultiLog4D; override;
+        function Output(const AOutput: TLogOutput): IMultiLog4D; override;
+      {$ENDIF}
     {$ENDIF}
-    function UserName(const AUserName: string): IMultiLog4D;
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; override;
     function LogWriteInformation(const AMsg: string): IMultiLog4D; override;
     function LogWriteWarning(const AMsg: string): IMultiLog4D; override;
@@ -30,7 +38,10 @@ type
 
 implementation
 
-{ TMultiLog4DWindowsServices }
+constructor TMultiLog4DWindowsServices.Create;
+begin
+  inherited Create;
+end;
 
 procedure TMultiLog4DWindowsServices.WriteToEventViewer(const AMessage: string; AType: Integer);
 var
@@ -54,7 +65,48 @@ begin
     RaiseLastOSError;
 end;
 
-{$IFDEF ML4D_SERVICE}
+procedure TMultiLog4DWindowsServices.LogWriteToDestination(const AMsg: string; const ALogType: TLogType);
+var
+  LType : Integer;
+begin
+  case FLogOutput of
+    loBoth:
+      begin
+        TMultiLogWriteToFile.Instance
+          .FileName(FFileName)
+          .Execute(AMsg, ALogType);
+
+        case ALogType of
+          ltInformation: LType := EVENTLOG_INFORMATION_TYPE;
+          ltWarning: LType := EVENTLOG_WARNING_TYPE;
+          ltError, ltFatalError: LType := EVENTLOG_ERROR_TYPE;
+        else
+          LType := EVENTLOG_INFORMATION_TYPE;
+        end;
+
+        WriteToEventViewer(AMsg, LType);
+      end;
+    loFile:
+      TMultiLogWriteToFile.Instance
+        .FileName(FFileName)
+        .Execute(AMsg, ALogType);
+    loEventViewer:
+      begin
+        case ALogType of
+          ltInformation: LType := EVENTLOG_INFORMATION_TYPE;
+          ltWarning: LType := EVENTLOG_WARNING_TYPE;
+          ltError, ltFatalError: LType := EVENTLOG_ERROR_TYPE;
+        else
+          LType := EVENTLOG_INFORMATION_TYPE;
+        end;
+
+        WriteToEventViewer(AMsg, LType);
+      end;
+  end;
+end;
+
+{$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
 function TMultiLog4DWindowsServices.Category(const AEventCategory: TEventCategory): IMultiLog4D;
 begin
   FEventCategory := AEventCategory;
@@ -66,7 +118,6 @@ begin
   FEventID := AEventID;
   Result := Self;
 end;
-{$ENDIF}
 
 function TMultiLog4DWindowsServices.UserName(const AUserName: string): IMultiLog4D;
 begin
@@ -74,42 +125,42 @@ begin
   Result := Self;
 end;
 
-function TMultiLog4DWindowsServices.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
-var
-  LogType: Integer;
+function TMultiLog4DWindowsServices.Output(const AOutput: TLogOutput): IMultiLog4D;
 begin
-  case ALogType of
-    ltInformation: LogType := EVENTLOG_INFORMATION_TYPE;
-    ltWarning: LogType := EVENTLOG_WARNING_TYPE;
-    ltError: LogType := EVENTLOG_ERROR_TYPE;
-    ltFatalError: LogType := EVENTLOG_ERROR_TYPE;
-  else
-    LogType := EVENTLOG_INFORMATION_TYPE;
-  end;
+  FLogOutput := AOutput;
+  Result := Self;
+end;
+{$ENDIF}
+{$ENDIF}
 
-  WriteToEventViewer(AMsg, LogType);
-  Result := Self as IMultiLog4D;
+function TMultiLog4DWindowsServices.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
+begin
+  LogWriteToDestination(AMsg, ALogType);
+  Result := Self;
 end;
 
 function TMultiLog4DWindowsServices.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
-  Result := LogWrite(AMsg, ltInformation);
+  LogWriteToDestination(AMsg, ltInformation);
+  Result := Self;
 end;
 
 function TMultiLog4DWindowsServices.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
-  Result := LogWrite(AMsg, ltWarning);
+  LogWriteToDestination(AMsg, ltWarning);
+  Result := Self;
 end;
 
 function TMultiLog4DWindowsServices.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
-  Result := LogWrite(AMsg, ltError);
+  LogWriteToDestination(AMsg, ltError);
+  Result := Self;
 end;
 
 function TMultiLog4DWindowsServices.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
-  Result := LogWrite(AMsg, ltFatalError);
+  LogWriteToDestination(AMsg, ltFatalError);
+  Result := Self;
 end;
 
 end.
-

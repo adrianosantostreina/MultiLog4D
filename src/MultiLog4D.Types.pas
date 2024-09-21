@@ -9,8 +9,9 @@ uses
 
 type
   TLogType = (ltInformation, ltWarning, ltError, ltFatalError);
-  TEventCategory = (ecNone, ecApplication, ecSecurity, ecPerformance, ecError, ecWarning, ecDebug, ecTransaction, ecNetwork);
-  TLogOutPut = (loBoth, loConsole, loFile);
+  TEventCategory = (ecNone, ecApplication, ecSecurity, ecPerformance, ecError,
+    ecWarning, ecDebug, ecTransaction, ecNetwork);
+  TLogOutPut = (loBoth, loConsole, loFile, loEventViewer);
 
 const
   EventCategoryNames: array[TEventCategory] of string = (
