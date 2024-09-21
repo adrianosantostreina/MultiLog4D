@@ -5,9 +5,12 @@ interface
 uses
   System.SysUtils,
   System.Classes,
+  {$IFDEF MSWINDOWS}
+    Winapi.Windows,
+  {$ENDIF}
   {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
     {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
-      Winapi.Windows,
+
     {$ENDIF}
   {$ENDIF}
   MultiLog4D.Interfaces,
@@ -24,7 +27,7 @@ type
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
       {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
         class procedure SetCategory(const AEventCategory: TEventCategory); static;
-        class procedure SetEventID(const AEventID: DWORD); static;
+        class procedure SetEventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}); static;
         class procedure SetUserName(const AUserName: string); static;
         class procedure SetFileName(const AFileName: string); static;
       {$ENDIF}
@@ -51,7 +54,7 @@ begin
     (FLogger as IMultiLog4D).Category(AEventCategory);
 end;
 
-class procedure TMultiLog4DUtil.SetEventID(const AEventID: DWORD);
+class procedure TMultiLog4DUtil.SetEventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF});
 begin
   if Supports(FLogger, IMultiLog4D) then
     (FLogger as IMultiLog4D).EventID(AEventID);

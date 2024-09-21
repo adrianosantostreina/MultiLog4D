@@ -6,13 +6,11 @@ uses
   System.StrUtils,
   System.SysUtils,
   System.Classes
+  {$IFDEF MSWINDOWS}
+    ,Winapi.Windows
+  {$ENDIF}
   {$IFDEF ANDROID}
     ,Androidapi.Helpers
-  {$ENDIF}
-  {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-    {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
-      ,Winapi.Windows
-    {$ENDIF}
   {$ENDIF}
   ,MultiLog4D.Types,
   MultiLog4D.Common,
@@ -31,7 +29,7 @@ type
         FUserName: string;
         FFileName: string;
         FEventCategory: TEventCategory;
-        FEventID: DWORD;
+        FEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF};
       {$ENDIF}
     {$ENDIF}
     function GetDefaultTag: string;
@@ -46,7 +44,7 @@ type
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
       {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
         function Category(const AEventCategory: TEventCategory): IMultiLog4D; virtual;
-        function EventID(const AEventID: DWORD): IMultiLog4D; virtual;
+        function EventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}): IMultiLog4D; virtual;
         function Output(const AOutput: TLogOutput): IMultiLog4D; virtual;
         function UserName(const AUserName: string): IMultiLog4D; virtual;
         function FileName(const AFileName: string): IMultiLog4D; virtual;
@@ -92,7 +90,7 @@ begin
   Result := Self;
 end;
 
-function TMultiLog4DBase.EventID(const AEventID: DWORD): IMultiLog4D;
+function TMultiLog4DBase.EventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}): IMultiLog4D;
 begin
   FEventID := AEventID;
   Result := Self;
@@ -109,7 +107,8 @@ begin
   if not AUserName.IsEmpty then
     FUserName := AUserName
   else
-    FUserName := TMultiLog4DCommon.GetCurrentUserName;
+    //ToDo: Ajustar no Linux
+    FUserName := '' ;//TMultiLog4DCommon.GetCurrentUserName;
 
   Result := Self;
 end;

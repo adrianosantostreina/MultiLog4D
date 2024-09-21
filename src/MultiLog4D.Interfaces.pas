@@ -5,11 +5,11 @@ interface
 uses
   System.StrUtils,
   System.SysUtils,
+  {$IFDEF MSWINDOWS}
+    Winapi.Windows,
+  {$ENDIF}
   System.Classes,
   {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-    {$IFDEF MSWINDOWS}
-      Winapi.Windows,
-    {$ENDIF}
   {$ENDIF}
   MultiLog4D.Types;
 
@@ -20,7 +20,7 @@ type
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
       {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
         function Category(const AEventCategory: TEventCategory): IMultiLog4D;
-        function EventID(const AEventID: DWORD): IMultiLog4D;
+        function EventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}): IMultiLog4D;
         function UserName(const AUserName: string): IMultiLog4D;
         function Output(const AOutput: TLogOutput): IMultiLog4D;
         function FileName(const AFileName: string): IMultiLog4D;
