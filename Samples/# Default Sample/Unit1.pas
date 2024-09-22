@@ -7,6 +7,7 @@ uses
   System.Types,
   System.UITypes,
   System.Classes,
+  System.IOUtils,
   System.Variants,
   FMX.Types,
   FMX.Controls,
@@ -32,6 +33,8 @@ type
     radioError: TRadioButton;
     radioFatalError: TRadioButton;
     Button7: TButton;
+    Button9: TButton;
+    Button10: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
@@ -41,6 +44,8 @@ type
     procedure Button8Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button7Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+    procedure Button10Click(Sender: TObject);
   private
     { Private declarations }
     FCont: Integer;
@@ -61,6 +66,16 @@ uses
 
 {$R *.fmx}
 
+
+procedure TForm1.Button10Click(Sender: TObject);
+var
+  I : Integer;
+begin
+  TMultiLog4DUtil
+    .Logger
+    .Tag('111')
+    .LogWriteInformation('Teste');
+end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
@@ -132,15 +147,17 @@ procedure TForm1.Button7Click(Sender: TObject);
 begin
   TMultiLog4DUtil
     .Logger
-    .Tag('MultiLog4D')
-    {$IFDEF ML4D_SERVICE}
-    .Category(TEventCategory.ecNone)
-    .EventID(1)
-    {$ENDIF}
-    {$IFDEF MSWINDOWS}
-    //.UserName('Adriano Santos')
-    //.UserName(EmptyStr)
-    {$ENDIF}
+    //.Setup
+      .Tag('MultiLog4D')
+      {$IFDEF ML4D_SERVICE}
+      .Category(TEventCategory.ecNone)
+      .EventID(1)
+      {$ENDIF}
+      {$IFDEF MSWINDOWS}
+      //.UserName('Adriano Santos')
+      //.UserName(EmptyStr)
+      {$ENDIF}
+    //.&End
     .LogWriteFatalError('Teste4');
 end;
 
@@ -162,6 +179,20 @@ begin
   TMultiLog4DUtil
    .Logger
    .LogWrite('LogWrite: ' + IntToStr(FCont), LTypeMsg);
+end;
+
+procedure TForm1.Button9Click(Sender: TObject);
+begin
+  TMultiLog4DUtil
+    .Logger
+    {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+        .EventID(123)
+        .Category(ecNone)
+        .UserName('adriano')
+      {$ENDIF}
+    {$ENDIF}
+    .LogWriteInformation('Log Information');
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

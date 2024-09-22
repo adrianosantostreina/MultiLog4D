@@ -6,41 +6,51 @@ uses
   System.StrUtils,
   System.SysUtils,
   System.Classes
-  {$IFDEF ANDROID}
-   ,Androidapi.Helpers
-  {$ENDIF}
   {$IFDEF MSWINDOWS}
     ,Winapi.Windows
   {$ENDIF}
+  {$IFDEF ANDROID}
+    ,Androidapi.Helpers
+  {$ENDIF}
   ,MultiLog4D.Types,
-
   MultiLog4D.Common,
   MultiLog4D.Interfaces;
 
 type
   TMultiLog4DBase = class(TInterfacedObject, IMultiLog4D)
   private
+
   protected
+    class var FLogOutput: TLogOutput;
     class var FTag: string;
     class var FTagSet: Boolean;
-    {$IFDEF MSWINDOWS}
-    FUserName: string;
-    {$ENDIF}
-    {$IFDEF ML4D_SERVICE}
-    FEventCategory: TEventCategory;
-    FEventID: DWORD;
-    function GetCategoryName: string;
+    {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
+        FUserName: string;
+        FFileName: string;
+        FEventCategory: TEventCategory;
+        FEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF};
+      {$ENDIF}
     {$ENDIF}
     function GetDefaultTag: string;
     function GetLogPrefix(const ALogType: TLogType): string;
+    {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
+        function GetCategoryName: string;
+      {$ENDIF}
+    {$ENDIF}
   public
     function Tag(const ATag: string): IMultiLog4D; virtual;
-    {$IFDEF ML4D_SERVICE}
-    function Category(const AEventCategory: TEventCategory): IMultiLog4D;
-    function EventID(const AEventID: DWORD): IMultiLog4D;
-    {$ENDIF}
-    {$IFDEF MSWINDOWS}
-    function UserName(const AUserName: string): IMultiLog4D;
+    {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
+        function Category(const AEventCategory: TEventCategory): IMultiLog4D; virtual;
+        function EventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}): IMultiLog4D; virtual;
+        function UserName(const AUserName: string): IMultiLog4D; virtual;
+        {$IFNDEF LINUX}
+        function Output(const AOutput: TLogOutput): IMultiLog4D; virtual;
+        function FileName(const AFileName: string): IMultiLog4D; virtual;
+        {$ENDIF}
+      {$ENDIF}
     {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; virtual; abstract;
     function LogWriteInformation(const AMsg: string): IMultiLog4D; virtual; abstract;
@@ -69,7 +79,8 @@ begin
   Result := Self as IMultiLog4D;
 end;
 
-{$IFDEF ML4D_SERVICE}
+{$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
+{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
 function TMultiLog4DBase.GetCategoryName: string;
 begin
   Result := EventCategoryNames[FEventCategory];
@@ -81,31 +92,45 @@ begin
   Result := Self;
 end;
 
-function TMultiLog4DBase.EventID(const AEventID: DWORD): IMultiLog4D;
+function TMultiLog4DBase.EventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}): IMultiLog4D;
 begin
   FEventID := AEventID;
   Result := Self;
 end;
-{$ENDIF}
 
-{$IFDEF MSWINDOWS}
 function TMultiLog4DBase.UserName(const AUserName: string): IMultiLog4D;
 begin
-  if not AUserName.IsEmpty
-  then FUserName := AUserName
-  else FUserName := TMultiLog4DCommon.GetCurrentUserName;
+  if not AUserName.IsEmpty then
+    FUserName := AUserName
+  else
+    FUserName := TMultiLog4DCommon.GetCurrentUserName;
 
   Result := Self;
 end;
+
+{$IFNDEF LINUX}
+function TMultiLog4DBase.Output(const AOutput: TLogOutput): IMultiLog4D;
+begin
+  FLogOutput := AOutput;
+  Result := Self;
+end;
+
+function TMultiLog4DBase.FileName(const AFileName: string): IMultiLog4D;
+begin
+  FFileName := AFileName;
+  Result := Self;
+end;
+{$ENDIF}
+{$ENDIF}
 {$ENDIF}
 
 function TMultiLog4DBase.GetLogPrefix(const ALogType: TLogType): string;
 begin
   case ALogType of
-    ltWarning:     Result := ' | WAR | ';
-    ltError:       Result := ' | ERR | ';
-    ltFatalError:  Result := ' | FAT | ';
-    else           Result := ' | INF | ';
+    ltWarning:     Result := 'WAR';
+    ltError:       Result := 'ERR';
+    ltFatalError:  Result := 'FAT';
+    else           Result := 'INF';
   end;
 end;
 
