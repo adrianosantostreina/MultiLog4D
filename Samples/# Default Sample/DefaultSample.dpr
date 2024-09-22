@@ -16,7 +16,7 @@ begin
   TMultiLog4DUtil
    .Logger
    .Tag('MultiLog4D')
-   {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+   {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
      .Output(loBoth)
      .FileName(TPath.Combine(ExtractFilePath(ParamStr(0)), 'log\MeuLog.log'))
    {$ENDIF}

@@ -7,7 +7,7 @@ uses
   System.SysUtils,
   System.StrUtils,
   Vcl.SvcMgr,
-  Main in 'Main.pas' {Service2: TService};
+  Main in 'Main.pas' {MultiLog4D: TService};
 
 {$R *.RES}
 

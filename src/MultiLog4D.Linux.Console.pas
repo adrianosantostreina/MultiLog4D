@@ -4,29 +4,21 @@ interface
 
 uses
   System.SysUtils,
-  MultiLog4D.Common.WriteToFile,
   MultiLog4D.Base,
   MultiLog4D.Common,
   MultiLog4D.Interfaces,
-  MultiLog4D.Types;
+  MultiLog4D.Types,
+  MultiLog4D.Common.WriteToFile,
+  MultiLog4D.Posix.Syslog;
 
 type
   TMultiLog4DLinuxConsole = class(TMultiLog4DBase)
   private
-    procedure WriteToConsole(const AMsg: string; const ALogType: TLogType);
-    procedure LogWriteToFile(const AMsg: string; const ALogType: TLogType);
+    procedure WriteToSysLog(const AMsg: string; const ALogType: TLogType);
   protected
     procedure LogWriteToDestination(const AMsg: string; const ALogType: TLogType);
   public
     constructor Create;
-    {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
-        function Category(const AEventCategory: TEventCategory): IMultiLog4D; override;
-        function EventID(const AEventID: LongWord): IMultiLog4D; override;
-        function UserName(const AUserName: string): IMultiLog4D; override;
-        function Output(const AOutput: TLogOutput): IMultiLog4D; override;
-      {$ENDIF}
-    {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; override;
     function LogWriteInformation(const AMsg: string): IMultiLog4D; override;
     function LogWriteWarning(const AMsg: string): IMultiLog4D; override;
@@ -36,67 +28,33 @@ type
 
 implementation
 
+{ TMultiLog4DLinuxConsole }
+
 constructor TMultiLog4DLinuxConsole.Create;
 begin
   inherited Create;
 end;
 
-procedure TMultiLog4DLinuxConsole.WriteToConsole(const AMsg: string; const ALogType: TLogType);
+procedure TMultiLog4DLinuxConsole.WriteToSysLog(const AMsg: string; const ALogType: TLogType);
+var
+  Priority: Integer;
 begin
-  Writeln(Format('%s %s %s - %s',
-    [FormatDateTime('yyyy-mm-dd hh:nn:ss', Now),
-     FUserName,
-     GetLogPrefix(ALogType),
-     AMsg]));
-end;
+  case ALogType of
+    ltInformation: Priority := LOG_INFO;
+    ltWarning:     Priority := LOG_WARNING;
+    ltError:       Priority := LOG_ERR;
+    ltFatalError:  Priority := LOG_CRIT;
+  else
+    Priority := LOG_INFO;
+  end;
 
-procedure TMultiLog4DLinuxConsole.LogWriteToFile(const AMsg: string; const ALogType: TLogType);
-begin
-  TMultiLogWriteToFile.Instance
-    .FileName(FFileName)
-    .Execute(AMsg, ALogType);
+  syslog(Priority, AMsg);
 end;
 
 procedure TMultiLog4DLinuxConsole.LogWriteToDestination(const AMsg: string; const ALogType: TLogType);
 begin
-  case FLogOutput of
-    loConsole: WriteToConsole(AMsg, ALogType);
-    loFile: LogWriteToFile(AMsg, ALogType);
-    loBoth:
-    begin
-      WriteToConsole(AMsg, ALogType);
-      LogWriteToFile(AMsg, ALogType);
-    end;
-  end;
+  WriteToSysLog(AMsg, ALogType);
 end;
-
-{$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
-function TMultiLog4DLinuxConsole.Category(const AEventCategory: TEventCategory): IMultiLog4D;
-begin
-  FEventCategory := AEventCategory;
-  Result := Self;
-end;
-
-function TMultiLog4DLinuxConsole.EventID(const AEventID: LongWord): IMultiLog4D;
-begin
-  FEventID := AEventID;
-  Result := Self;
-end;
-
-function TMultiLog4DLinuxConsole.UserName(const AUserName: string): IMultiLog4D;
-begin
-  FUserName := AUserName;
-  Result := Self;
-end;
-
-function TMultiLog4DLinuxConsole.Output(const AOutput: TLogOutput): IMultiLog4D;
-begin
-  FLogOutput := AOutput;
-  Result := Self;
-end;
-{$ENDIF}
-{$ENDIF}
 
 function TMultiLog4DLinuxConsole.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 begin
@@ -129,3 +87,5 @@ begin
 end;
 
 end.
+
+

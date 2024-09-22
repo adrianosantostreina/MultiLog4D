@@ -1,8 +1,9 @@
-program Horse_MultiLog4D;
+program HorseLinux_MultiLog4D;
 
 {$APPTYPE CONSOLE}
 
 {$R *.res}
+
 
 uses
   Horse,
@@ -15,59 +16,49 @@ uses
 begin
   TMultiLog4DUtil
     .Logger
-    .Tag('MultiLog4D')
-    .Output(loConsole)
-    .LogWriteInformation('>>>>>>>>>> Starting <<<<<<<<<<');
+    .LogWriteInformation('Start Application');
 
   THorse
     .Get('/test1',
     procedure(Req: THorseRequest; Res: THorseResponse)
     begin
+      Randomize;
+
       TMultiLog4DUtil
         .Logger
-        .Output(loConsole)
-        .LogWriteInformation('Before Test1');
+        .LogWriteInformation('Before Test1 - ' + Format('Mensagem de teste 1 de log: %d', [Random(1000)]));
 
       Res.Send('test1');
 
       TMultiLog4DUtil
         .Logger
-        .Output(loConsole)
-        .LogWriteInformation('After Test1');
+        .LogWriteInformation('After Test1 - ' + Format('Mensagem de teste 1 de log: %d', [Random(1000)]));
     end
     )
     .Get('/test2',
     procedure(Req: THorseRequest; Res: THorseResponse)
     begin
+      Randomize;
       Res.Send('test2');
 
       TMultiLog4DUtil
         .Logger
-        .Output(loFile)
-        .Category(TEventCategory.ecSecurity)
-        .LogWriteInformation('Test2');
+        .LogWriteInformation(Format('Mensagem de teste 2 de log: %d', [Random(1000)]));
     end
     )
     .Get('/test3',
     procedure(Req: THorseRequest; Res: THorseResponse)
-    var
-      LOutputLogPath : string;
     begin
+      Randomize;
       Res.Send('test3');
-
-      LOutputLogPath := TPath.Combine(ExtractFilePath(ParamStr(0)), 'MyLog');
-      ForceDirectories(LOutputLogPath);
 
       TMultiLog4DUtil
         .Logger
-        .Category(TEventCategory.ecSecurity)
-        .EventID(123)
-        .Output(loBoth)
-        .FileName(TPath.Combine(LOutputLogPath, 'Log.txt'))
-        .LogWriteInformation('Test3');
+        .LogWriteInformation(Format('Mensagem de teste 3 de log: %d', [Random(1000)]));
     end
     );
 
   THorse
     .Listen(9000);
+
 end.

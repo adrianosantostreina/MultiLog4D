@@ -9,6 +9,9 @@ uses
   {$IFDEF MSWINDOWS}
     ,Winapi.Windows
   {$ENDIF}
+  {$IFDEF LINUX}
+    ,Posix.Unistd
+  {$ENDIF}
   ;
 
 type
@@ -17,6 +20,9 @@ type
 
     public
       {$IFDEF MSWINDOWS}
+      class function GetCurrentUserName: string;
+      {$ENDIF}
+      {$IFDEF LINUX}
       class function GetCurrentUserName: string;
       {$ENDIF}
   end;
@@ -36,5 +42,19 @@ begin
     Result := 'Unknown';
 end;
 {$ENDIF}
+
+{$IFDEF LINUX}
+class function TMultiLog4DCommon.GetCurrentUserName: string;
+var
+  LoginName: PAnsiChar;
+begin
+  LoginName := getlogin;
+  if LoginName <> nil then
+    Result := string(LoginName)
+  else
+    Result := 'Unknown';
+end;
+{$ENDIF}
+
 
 end.
