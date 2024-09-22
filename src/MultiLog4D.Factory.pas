@@ -22,7 +22,7 @@ uses
     {$IFDEF MSWINDOWS}
       {$IFDEF ML4D_CONSOLE}
         MultiLog4D.Windows.Console,
-      {$ELSEIF DEFINED(ML4D_SERVICE)}
+      {$ELSEIF DEFINED(ML4D_EVENTVIEWER)}
         MultiLog4D.Windows.Services,
       {$ELSE}
         MultiLog4D.Windows.Files,
@@ -30,10 +30,6 @@ uses
     {$ELSEIF DEFINED(LINUX)}
       {$IFDEF ML4D_CONSOLE}
         MultiLog4D.Linux.Console,
-      {$ELSEIF DEFINED(ML4D_SERVICE)}
-        MultiLog4D.Linux.Daemon,
-      {$ELSE}
-        MultiLog4D.Linux.Desktop,
       {$ENDIF}
     {$ELSEIF DEFINED(MACOS)}
       {$IFDEF ML4D_DESKTOP}
@@ -62,7 +58,7 @@ begin
       {$IFDEF MSWINDOWS}
         {$IFDEF ML4D_CONSOLE}
           FLogger := TMultiLog4DWindowsConsole.Create;
-        {$ELSEIF DEFINED(ML4D_SERVICE)}
+        {$ELSEIF DEFINED(ML4D_EVENTVIEWER)}
           FLogger := TMultiLog4DWindowsServices.Create;
         {$ELSE}
           FLogger := TMultiLog4DWindowsFile.Create(EmptyStr);
@@ -70,11 +66,6 @@ begin
       {$ELSEIF DEFINED(LINUX)}
         {$IFDEF ML4D_CONSOLE}
           FLogger := TMultiLog4DLinuxConsole.Create;
-        {$ELSEIF DEFINED(ML4D_SERVICE)}
-          FLogger := TMultiLog4DLinuxDaemon.Create;
-        {$ELSE}
-          // Se nenhum específico definido, use Desktop como padrão
-          FLogger := TMultiLog4DLinuxFile.Create(EmptyStr);
         {$ENDIF}
       {$ELSEIF DEFINED(MACOS)}
         FLogger := TMultiLog4DMacOS.Create;
@@ -87,57 +78,6 @@ begin
       {$ENDIF}
     {$ENDIF}
   end;
-
-
-
-(* Funciona hoje
-  if not Assigned(FLogger) then
-  begin
-    {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-      //{$IFDEF MSWINDOWS}
-        {$IFDEF ML4D_CONSOLE}
-          FLogger := TMultiLog4DWindowsConsole.Create;
-        {$ENDIF}
-        {$IFDEF ML4D_DESKTOP}
-          FLogger := TMultiLog4DWindowsFile.Create(EmptyStr);
-        {$ENDIF}
-        {$IFDEF ML4D_SERVICE}
-          FLogger := TMultiLog4DWindowsServices.Create;
-        {$ENDIF}
-      //{$ENDIF}
-    {$ELSE}
-      {$IFDEF ANDROID}
-        FLogger := TMultiLog4DAndroid.Create;
-      {$ENDIF}
-      {$IFDEF IOS}
-        FLogger := TMultiLog4DiOS.Create;
-      {$ENDIF}
-    {$ENDIF}
-  end;
-*)
-
-(*
-  if not Assigned(FLogger) then
-  begin
-    {$IFDEF ANDROID}
-      FLogger := TMultiLog4DAndroid.Create;
-    {$ENDIF}
-    {$IFDEF IOS}
-      FLogger := TMultiLog4DiOS.Create;
-    {$ENDIF}
-    //{$IFDEF MSWINDOWS}
-      {$IFDEF ML4D_CONSOLE}
-        FLogger := TMultiLog4DWindowsConsole.Create;
-      {$ENDIF}
-      {$IFDEF ML4D_DESKTOP}
-        FLogger := TMultiLog4DWindowsFile.Create(EmptyStr);
-      {$ENDIF}
-      {$IFDEF ML4D_SERVICE}
-        FLogger := TMultiLog4DWindowsServices.Create;
-      {$ENDIF}
-    //{$ENDIF}
-  end;
-*)
 
   Result := FLogger;
 end;

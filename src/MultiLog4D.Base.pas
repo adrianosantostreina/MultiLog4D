@@ -25,7 +25,7 @@ type
     class var FTag: string;
     class var FTagSet: Boolean;
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
         FUserName: string;
         FFileName: string;
         FEventCategory: TEventCategory;
@@ -35,19 +35,21 @@ type
     function GetDefaultTag: string;
     function GetLogPrefix(const ALogType: TLogType): string;
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
         function GetCategoryName: string;
       {$ENDIF}
     {$ENDIF}
   public
     function Tag(const ATag: string): IMultiLog4D; virtual;
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
         function Category(const AEventCategory: TEventCategory): IMultiLog4D; virtual;
         function EventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}): IMultiLog4D; virtual;
-        function Output(const AOutput: TLogOutput): IMultiLog4D; virtual;
         function UserName(const AUserName: string): IMultiLog4D; virtual;
+        {$IFNDEF LINUX}
+        function Output(const AOutput: TLogOutput): IMultiLog4D; virtual;
         function FileName(const AFileName: string): IMultiLog4D; virtual;
+        {$ENDIF}
       {$ENDIF}
     {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; virtual; abstract;
@@ -78,7 +80,7 @@ begin
 end;
 
 {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
 function TMultiLog4DBase.GetCategoryName: string;
 begin
   Result := EventCategoryNames[FEventCategory];
@@ -96,20 +98,20 @@ begin
   Result := Self;
 end;
 
-function TMultiLog4DBase.Output(const AOutput: TLogOutput): IMultiLog4D;
-begin
-  FLogOutput := AOutput;
-  Result := Self;
-end;
-
 function TMultiLog4DBase.UserName(const AUserName: string): IMultiLog4D;
 begin
   if not AUserName.IsEmpty then
     FUserName := AUserName
   else
-    //ToDo: Ajustar no Linux
-    FUserName := '' ;//TMultiLog4DCommon.GetCurrentUserName;
+    FUserName := TMultiLog4DCommon.GetCurrentUserName;
 
+  Result := Self;
+end;
+
+{$IFNDEF LINUX}
+function TMultiLog4DBase.Output(const AOutput: TLogOutput): IMultiLog4D;
+begin
+  FLogOutput := AOutput;
   Result := Self;
 end;
 
@@ -118,6 +120,7 @@ begin
   FFileName := AFileName;
   Result := Self;
 end;
+{$ENDIF}
 {$ENDIF}
 {$ENDIF}
 

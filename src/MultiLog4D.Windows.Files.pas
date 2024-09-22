@@ -24,7 +24,7 @@ type
   public
     constructor Create(const AFileName: string);
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
         function Category(const AEventCategory: TEventCategory): IMultiLog4D; override;
         function EventID(const AEventID: DWORD): IMultiLog4D; override;
         function UserName(const AUserName: string): IMultiLog4D; override;
@@ -61,7 +61,7 @@ begin
 end;
 
 {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_SERVICE)}
+{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
 function TMultiLog4DWindowsFile.Category(const AEventCategory: TEventCategory): IMultiLog4D;
 begin
   FEventCategory := AEventCategory;

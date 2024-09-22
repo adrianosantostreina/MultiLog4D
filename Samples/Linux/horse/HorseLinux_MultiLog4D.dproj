@@ -1,15 +1,14 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{EF4844CC-8021-4626-BB20-6CD4E16517C4}</ProjectGuid>
+        <ProjectGuid>{A99B1AF2-F41B-4F7E-9AC3-5000BF8185A1}</ProjectGuid>
         <ProjectVersion>20.1</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <TargetedPlatforms>131</TargetedPlatforms>
+        <Platform Condition="'$(Platform)'==''">Linux64</Platform>
+        <TargetedPlatforms>128</TargetedPlatforms>
         <AppType>Console</AppType>
-        <MainSource>Horse_MultiLog4D.dpr</MainSource>
-        <ProjectName Condition="'$(ProjectName)'==''">Horse_MultiLog4D</ProjectName>
+        <MainSource>HorseLinux_MultiLog4D.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -114,7 +113,7 @@
         <DCC_F>false</DCC_F>
         <DCC_K>false</DCC_K>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <SanitizedProjectName>Horse_MultiLog4D</SanitizedProjectName>
+        <SanitizedProjectName>HorseLinux_MultiLog4D</SanitizedProjectName>
         <DCC_UnitSearchPath>modules\.dcp;modules\.dcu;modules;modules\horse\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
@@ -233,7 +232,10 @@
         <Debugger_Launcher>/usr/bin/gnome-terminal -- &quot;%debuggee%&quot;</Debugger_Launcher>
         <Manifest_File>(None)</Manifest_File>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
-        <DCC_Define>ML4D_CONSOLE;$(DCC_Define)</DCC_Define>
+        <DCC_Define>ML4D_CONSOLE;HORSE_DAEMON;$(DCC_Define)</DCC_Define>
+        <DCC_ExeOutput>.\bin</DCC_ExeOutput>
+        <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
+        <Debugger_RunParams>-cleaninstall -debugport=54321</Debugger_RunParams>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
@@ -258,10 +260,12 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Linux64)'!=''">
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_Define>ML4D_CONSOLE;$(DCC_Define)</DCC_Define>
+        <DCC_Define>ML4D_CONSOLE;HORSE_DAEMON;$(DCC_Define)</DCC_Define>
         <Debugger_Launcher>/usr/bin/gnome-terminal -- &quot;%debuggee%&quot;</Debugger_Launcher>
         <Manifest_File>(None)</Manifest_File>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
+        <DCC_ExeOutput>.\bin</DCC_ExeOutput>
+        <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <DCC_Define>ML4D_CONSOLE;$(DCC_Define)</DCC_Define>
@@ -299,7 +303,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">Horse_MultiLog4D.dpr</Source>
+                    <Source Name="MainSource">HorseLinux_MultiLog4D.dpr</Source>
                 </Source>
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k290.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
@@ -322,15 +326,21 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Linux64\Debug\Horse_MultiLog4D" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Linux64">
-                        <RemoteName>Horse_MultiLog4D</RemoteName>
+                <DeployFile LocalName="bin\HorseLinux_MultiLog4D.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>HorseLinux_MultiLog4D.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\Horse_MultiLog4D.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>Horse_MultiLog4D.exe</RemoteName>
+                <DeployFile LocalName="bin\HorseLinux_MultiLog4D" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Linux64">
+                        <RemoteName>HorseLinux_MultiLog4D</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="bin\HorseLinux_MultiLog4D" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Linux64">
+                        <RemoteName>HorseLinux_MultiLog4D</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1293,8 +1303,8 @@
                 <Platform value="Linux64">True</Platform>
                 <Platform value="OSX64">False</Platform>
                 <Platform value="OSXARM64">False</Platform>
-                <Platform value="Win32">True</Platform>
-                <Platform value="Win64">True</Platform>
+                <Platform value="Win32">False</Platform>
+                <Platform value="Win64">False</Platform>
             </Platforms>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
