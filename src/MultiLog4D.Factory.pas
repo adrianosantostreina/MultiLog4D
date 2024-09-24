@@ -4,6 +4,7 @@ interface
 
 uses
   System.SysUtils,
+  FMX.Dialogs,
   MultiLog4D.Interfaces;
 
 type
@@ -79,6 +80,7 @@ begin
     {$ENDIF}
   end;
 
+  //ShowMessage('Test');
   Result := FLogger;
 end;
 
