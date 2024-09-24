@@ -73,3 +73,4 @@ Samples/# Default Sample/iOSSimARM64/Debug/DefaultSample.dSYM
 Samples/# Default Sample/iOSDevice64/Debug/DefaultSample
 Samples/# Default Sample/iOSSimARM64/Debug/DefaultSample
 Samples/Linux/horse/bin/HorseLinux_MultiLog4D
+Samples/FMX/GUI/Linux64/Debug/GUI_MultiLog4D
