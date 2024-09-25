@@ -1,23 +1,29 @@
-unit Unit4;
+unit Unit5;
 
 interface
 
 uses
   MultiLog4D.Util,
   MultiLog4D.Types,
-
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, UI.Standard, UI.Edit, UI.Base,
-  FMX.Controls.Presentation, FMX.StdCtrls;
+  System.SysUtils,
+  System.Types,
+  System.UITypes,
+  System.Classes,
+  System.Variants,
+  FMX.Types,
+  FMX.Controls,
+  FMX.Forms,
+  FMX.Graphics,
+  FMX.Dialogs, FMX.StdCtrls, FMX.Controls.Presentation;
 
 type
-  TForm4 = class(TForm)
+  TForm5 = class(TForm)
     Button1: TButton;
     GroupBox1: TGroupBox;
     rbInformation: TRadioButton;
     rbWarning: TRadioButton;
-    rbError: TRadioButton;
     rbFatalError: TRadioButton;
+    rbError: TRadioButton;
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
@@ -34,16 +40,16 @@ type
   end;
 
 var
-  Form4: TForm4;
+  Form5: TForm5;
 
 implementation
 
 {$R *.fmx}
 
-procedure TForm4.Button1Click(Sender: TObject);
+procedure TForm5.Button1Click(Sender: TObject);
 var
-  LStrTypeMsg : string;
-  LTypeMsg : TLogType; //Uses MultiLog4D.Types
+  LStrTypeMsg: string;
+  LTypeMsg: TLogType; // Uses MultiLog4D.Types
 begin
   if rbInformation.IsChecked then
   begin
@@ -67,36 +73,36 @@ begin
   end;
 
   TMultiLog4DUtil
-   .Logger
-   .LogWrite(Format('LogWrite Type: %s', [LStrTypeMsg]), LTypeMsg);
+    .Logger
+    .LogWrite(Format('LogWrite My Type: %s', [LStrTypeMsg]), LTypeMsg);
 end;
 
-procedure TForm4.Button2Click(Sender: TObject);
+procedure TForm5.Button2Click(Sender: TObject);
 begin
   TMultiLog4DUtil
     .Logger
     .LogWriteInformation('Information')
 end;
 
-procedure TForm4.Button3Click(Sender: TObject);
+procedure TForm5.Button3Click(Sender: TObject);
 begin
   TMultiLog4DUtil
     .Logger
-    .LogWriteInformation('Warning')
+    .LogWriteWarning('Warning')
 end;
 
-procedure TForm4.Button4Click(Sender: TObject);
+procedure TForm5.Button4Click(Sender: TObject);
 begin
   TMultiLog4DUtil
     .Logger
-    .LogWriteInformation('Error')
+    .LogWriteError('Error')
 end;
 
-procedure TForm4.Button5Click(Sender: TObject);
+procedure TForm5.Button5Click(Sender: TObject);
 begin
   TMultiLog4DUtil
     .Logger
-    .LogWriteInformation('Fatal Error')
+    .LogWriteFatalError('Fatal Error')
 end;
 
 end.

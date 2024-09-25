@@ -12,6 +12,9 @@ uses
   {$IFDEF ANDROID}
     ,Androidapi.Helpers
   {$ENDIF}
+  {$IFDEF MACOS}
+    ,Macapi.CoreFoundation
+  {$ENDIF}
   ,MultiLog4D.Types,
   MultiLog4D.Common,
   MultiLog4D.Interfaces;
@@ -29,7 +32,7 @@ type
         FUserName: string;
         FFileName: string;
         FEventCategory: TEventCategory;
-        FEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF};
+        FEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}{$IFDEF MACOS}UInt32{$ENDIF};
       {$ENDIF}
     {$ENDIF}
     function GetDefaultTag: string;
@@ -44,7 +47,16 @@ type
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
       {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
         function Category(const AEventCategory: TEventCategory): IMultiLog4D; virtual;
-        function EventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}): IMultiLog4D; virtual;
+
+        {$IFDEF MSWINDOWS}
+        function EventID(const AEventID: DWORD): IMultiLog4D; virtual;
+        {$ENDIF}
+        {$IFDEF LINUX}
+        function EventID(const AEventID: LONGWORD): IMultiLog4D; virtual;
+        {$ENDIF}
+        {$IFDEF MACOS}
+        function EventID(const AEventID: UInt32): IMultiLog4D; virtual;
+        {$ENDIF}
         function UserName(const AUserName: string): IMultiLog4D; virtual;
         {$IFNDEF LINUX}
         function Output(const AOutput: TLogOutput): IMultiLog4D; virtual;
@@ -89,13 +101,21 @@ end;
 function TMultiLog4DBase.Category(const AEventCategory: TEventCategory): IMultiLog4D;
 begin
   FEventCategory := AEventCategory;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
-function TMultiLog4DBase.EventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}): IMultiLog4D;
+{$IFDEF MSWINDOWS}
+function TMultiLog4DBase.EventID(const AEventID: DWORD): IMultiLog4D;
+{$ENDIF}
+{$IFDEF LINUX}
+function TMultiLog4DBase.EventID(const AEventID: LONGWORD): IMultiLog4D;
+{$ENDIF}
+{$IFDEF MACOS}
+function TMultiLog4DBase.EventID(const AEventID: UInt32): IMultiLog4D;
+{$ENDIF}
 begin
   FEventID := AEventID;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DBase.UserName(const AUserName: string): IMultiLog4D;
@@ -105,20 +125,20 @@ begin
   else
     FUserName := TMultiLog4DCommon.GetCurrentUserName;
 
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 {$IFNDEF LINUX}
 function TMultiLog4DBase.Output(const AOutput: TLogOutput): IMultiLog4D;
 begin
   FLogOutput := AOutput;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DBase.FileName(const AFileName: string): IMultiLog4D;
 begin
   FFileName := AFileName;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 {$ENDIF}
 {$ENDIF}

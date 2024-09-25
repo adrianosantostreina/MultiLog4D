@@ -22,7 +22,15 @@ type
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
       {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
         class procedure SetCategory(const AEventCategory: TEventCategory); static;
-        class procedure SetEventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}); static;
+        {$IFDEF MSWINDOWS}
+        class procedure SetEventID(const AEventID: DWORD); static;
+        {$ENDIF}
+        {$IFDEF LINUX}
+        class procedure SetEventID(const AEventID: LONGWORD); static;
+        {$ENDIF}
+        {$IFDEF MACOS}
+        class procedure SetEventID(const AEventID: UInt32); static;
+        {$ENDIF}
         class procedure SetUserName(const AUserName: string); static;
         {$IFNDEF LINUX}
         class procedure SetFileName(const AFileName: string); static;
@@ -51,7 +59,15 @@ begin
     (FLogger as IMultiLog4D).Category(AEventCategory);
 end;
 
-class procedure TMultiLog4DUtil.SetEventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF});
+{$IFDEF MSWINDOWS}
+class procedure TMultiLog4DUtil.SetEventID(const AEventID: DWORD);
+{$ENDIF}
+{$IFDEF LINUX}
+class procedure TMultiLog4DUtil.SetEventID(const AEventID:LONGWORD);
+{$ENDIF}
+{$IFDEF MACOS}
+class procedure TMultiLog4DUtil.SetEventID(const AEventID: UInt32);
+{$ENDIF}
 begin
   if Supports(FLogger, IMultiLog4D) then
     (FLogger as IMultiLog4D).EventID(AEventID);

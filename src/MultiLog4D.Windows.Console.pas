@@ -80,25 +80,25 @@ end;
 function TMultiLog4DWindowsConsole.Category(const AEventCategory: TEventCategory): IMultiLog4D;
 begin
   FEventCategory := AEventCategory;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsConsole.EventID(const AEventID: DWORD): IMultiLog4D;
 begin
   FEventID := AEventID;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsConsole.UserName(const AUserName: string): IMultiLog4D;
 begin
   FUserName := AUserName;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsConsole.Output(const AOutput: TLogOutput): IMultiLog4D;
 begin
   FLogOutput := AOutput;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 {$ENDIF}
 {$ENDIF}
@@ -106,31 +106,31 @@ end;
 function TMultiLog4DWindowsConsole.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ALogType);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsConsole.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltInformation);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsConsole.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltWarning);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsConsole.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltError);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsConsole.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltFatalError);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 end.
