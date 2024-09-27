@@ -74,3 +74,13 @@ Samples/# Default Sample/iOSDevice64/Debug/DefaultSample
 Samples/# Default Sample/iOSSimARM64/Debug/DefaultSample
 Samples/Linux/horse/bin/HorseLinux_MultiLog4D
 Samples/FMX/GUI/Linux64/Debug/GUI_MultiLog4D
+Samples/macOS/bin/macOS_MultiLog4D
+Samples/macOS/bin/macOS_MultiLog4D.dSYM
+Samples/macOS/bin/macOS_MultiLog4D.entitlements
+Samples/macOS/bin/macOS_MultiLog4D.info.plist
+Samples/macOS/libsystem_trace.dylib
+Samples/Linux/GUI/Linux64/Debug/GUI_Linux_MultiLog4D
+Samples/Linux/GUI/Linux64/Debug/GUI_MultiLog4D
+Samples/FMX/iOS/iOSDevice64/Debug/iOS_MultiLog4D
+Samples/FMX/iOS/iOSDevice64/Debug/iOS_MultiLog4D.dSYM
+Samples/VCL/desktop/bin/Log/Log.txt

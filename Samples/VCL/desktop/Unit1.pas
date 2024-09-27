@@ -15,7 +15,7 @@ uses
   Vcl.Forms,
   Vcl.Dialogs,
   Vcl.StdCtrls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Vcl.Mask;
 
 type
   TForm3 = class(TForm)
@@ -27,6 +27,9 @@ type
     Button5: TButton;
     Bevel1: TBevel;
     RadioGroup2: TRadioGroup;
+    GroupBox1: TGroupBox;
+    lbleditDateTimeFormat: TLabeledEdit;
+    lbleditLogFormat: TLabeledEdit;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -79,6 +82,10 @@ begin
   TMultiLog4DUtil
    .Logger
    .Output(FOutputLog)
+   .SetLogFormat(lbleditLogFormat.Text) //Mask Format
+   .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
+   .UserName('adrianosantos')
+   .EventID(Random(1000))
    .LogWrite(Format('LogWrite Type: %s', [LStrTypeMsg]), LTypeMsg);
 
   ShowMessage(Format('LogWrite Type: %s', [LStrTypeMsg]));
@@ -89,6 +96,10 @@ begin
   TMultiLog4DUtil
    .Logger
    .Output(FOutputLog)
+   .SetLogFormat(lbleditLogFormat.Text) //Mask Format
+   .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
+   .UserName('adrianosantos')
+   .EventID(1000)
    .LogWriteInformation('LogWrite Type Information');
 
   ShowMessage('LogWrite Type Information');
@@ -99,6 +110,10 @@ begin
   TMultiLog4DUtil
    .Logger
    .Output(FOutputLog)
+   .SetLogFormat(lbleditLogFormat.Text) //Mask Format
+   .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
+   .UserName('adrianosantos')
+   .EventID(1000)
    .LogWriteInformation('LogWrite Type Warning');
 
   ShowMessage('LogWrite Type Warning');
@@ -109,6 +124,10 @@ begin
   TMultiLog4DUtil
    .Logger
    .Output(FOutputLog)
+   .SetLogFormat(lbleditLogFormat.Text) //Mask Format
+   .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
+   .UserName('adrianosantos')
+   .EventID(1000)
    .LogWriteInformation('LogWrite Type Error');
 
   ShowMessage('LogWrite Type Error');
@@ -119,6 +138,10 @@ begin
   TMultiLog4DUtil
    .Logger
    .Output(FOutputLog)
+   .SetLogFormat(lbleditLogFormat.Text) //Mask Format
+   .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
+   .UserName('adrianosantos')
+   .EventID(Random(1000))
    .LogWriteInformation('LogWrite Type Fatal Error');
 
   ShowMessage('LogWrite Type Fatal Error');

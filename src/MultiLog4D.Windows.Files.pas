@@ -29,6 +29,8 @@ type
         function EventID(const AEventID: DWORD): IMultiLog4D; override;
         function UserName(const AUserName: string): IMultiLog4D; override;
         function Output(const AOutput: TLogOutput): IMultiLog4D; override;
+        function SetLogFormat(const AFormat: string): IMultiLog4D; override;
+        function SetDateTimeFormat(const ADateTimeFormat: string): IMultiLog4D; override;
       {$ENDIF}
     {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; override;
@@ -50,6 +52,10 @@ procedure TMultiLog4DWindowsFile.WriteToFile(const AMsg: string; const ALogType:
 begin
   TMultiLogWriteToFile.Instance
     .FileName(FFileName)
+    .SetLogFormat(FLogFormat)
+    .SetDateTimeFormat(FDateTimeFormat)
+    .SetUserName(FUserName)
+    .SetEventID(FEventID)
     .Execute(AMsg, ALogType);
 end;
 
@@ -65,25 +71,37 @@ end;
 function TMultiLog4DWindowsFile.Category(const AEventCategory: TEventCategory): IMultiLog4D;
 begin
   FEventCategory := AEventCategory;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsFile.EventID(const AEventID: DWORD): IMultiLog4D;
 begin
   FEventID := AEventID;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsFile.UserName(const AUserName: string): IMultiLog4D;
 begin
   FUserName := AUserName;
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsFile.Output(const AOutput: TLogOutput): IMultiLog4D;
 begin
   FLogOutput := AOutput;
-  Result := Self;
+  Result := Self as IMultiLog4D;
+end;
+
+function TMultiLog4DWindowsFile.SetLogFormat(const AFormat: string): IMultiLog4D;
+begin
+  FLogFormat := AFormat;
+  Result := Self as IMultiLog4D;
+end;
+
+function TMultiLog4DWindowsFile.SetDateTimeFormat(const ADateTimeFormat: string): IMultiLog4D;
+begin
+  FDateTimeFormat := ADateTimeFormat;
+  Result := Self as IMultiLog4D;
 end;
 {$ENDIF}
 {$ENDIF}
@@ -91,31 +109,31 @@ end;
 function TMultiLog4DWindowsFile.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ALogType);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsFile.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltInformation);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsFile.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltWarning);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsFile.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltError);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DWindowsFile.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltFatalError);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 end.

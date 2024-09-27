@@ -1,4 +1,4 @@
-program GUI_MultiLog4D;
+program GUI_Linux_MultiLog4D;
 
 uses
   MultiLog4D.Util,

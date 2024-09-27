@@ -12,6 +12,9 @@ uses
   {$IFDEF LINUX}
     ,Posix.Unistd
   {$ENDIF}
+  {$IFDEF MACOS}
+    ,Posix.Unistd
+  {$ENDIF}
   ;
 
 type
@@ -19,10 +22,7 @@ type
     private
 
     public
-      {$IFDEF MSWINDOWS}
-      class function GetCurrentUserName: string;
-      {$ENDIF}
-      {$IFDEF LINUX}
+      {$IF DEFINED(MSWINDOWS) OR DEFINED(LINUX) OR DEFINED(MACOS)}
       class function GetCurrentUserName: string;
       {$ENDIF}
   end;
@@ -55,6 +55,20 @@ begin
     Result := 'Unknown';
 end;
 {$ENDIF}
+
+{$IFDEF MACOS}
+class function TMultiLog4DCommon.GetCurrentUserName: string;
+var
+  LoginName: PAnsiChar;
+begin
+  LoginName := getlogin;
+  if LoginName <> nil then
+    Result := string(LoginName)
+  else
+    Result := 'Unknown';
+end;
+{$ENDIF}
+
 
 
 end.
