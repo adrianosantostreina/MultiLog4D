@@ -1,0 +1,84 @@
+object Form5: TForm5
+  Left = 0
+  Top = 0
+  Caption = 'Form5'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Button1: TButton
+    Position.X = 257.000000000000000000
+    Position.Y = 13.000000000000000000
+    TabOrder = 0
+    Text = 'LogWrite'
+    TextSettings.Trimming = None
+    OnClick = Button1Click
+  end
+  object GroupBox1: TGroupBox
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 241.000000000000000000
+    Size.Height = 129.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'LogType'
+    TabOrder = 1
+    object rbInformation: TRadioButton
+      Position.X = 16.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 38
+      Text = 'Information'
+    end
+    object rbWarning: TRadioButton
+      Position.X = 16.000000000000000000
+      Position.Y = 50.000000000000000000
+      TabOrder = 39
+      Text = 'Warning'
+    end
+    object rbFatalError: TRadioButton
+      Position.X = 16.000000000000000000
+      Position.Y = 104.000000000000000000
+      TabOrder = 40
+      Text = 'FatalError'
+    end
+    object rbError: TRadioButton
+      Position.X = 16.000000000000000000
+      Position.Y = 77.000000000000000000
+      TabOrder = 41
+      Text = 'Error'
+    end
+  end
+  object Button2: TButton
+    Position.X = 8.000000000000000000
+    Position.Y = 145.000000000000000000
+    TabOrder = 2
+    Text = 'Information'
+    TextSettings.Trimming = None
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    Position.X = 114.000000000000000000
+    Position.Y = 145.000000000000000000
+    TabOrder = 3
+    Text = 'Warning'
+    TextSettings.Trimming = None
+    OnClick = Button3Click
+  end
+  object Button4: TButton
+    Position.X = 221.000000000000000000
+    Position.Y = 145.000000000000000000
+    TabOrder = 4
+    Text = 'Error'
+    TextSettings.Trimming = None
+    OnClick = Button4Click
+  end
+  object Button5: TButton
+    Position.X = 328.000000000000000000
+    Position.Y = 145.000000000000000000
+    TabOrder = 5
+    Text = 'Fatal Error'
+    TextSettings.Trimming = None
+    OnClick = Button5Click
+  end
+end

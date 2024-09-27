@@ -80,7 +80,6 @@ begin
     {$ENDIF}
   end;
 
-  //ShowMessage('Test');
   Result := FLogger;
 end;
 

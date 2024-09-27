@@ -59,31 +59,31 @@ end;
 function TMultiLog4DLinuxConsole.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ALogType);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DLinuxConsole.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltInformation);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DLinuxConsole.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltWarning);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DLinuxConsole.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltError);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DLinuxConsole.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltFatalError);
-  Result := Self;
+  Result := Self as IMultiLog4D;
 end;
 
 end.

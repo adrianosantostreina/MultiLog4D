@@ -21,6 +21,8 @@ begin
     .Logger
     .Tag('MultiLog4D')
     .FileName(TPath.Combine(LOutputLogPath, 'Log.txt'))
+    .UserName('adrianosantos')
+    .EventID(1)
     .LogWriteInformation('>>>>>>>>>> Starting <<<<<<<<<<');
 
   Application.Initialize;
