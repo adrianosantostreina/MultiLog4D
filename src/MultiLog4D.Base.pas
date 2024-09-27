@@ -33,6 +33,8 @@ type
         FFileName: string;
         FEventCategory: TEventCategory;
         FEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}{$IFDEF MACOS}UInt32{$ENDIF};
+        FLogFormat : string;
+        FDateTimeFormat: string;
       {$ENDIF}
     {$ENDIF}
     function GetDefaultTag: string;
@@ -47,7 +49,6 @@ type
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
       {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
         function Category(const AEventCategory: TEventCategory): IMultiLog4D; virtual;
-
         {$IFDEF MSWINDOWS}
         function EventID(const AEventID: DWORD): IMultiLog4D; virtual;
         {$ENDIF}
@@ -61,6 +62,8 @@ type
         {$IFNDEF LINUX}
         function Output(const AOutput: TLogOutput): IMultiLog4D; virtual;
         function FileName(const AFileName: string): IMultiLog4D; virtual;
+        function SetLogFormat(const AFormat: string): IMultiLog4D; virtual;
+        function SetDateTimeFormat(const ADateTimeFormat: string): IMultiLog4D; virtual;
         {$ENDIF}
       {$ENDIF}
     {$ENDIF}
@@ -138,6 +141,18 @@ end;
 function TMultiLog4DBase.FileName(const AFileName: string): IMultiLog4D;
 begin
   FFileName := AFileName;
+  Result := Self as IMultiLog4D;
+end;
+
+function TMultiLog4DBase.SetLogFormat(const AFormat: string): IMultiLog4D;
+begin
+  FLogFormat := AFormat;
+  Result := Self as IMultiLog4D;
+end;
+
+function TMultiLog4DBase.SetDateTimeFormat(const ADateTimeFormat: string): IMultiLog4D;
+begin
+  FDateTimeFormat := ADateTimeFormat;
   Result := Self as IMultiLog4D;
 end;
 {$ENDIF}

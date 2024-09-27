@@ -35,6 +35,8 @@ type
         {$IFNDEF LINUX}
         class procedure SetFileName(const AFileName: string); static;
         {$ENDIF}
+        class procedure SetLogFormat(const AFormat: string); static;
+        class procedure SetDateTimeFormat(const ADateTimeFormat: string); static;
       {$ENDIF}
     {$ENDIF}
   end;
@@ -85,6 +87,18 @@ begin
   if Supports(FLogger, IMultiLog4D) then
     (FLogger as IMultiLog4D).Output(TLogOutput.loFile)
       .FileName(AFileName);
+end;
+
+class procedure TMultiLog4DUtil.SetLogFormat(const AFormat: string);
+begin
+  if Supports(FLogger, IMultiLog4D) then
+    (FLogger as IMultiLog4D).SetLogFormat(AFormat);
+end;
+
+class procedure TMultiLog4DUtil.SetDateTimeFormat(const ADateTimeFormat: string);
+begin
+  if Supports(FLogger, IMultiLog4D) then
+    (FLogger as IMultiLog4D).SetDateTimeFormat(ADateTimeFormat);
 end;
 {$ENDIF}
 {$ENDIF}

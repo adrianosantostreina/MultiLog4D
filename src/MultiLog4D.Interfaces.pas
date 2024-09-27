@@ -34,6 +34,8 @@ type
         {$IFNDEF LINUX}
         function Output(const AOutput: TLogOutput): IMultiLog4D;
         function FileName(const AFileName: string): IMultiLog4D;
+        function SetLogFormat(const AFormat: string): IMultiLog4D;
+        function SetDateTimeFormat(const AFormat: string): IMultiLog4D;
         {$ENDIF}
       {$ENDIF}
     {$ENDIF}

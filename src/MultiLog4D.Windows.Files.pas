@@ -29,6 +29,8 @@ type
         function EventID(const AEventID: DWORD): IMultiLog4D; override;
         function UserName(const AUserName: string): IMultiLog4D; override;
         function Output(const AOutput: TLogOutput): IMultiLog4D; override;
+        function SetLogFormat(const AFormat: string): IMultiLog4D; override;
+        function SetDateTimeFormat(const ADateTimeFormat: string): IMultiLog4D; override;
       {$ENDIF}
     {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; override;
@@ -50,6 +52,10 @@ procedure TMultiLog4DWindowsFile.WriteToFile(const AMsg: string; const ALogType:
 begin
   TMultiLogWriteToFile.Instance
     .FileName(FFileName)
+    .SetLogFormat(FLogFormat)
+    .SetDateTimeFormat(FDateTimeFormat)
+    .SetUserName(FUserName)
+    .SetEventID(FEventID)
     .Execute(AMsg, ALogType);
 end;
 
@@ -83,6 +89,18 @@ end;
 function TMultiLog4DWindowsFile.Output(const AOutput: TLogOutput): IMultiLog4D;
 begin
   FLogOutput := AOutput;
+  Result := Self as IMultiLog4D;
+end;
+
+function TMultiLog4DWindowsFile.SetLogFormat(const AFormat: string): IMultiLog4D;
+begin
+  FLogFormat := AFormat;
+  Result := Self as IMultiLog4D;
+end;
+
+function TMultiLog4DWindowsFile.SetDateTimeFormat(const ADateTimeFormat: string): IMultiLog4D;
+begin
+  FDateTimeFormat := ADateTimeFormat;
   Result := Self as IMultiLog4D;
 end;
 {$ENDIF}
