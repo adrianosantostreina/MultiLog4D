@@ -23,7 +23,10 @@ type
       {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
         class procedure SetCategory(const AEventCategory: TEventCategory); static;
         {$IFDEF MSWINDOWS}
+        class procedure SetFileName(const AFileName: string); static;
         class procedure SetEventID(const AEventID: DWORD); static;
+        class procedure SetLogFormat(const AFormat: string); static;
+        class procedure SetDateTimeFormat(const ADateTimeFormat: string); static;
         {$ENDIF}
         {$IFDEF LINUX}
         class procedure SetEventID(const AEventID: LONGWORD); static;
@@ -32,11 +35,6 @@ type
         class procedure SetEventID(const AEventID: UInt32); static;
         {$ENDIF}
         class procedure SetUserName(const AUserName: string); static;
-        {$IFNDEF LINUX}
-        class procedure SetFileName(const AFileName: string); static;
-        {$ENDIF}
-        class procedure SetLogFormat(const AFormat: string); static;
-        class procedure SetDateTimeFormat(const ADateTimeFormat: string); static;
       {$ENDIF}
     {$ENDIF}
   end;
@@ -81,7 +79,7 @@ begin
     (FLogger as IMultiLog4D).UserName(AUserName);
 end;
 
-{$IFNDEF LINUX}
+{$IFDEF MSWINDOWS}
 class procedure TMultiLog4DUtil.SetFileName(const AFileName: string);
 begin
   if Supports(FLogger, IMultiLog4D) then

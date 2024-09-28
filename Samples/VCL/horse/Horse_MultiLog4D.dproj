@@ -239,7 +239,6 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_Define>ML4D_CONSOLE;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
     </PropertyGroup>

@@ -18,7 +18,15 @@ type
     FLogFormat: string;
     FDateTimeFormat: string;
     FUserName: string;
+    {$IFDEF MSWINDOWS}
     FEventID: DWORD;
+    {$ENDIF}
+    {$IFDEF LINUX}
+    FEventID: LONGWORD;
+    {$ENDIF}
+    {$IFDEF MACOS}
+    FEventID: UInt32;
+    {$ENDIF}
     procedure EnsureDirectoryExists;
     function ReplaceLogVariables(const AMsg: string; const ALogType: TLogType): string;
   public
@@ -28,7 +36,7 @@ type
     function SetLogFormat(const AFormat: string): TMultiLogWriteToFile;
     function SetDateTimeFormat(const ADateTimeFormat: string): TMultiLogWriteToFile;
     function SetUserName(const AUserName: string): TMultiLogWriteToFile;
-    function SetEventID(const AEventID: DWORD): TMultiLogWriteToFile;
+    function SetEventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ELSEIF DEFINED(LINUX)}LONGWORD{$ELSEIF DEFINED(MACOS)}UInt32{$ENDIF}): TMultiLogWriteToFile;
     function Execute(const AMsg: string; const ALogType: TLogType): TMultiLogWriteToFile;
   end;
 
@@ -72,7 +80,7 @@ begin
   Result := Self;
 end;
 
-function TMultiLogWriteToFile.SetEventID(const AEventID: DWORD): TMultiLogWriteToFile;
+function TMultiLogWriteToFile.SetEventID(const AEventID: {$IFDEF MSWINDOWS}DWORD{$ELSEIF DEFINED(LINUX)}LONGWORD{$ELSEIF DEFINED(MACOS)}UInt32{$ENDIF}): TMultiLogWriteToFile;
 begin
   FEventID := AEventID;
   Result := Self;
