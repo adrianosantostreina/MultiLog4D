@@ -4,25 +4,16 @@
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
     <PropertyGroup>
-        <DeviceId Condition="'$(Platform)'=='Android'"/>
-        <DeviceId Condition="'$(Platform)'=='Android64'"/>
-        <DeviceId Condition="'$(Platform)'=='iOSDevice64'">00008101-0002651A0221001E</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android'">RX8NB0503LV</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android64'">RX8NB0503LV</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
         <DeviceId Condition="'$(Platform)'=='iOSSimARM64'">52740D33-2E76-45AF-BE8C-B1C14E6EFEB4</DeviceId>
     </PropertyGroup>
     <ItemGroup Condition="'$(Platform)'=='OSX64'">
-        <DeployFile Include="bin\macOS_MultiLog4D.entitlements" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>macOS_MultiLog4D.app\..\</RemoteDir>
-            <RemoteName>macOS_MultiLog4D.entitlements</RemoteName>
-            <DeployClass>ProjectOSXEntitlements</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="bin\macOS_MultiLog4D.info.plist" Condition="'$(Config)'=='Release'">
-            <RemoteDir>macOS_MultiLog4D.app\Contents\</RemoteDir>
-            <RemoteName>Info.plist</RemoteName>
-            <DeployClass>ProjectOSXInfoPList</DeployClass>
+        <DeployFile Include="bin\macOS_MultiLog4D.dSYM" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>macOS_MultiLog4D.app\..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF\</RemoteDir>
+            <RemoteName>macOS_MultiLog4D</RemoteName>
+            <DeployClass>ProjectOSXDebug</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -37,10 +28,19 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="bin\macOS_MultiLog4D.dSYM" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>macOS_MultiLog4D.app\..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF\</RemoteDir>
-            <RemoteName>macOS_MultiLog4D</RemoteName>
-            <DeployClass>ProjectOSXDebug</DeployClass>
+        <DeployFile Include="bin\macOS_MultiLog4D.info.plist" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>macOS_MultiLog4D.app\Contents\</RemoteDir>
+            <RemoteName>Info.plist</RemoteName>
+            <DeployClass>ProjectOSXInfoPList</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="bin\macOS_MultiLog4D.info.plist" Condition="'$(Config)'=='Release'">
+            <RemoteDir>macOS_MultiLog4D.app\Contents\</RemoteDir>
+            <RemoteName>Info.plist</RemoteName>
+            <DeployClass>ProjectOSXInfoPList</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -84,10 +84,10 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="bin\macOS_MultiLog4D.info.plist" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>macOS_MultiLog4D.app\Contents\</RemoteDir>
-            <RemoteName>Info.plist</RemoteName>
-            <DeployClass>ProjectOSXInfoPList</DeployClass>
+        <DeployFile Include="bin\macOS_MultiLog4D.entitlements" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>macOS_MultiLog4D.app\..\</RemoteDir>
+            <RemoteName>macOS_MultiLog4D.entitlements</RemoteName>
+            <DeployClass>ProjectOSXEntitlements</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>

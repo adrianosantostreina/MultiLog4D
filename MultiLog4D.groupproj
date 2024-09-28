@@ -3,9 +3,6 @@
         <ProjectGuid>{8E71FF84-0BA8-49FB-91D8-45D71870F705}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="Samples\# Default Sample\DefaultSample.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Samples\FMX\Android\Android_MultiLog4D.dproj">
             <Dependencies/>
         </Projects>
@@ -41,15 +38,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="DefaultSample">
-        <MSBuild Projects="Samples\# Default Sample\DefaultSample.dproj"/>
-    </Target>
-    <Target Name="DefaultSample:Clean">
-        <MSBuild Projects="Samples\# Default Sample\DefaultSample.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="DefaultSample:Make">
-        <MSBuild Projects="Samples\# Default Sample\DefaultSample.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Android_MultiLog4D">
         <MSBuild Projects="Samples\FMX\Android\Android_MultiLog4D.dproj"/>
     </Target>
@@ -132,13 +120,13 @@
         <MSBuild Projects="Samples\macOS\macOS_MultiLog4D.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="DefaultSample;Android_MultiLog4D;iOS_MultiLog4D;Horse_MultiLog4D;Console_MultiLog4D;VCL_MultiLog4D;Service_MultiLog4D;HorseLinux_MultiLog4D;GUI_Linux_MultiLog4D;macOS_MultiLog4D"/>
+        <CallTarget Targets="Android_MultiLog4D;iOS_MultiLog4D;Horse_MultiLog4D;Console_MultiLog4D;VCL_MultiLog4D;Service_MultiLog4D;HorseLinux_MultiLog4D;GUI_Linux_MultiLog4D;macOS_MultiLog4D"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="DefaultSample:Clean;Android_MultiLog4D:Clean;iOS_MultiLog4D:Clean;Horse_MultiLog4D:Clean;Console_MultiLog4D:Clean;VCL_MultiLog4D:Clean;Service_MultiLog4D:Clean;HorseLinux_MultiLog4D:Clean;GUI_Linux_MultiLog4D:Clean;macOS_MultiLog4D:Clean"/>
+        <CallTarget Targets="Android_MultiLog4D:Clean;iOS_MultiLog4D:Clean;Horse_MultiLog4D:Clean;Console_MultiLog4D:Clean;VCL_MultiLog4D:Clean;Service_MultiLog4D:Clean;HorseLinux_MultiLog4D:Clean;GUI_Linux_MultiLog4D:Clean;macOS_MultiLog4D:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="DefaultSample:Make;Android_MultiLog4D:Make;iOS_MultiLog4D:Make;Horse_MultiLog4D:Make;Console_MultiLog4D:Make;VCL_MultiLog4D:Make;Service_MultiLog4D:Make;HorseLinux_MultiLog4D:Make;GUI_Linux_MultiLog4D:Make;macOS_MultiLog4D:Make"/>
+        <CallTarget Targets="Android_MultiLog4D:Make;iOS_MultiLog4D:Make;Horse_MultiLog4D:Make;Console_MultiLog4D:Make;VCL_MultiLog4D:Make;Service_MultiLog4D:Make;HorseLinux_MultiLog4D:Make;GUI_Linux_MultiLog4D:Make;macOS_MultiLog4D:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

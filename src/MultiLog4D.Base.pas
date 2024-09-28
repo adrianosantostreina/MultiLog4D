@@ -24,33 +24,39 @@ type
   private
 
   protected
+    {$IFDEF MSWINDOWS}
     class var FLogOutput: TLogOutput;
+    {$ENDIF}
     class var FTag: string;
     class var FTagSet: Boolean;
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
-        FUserName: string;
-        FFileName: string;
-        FEventCategory: TEventCategory;
-        FEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}{$IFDEF MACOS}UInt32{$ENDIF};
-        FLogFormat : string;
-        FDateTimeFormat: string;
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER) OR DEFINED(MSWINDOWS)}
+          FUserName: string;
+          FFileName: string;
+          FEventCategory: TEventCategory;
+          FEventID: {$IFDEF MSWINDOWS}DWORD{$ENDIF}{$IFDEF LINUX}LONGWORD{$ENDIF}{$IFDEF MACOS}UInt32{$ENDIF};
+          FLogFormat : string;
+          FDateTimeFormat: string;
       {$ENDIF}
     {$ENDIF}
     function GetDefaultTag: string;
     function GetLogPrefix(const ALogType: TLogType): string;
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER) OR DEFINED(MSWINDOWS)}
         function GetCategoryName: string;
       {$ENDIF}
     {$ENDIF}
   public
     function Tag(const ATag: string): IMultiLog4D; virtual;
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
+      {$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER) OR DEFINED(MSWINDOWS)}
         function Category(const AEventCategory: TEventCategory): IMultiLog4D; virtual;
         {$IFDEF MSWINDOWS}
         function EventID(const AEventID: DWORD): IMultiLog4D; virtual;
+        function Output(const AOutput: TLogOutput): IMultiLog4D; virtual;
+        function FileName(const AFileName: string): IMultiLog4D; virtual;
+        function SetLogFormat(const AFormat: string): IMultiLog4D; virtual;
+        function SetDateTimeFormat(const ADateTimeFormat: string): IMultiLog4D; virtual;
         {$ENDIF}
         {$IFDEF LINUX}
         function EventID(const AEventID: LONGWORD): IMultiLog4D; virtual;
@@ -59,12 +65,6 @@ type
         function EventID(const AEventID: UInt32): IMultiLog4D; virtual;
         {$ENDIF}
         function UserName(const AUserName: string): IMultiLog4D; virtual;
-        {$IFNDEF LINUX}
-        function Output(const AOutput: TLogOutput): IMultiLog4D; virtual;
-        function FileName(const AFileName: string): IMultiLog4D; virtual;
-        function SetLogFormat(const AFormat: string): IMultiLog4D; virtual;
-        function SetDateTimeFormat(const ADateTimeFormat: string): IMultiLog4D; virtual;
-        {$ENDIF}
       {$ENDIF}
     {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; virtual; abstract;
@@ -95,7 +95,7 @@ begin
 end;
 
 {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
-{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER)}
+{$IF DEFINED(ML4D_DESKTOP) OR DEFINED(ML4D_CONSOLE) OR DEFINED(ML4D_EVENTVIEWER) OR DEFINED(MSWINDOWS)}
 function TMultiLog4DBase.GetCategoryName: string;
 begin
   Result := EventCategoryNames[FEventCategory];
@@ -131,7 +131,7 @@ begin
   Result := Self as IMultiLog4D;
 end;
 
-{$IFNDEF LINUX}
+{$IFDEF MSWINDOWS}
 function TMultiLog4DBase.Output(const AOutput: TLogOutput): IMultiLog4D;
 begin
   FLogOutput := AOutput;
