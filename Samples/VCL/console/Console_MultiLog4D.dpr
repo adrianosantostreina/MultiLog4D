@@ -49,7 +49,7 @@ begin
     TMultiLog4DUtil
      .Logger
      .Tag('MultiLog4D')
-     .Output(loBoth)
+     .Output(loFile)
      .LogWrite('>>>>>>>>>> Starting <<<<<<<<<', ltInformation);
 
     repeat

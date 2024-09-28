@@ -45,7 +45,9 @@ implementation
 constructor TMultiLog4DWindowsFile.Create(const AFileName: string);
 begin
   inherited Create;
+  {$IFDEF MSWINDOWS}
   FFileName := AFileName;
+  {$ENDIF}
 end;
 
 procedure TMultiLog4DWindowsFile.WriteToFile(const AMsg: string; const ALogType: TLogType);

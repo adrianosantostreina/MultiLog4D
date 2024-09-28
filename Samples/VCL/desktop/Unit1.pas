@@ -156,7 +156,7 @@ procedure TForm3.RadioGroup2Click(Sender: TObject);
 begin
   case RadioGroup2.ItemIndex of
     0: FOutputLog := TLogOutPut.loFile;
-    1: FOutputLog := TLogOutPut.loEventViewer; //Add ML4D_SERVICE Directivec
+    1: FOutputLog := TLogOutPut.loEventViewer; //Add ML4D_EVENTVIEWER Directivec
     2: FOutputLog := TLogOutPut.loBoth;
   end;
 end;

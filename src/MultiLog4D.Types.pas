@@ -11,7 +11,10 @@ type
   TLogType = (ltInformation, ltWarning, ltError, ltFatalError);
   TEventCategory = (ecNone, ecApplication, ecSecurity, ecPerformance, ecError,
     ecWarning, ecDebug, ecTransaction, ecNetwork);
-  TLogOutPut = (loBoth, {$IFDEF MSWINDOWS}loConsole,{$ENDIF} loFile {$IFDEF MSWINDOWS},loEventViewer{$ENDIF}{$IFDEF LINUX},loSysLog{$ENDIF});
+
+  {$IFDEF MSWINDOWS}
+  TLogOutPut = (loBoth, loConsole, loFile, loEventViewer);
+  {$ENDIF}
 
 const
   EventCategoryNames: array[TEventCategory] of string = (

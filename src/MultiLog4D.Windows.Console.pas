@@ -50,11 +50,12 @@ end;
 
 procedure TMultiLog4DWindowsConsole.WriteToConsole(const AMsg: string; const ALogType: TLogType);
 begin
-  Writeln(Format('%s %s %s - %s',
-    [FormatDateTime(FDateTimeFormat, Now),
-     FUserName,
-     GetLogPrefix(ALogType),
-     AMsg]));
+  if IsConsole then
+    Writeln(Format('%s %s %s - %s',
+      [FormatDateTime(FDateTimeFormat, Now),
+       FUserName,
+       GetLogPrefix(ALogType),
+       AMsg]));
 end;
 
 procedure TMultiLog4DWindowsConsole.LogWriteToFile(const AMsg: string; const ALogType: TLogType);
