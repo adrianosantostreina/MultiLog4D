@@ -108,7 +108,7 @@ procedure TForm2.Button5Click(Sender: TObject);
 begin
   TMultiLog4DUtil
     .Logger
-      .LogWriteInformation('Information');
+    .LogWriteInformation('Information');
 end;
 
 end.

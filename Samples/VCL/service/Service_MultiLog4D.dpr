@@ -20,7 +20,7 @@ begin
   TMultiLog4DUtil
     .Logger
     .Tag('MultiLog4D')
-    .Output(loBoth) //File and EventViewer
+    .Output([loEventViewer]) //File and EventViewer
     .FileName(TPath.Combine(LOutputLogPath, 'Log.txt'));
 
   if not Application.DelayInitialize or Application.Installing then

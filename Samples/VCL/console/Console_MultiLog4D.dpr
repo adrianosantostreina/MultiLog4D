@@ -49,8 +49,8 @@ begin
     TMultiLog4DUtil
      .Logger
      .Tag('MultiLog4D')
-     .Output(loFile)
-     .LogWrite('>>>>>>>>>> Starting <<<<<<<<<', ltInformation);
+     .Output([loConsole, loFile, loEventViewer])
+     .LogWrite('>>>>>>>>>> App Console - Starting <<<<<<<<<', ltInformation);
 
     repeat
       ShowMenu;

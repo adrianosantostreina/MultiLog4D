@@ -1,4 +1,4 @@
-unit MultiLog4D.Linux.Console;
+unit MultiLog4D.Linux;
 
 interface
 
@@ -12,7 +12,7 @@ uses
   MultiLog4D.Posix.Syslog;
 
 type
-  TMultiLog4DLinuxConsole = class(TMultiLog4DBase)
+  TMultiLog4DLinux = class(TMultiLog4DBase)
   private
     procedure WriteToSysLog(const AMsg: string; const ALogType: TLogType);
   protected
@@ -30,12 +30,12 @@ implementation
 
 { TMultiLog4DLinuxConsole }
 
-constructor TMultiLog4DLinuxConsole.Create;
+constructor TMultiLog4DLinux.Create;
 begin
   inherited Create;
 end;
 
-procedure TMultiLog4DLinuxConsole.WriteToSysLog(const AMsg: string; const ALogType: TLogType);
+procedure TMultiLog4DLinux.WriteToSysLog(const AMsg: string; const ALogType: TLogType);
 var
   Priority: Integer;
 begin
@@ -51,36 +51,36 @@ begin
   syslog(Priority, AMsg);
 end;
 
-procedure TMultiLog4DLinuxConsole.LogWriteToDestination(const AMsg: string; const ALogType: TLogType);
+procedure TMultiLog4DLinux.LogWriteToDestination(const AMsg: string; const ALogType: TLogType);
 begin
   WriteToSysLog(AMsg, ALogType);
 end;
 
-function TMultiLog4DLinuxConsole.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
+function TMultiLog4DLinux.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ALogType);
   Result := Self as IMultiLog4D;
 end;
 
-function TMultiLog4DLinuxConsole.LogWriteInformation(const AMsg: string): IMultiLog4D;
+function TMultiLog4DLinux.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltInformation);
   Result := Self as IMultiLog4D;
 end;
 
-function TMultiLog4DLinuxConsole.LogWriteWarning(const AMsg: string): IMultiLog4D;
+function TMultiLog4DLinux.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltWarning);
   Result := Self as IMultiLog4D;
 end;
 
-function TMultiLog4DLinuxConsole.LogWriteError(const AMsg: string): IMultiLog4D;
+function TMultiLog4DLinux.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltError);
   Result := Self as IMultiLog4D;
 end;
 
-function TMultiLog4DLinuxConsole.LogWriteFatalError(const AMsg: string): IMultiLog4D;
+function TMultiLog4DLinux.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
   LogWriteToDestination(AMsg, ltFatalError);
   Result := Self as IMultiLog4D;

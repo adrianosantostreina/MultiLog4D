@@ -162,7 +162,6 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_Define>ML4D_EVENTVIEWER;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
@@ -171,7 +170,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_Define>ML4D_EVENTVIEWER;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
@@ -186,7 +184,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_Define>ML4D_EVENTVIEWER;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
@@ -195,7 +192,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_Define>ML4D_EVENTVIEWER;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>

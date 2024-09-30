@@ -20,6 +20,7 @@ begin
   TMultiLog4DUtil
     .Logger
     .Tag('MultiLog4D')
+    .Output([loConsole, loFile, loEventViewer])
     .FileName(TPath.Combine(LOutputLogPath, 'Log.txt'))
     .UserName('adrianosantos')
     .EventID(1)

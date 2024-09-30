@@ -27,25 +27,25 @@ object Form4: TForm4
     object rbInformation: TRadioButton
       Position.X = 16.000000000000000000
       Position.Y = 24.000000000000000000
-      TabOrder = 37
+      TabOrder = 38
       Text = 'Information'
     end
     object rbWarning: TRadioButton
       Position.X = 16.000000000000000000
       Position.Y = 50.000000000000000000
-      TabOrder = 38
+      TabOrder = 39
       Text = 'Warning'
     end
     object rbFatalError: TRadioButton
       Position.X = 16.000000000000000000
       Position.Y = 104.000000000000000000
-      TabOrder = 39
+      TabOrder = 40
       Text = 'FatalError'
     end
     object rbError: TRadioButton
       Position.X = 16.000000000000000000
       Position.Y = 77.000000000000000000
-      TabOrder = 40
+      TabOrder = 41
       Text = 'Error'
     end
   end

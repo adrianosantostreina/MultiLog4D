@@ -108,11 +108,9 @@
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <DCC_Define>ML4D_EVENTVIEWER;ML4D_DESKTOP;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_Define>ML4D_SERVICE;ML4D_DESKTOP;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_UnitSearchPath>..\..\..\scr;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
@@ -127,7 +125,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_Define>ML4D_SERVICE;ML4D_DESKTOP;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
@@ -136,7 +133,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_Define>ML4D_SERVICE;ML4D_DESKTOP;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
@@ -176,7 +172,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
-                <DeployFile LocalName="Win32\Debug\VCL_MultiLog4D.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="bin\VCL_MultiLog4D.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>VCL_MultiLog4D.exe</RemoteName>
                         <Overwrite>true</Overwrite>
