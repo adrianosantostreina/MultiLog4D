@@ -4,7 +4,6 @@ interface
 
 uses
   System.SysUtils,
-  FMX.Dialogs,
   MultiLog4D.Interfaces;
 
 type
@@ -21,21 +20,11 @@ implementation
 uses
   {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
     {$IFDEF MSWINDOWS}
-      {$IFDEF ML4D_CONSOLE}
-        MultiLog4D.Windows.Console,
-      {$ELSEIF DEFINED(ML4D_EVENTVIEWER)}
-        MultiLog4D.Windows.Services,
-      {$ELSE}
-        MultiLog4D.Windows.Files,
-      {$ENDIF}
+      MultiLog4D.Windows,
     {$ELSEIF DEFINED(LINUX)}
-      {$IFDEF ML4D_CONSOLE}
-        MultiLog4D.Linux.Console,
-      {$ENDIF}
+      MultiLog4D.Linux,
     {$ELSEIF DEFINED(MACOS)}
-      {$IFDEF ML4D_DESKTOP}
-        MultiLog4D.MacOs.Desktop,
-      {$ENDIF}
+      MultiLog4D.MacOs.Desktop,
     {$ENDIF}
   {$ELSE}
     {$IFDEF ANDROID}
@@ -57,17 +46,9 @@ begin
   begin
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
       {$IFDEF MSWINDOWS}
-        {$IFDEF ML4D_CONSOLE}
-          FLogger := TMultiLog4DWindowsConsole.Create;
-        {$ELSEIF DEFINED(ML4D_EVENTVIEWER)}
-          FLogger := TMultiLog4DWindowsServices.Create;
-        {$ELSE}
-          FLogger := TMultiLog4DWindowsFile.Create(EmptyStr);
-        {$ENDIF}
+        FLogger := TMultiLog4DWindows.Create(EmptyStr);
       {$ELSEIF DEFINED(LINUX)}
-        {$IFDEF ML4D_CONSOLE}
-          FLogger := TMultiLog4DLinuxConsole.Create;
-        {$ENDIF}
+        FLogger := TMultiLog4DLinux.Create;
       {$ELSEIF DEFINED(MACOS)}
         FLogger := TMultiLog4DMacOS.Create;
       {$ENDIF}
@@ -82,6 +63,5 @@ begin
 
   Result := FLogger;
 end;
-
 
 end.

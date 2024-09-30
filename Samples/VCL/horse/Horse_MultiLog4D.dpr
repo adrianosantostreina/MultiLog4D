@@ -14,7 +14,6 @@ uses
 
 var
   LOutputLogPath : string;
-
 begin
   LOutputLogPath := TPath.Combine(ExtractFilePath(ParamStr(0)), 'MyLog');
   ForceDirectories(LOutputLogPath);
@@ -22,8 +21,7 @@ begin
   TMultiLog4DUtil
     .Logger
     .Tag('MultiLog4D')
-    //.Output(loBoth)
-    //.Category(TEventCategory.ecNone)
+    .Output([loFile, loConsole])
     .FileName(TPath.Combine(LOutputLogPath, 'Log.txt'))
     .LogWriteInformation('>>>>>>>>>> Starting <<<<<<<<<<');
 

@@ -39,7 +39,7 @@ type
     procedure RadioGroup2Click(Sender: TObject);
   private
     { Private declarations }
-    FOutputLog : TLogOutPut;
+    FOutputLog : TLogOutputSet;
   public
     { Public declarations }
   end;
@@ -82,13 +82,11 @@ begin
   TMultiLog4DUtil
    .Logger
    .Output(FOutputLog)
-   .SetLogFormat(lbleditLogFormat.Text) //Mask Format
+   .SetLogFormat(lbleditLogFormat.Text)           //Mask Format
    .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
    .UserName('adrianosantos')
    .EventID(Random(1000))
    .LogWrite(Format('LogWrite Type: %s', [LStrTypeMsg]), LTypeMsg);
-
-  ShowMessage(Format('LogWrite Type: %s', [LStrTypeMsg]));
 end;
 
 procedure TForm3.Button2Click(Sender: TObject);
@@ -101,8 +99,6 @@ begin
    .UserName('adrianosantos')
    .EventID(1000)
    .LogWriteInformation('LogWrite Type Information');
-
-  ShowMessage('LogWrite Type Information');
 end;
 
 procedure TForm3.Button3Click(Sender: TObject);
@@ -115,8 +111,6 @@ begin
    .UserName('adrianosantos')
    .EventID(1000)
    .LogWriteInformation('LogWrite Type Warning');
-
-  ShowMessage('LogWrite Type Warning');
 end;
 
 procedure TForm3.Button4Click(Sender: TObject);
@@ -129,8 +123,6 @@ begin
    .UserName('adrianosantos')
    .EventID(1000)
    .LogWriteInformation('LogWrite Type Error');
-
-  ShowMessage('LogWrite Type Error');
 end;
 
 procedure TForm3.Button5Click(Sender: TObject);
@@ -143,21 +135,19 @@ begin
    .UserName('adrianosantos')
    .EventID(Random(1000))
    .LogWriteInformation('LogWrite Type Fatal Error');
-
-  ShowMessage('LogWrite Type Fatal Error');
 end;
 
 procedure TForm3.FormCreate(Sender: TObject);
 begin
-  FOutputLog := TLogOutPut.loFile;
+  FOutputLog := [loFile];
 end;
 
 procedure TForm3.RadioGroup2Click(Sender: TObject);
 begin
   case RadioGroup2.ItemIndex of
-    0: FOutputLog := TLogOutPut.loFile;
-    1: FOutputLog := TLogOutPut.loEventViewer; //Add ML4D_EVENTVIEWER Directivec
-    2: FOutputLog := TLogOutPut.loBoth;
+    0: FOutputLog := [loFile];
+    1: FOutputLog := [loEventViewer]; //Add ML4D_EVENTVIEWER Directivec
+    2: FOutputLog := [loFile, loEventViewer];
   end;
 end;
 

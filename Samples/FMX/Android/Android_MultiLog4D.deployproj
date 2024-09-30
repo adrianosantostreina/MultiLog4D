@@ -6,7 +6,7 @@
     <PropertyGroup>
         <DeviceId Condition="'$(Platform)'=='Android'">RX8NB0503LV</DeviceId>
         <DeviceId Condition="'$(Platform)'=='Android64'"/>
-        <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
+        <DeviceId Condition="'$(Platform)'=='iOSDevice64'">00008101-0002651A0221001E</DeviceId>
         <DeviceId Condition="'$(Platform)'=='iOSSimARM64'">52740D33-2E76-45AF-BE8C-B1C14E6EFEB4</DeviceId>
     </PropertyGroup>
     <ItemGroup Condition="'$(Platform)'=='OSX64'"/>
@@ -51,15 +51,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\Android_MultiLog4D.classes" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Android_MultiLog4D\classes\</RemoteDir>
-            <RemoteName>Android_MultiLog4D.classes</RemoteName>
-            <DeployClass>AndroidClasses</DeployClass>
-            <Operation>64</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_VectorizedSplashV31.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Android_MultiLog4D\res\drawable-anydpi-v31\</RemoteDir>
             <RemoteName>splash_vector.xml</RemoteName>
@@ -92,6 +83,15 @@
             <RemoteName>splash_image_def.xml</RemoteName>
             <DeployClass>AndroidSplashImageDef</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\Android_MultiLog4D.classes" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Android_MultiLog4D\classes\</RemoteDir>
+            <RemoteName>Android_MultiLog4D.classes</RemoteName>
+            <DeployClass>AndroidClasses</DeployClass>
+            <Operation>64</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -249,6 +249,16 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="Android\Debug\libAndroid_MultiLog4D.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Android_MultiLog4D\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libAndroid_MultiLog4D.so</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_AdaptiveIcon_Foreground.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Android_MultiLog4D\res\drawable\</RemoteDir>
             <RemoteName>ic_launcher_foreground.xml</RemoteName>
@@ -329,16 +339,6 @@
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Android\Debug\libAndroid_MultiLog4D.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Android_MultiLog4D\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>libAndroid_MultiLog4D.so</RemoteName>
-            <DeployClass>ProjectOutput</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-            <Required>True</Required>
         </DeployFile>
         <DeployFile Include="Android\Debug\colors-night-v21.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Android_MultiLog4D\res\values-night-v21\</RemoteDir>

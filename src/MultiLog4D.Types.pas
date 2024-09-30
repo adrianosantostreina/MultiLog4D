@@ -12,8 +12,13 @@ type
   TEventCategory = (ecNone, ecApplication, ecSecurity, ecPerformance, ecError,
     ecWarning, ecDebug, ecTransaction, ecNetwork);
 
+//  {$IFDEF MSWINDOWS}
+//  TLogOutPut = (loBoth, loConsole, loFile, loEventViewer);
+//  {$ENDIF}
+
   {$IFDEF MSWINDOWS}
-  TLogOutPut = (loBoth, loConsole, loFile, loEventViewer);
+  TLogOutput = (loConsole, loFile, loEventViewer);
+  TLogOutputSet = set of TLogOutput;
   {$ENDIF}
 
 const

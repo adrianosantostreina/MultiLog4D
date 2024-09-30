@@ -232,7 +232,7 @@
         <Debugger_Launcher>/usr/bin/gnome-terminal -- &quot;%debuggee%&quot;</Debugger_Launcher>
         <Manifest_File>(None)</Manifest_File>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
-        <DCC_Define>ML4D_CONSOLE;HORSE_DAEMON;$(DCC_Define)</DCC_Define>
+        <DCC_Define>HORSE_DAEMON;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
         <Debugger_RunParams>-cleaninstall -debugport=54321</Debugger_RunParams>
@@ -260,7 +260,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Linux64)'!=''">
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_Define>ML4D_CONSOLE;HORSE_DAEMON;$(DCC_Define)</DCC_Define>
+        <DCC_Define>HORSE_DAEMON;$(DCC_Define)</DCC_Define>
         <Debugger_Launcher>/usr/bin/gnome-terminal -- &quot;%debuggee%&quot;</Debugger_Launcher>
         <Manifest_File>(None)</Manifest_File>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>

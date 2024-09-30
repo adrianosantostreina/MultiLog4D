@@ -295,7 +295,6 @@
         <DCC_RangeChecking>true</DCC_RangeChecking>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_OSX64)'!=''">
-        <DCC_Define>ML4D_DESKTOP;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_UnitSearchPath>..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
@@ -325,7 +324,6 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_OSX64)'!=''">
-        <DCC_Define>ML4D_DESKTOP;$(DCC_Define)</DCC_Define>
         <DCC_ExeOutput>.\bin</DCC_ExeOutput>
         <DCC_UnitSearchPath>..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_DcuOutput>.\dcu</DCC_DcuOutput>
