@@ -57,30 +57,45 @@ end;
 
 function TMultiLog4DMacOS.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ALogType);
   Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DMacOS.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ltInformation);
   Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DMacOS.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ltWarning);
   Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DMacOS.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ltError);
   Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DMacOS.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ltFatalError);
   Result := Self as IMultiLog4D;
 end;

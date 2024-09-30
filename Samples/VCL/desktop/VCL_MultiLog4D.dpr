@@ -24,6 +24,7 @@ begin
     .FileName(TPath.Combine(LOutputLogPath, 'Log.txt'))
     .UserName('adrianosantos')
     .EventID(1)
+    .EnableLog(True)
     .LogWriteInformation('>>>>>>>>>> Starting <<<<<<<<<<');
 
   Application.Initialize;

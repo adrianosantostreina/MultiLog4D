@@ -29,6 +29,7 @@ type
     {$ENDIF}
     class var FTag: string;
     class var FTagSet: Boolean;
+    class var FEnableLog : Boolean;
     {$IF NOT DEFINED(ANDROID) AND NOT DEFINED(IOS)}
       {$IF DEFINED(MSWINDOWS)}
           FFileName: string;
@@ -64,6 +65,7 @@ type
         function EventID(const AEventID: UInt32): IMultiLog4D; virtual;
       {$ENDIF}
       function UserName(const AUserName: string): IMultiLog4D; virtual;
+      function EnableLog(const AEnable: Boolean = True): IMultiLog4D; virtual;
     {$ENDIF}
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; virtual; abstract;
     function LogWriteInformation(const AMsg: string): IMultiLog4D; virtual; abstract;
@@ -126,6 +128,12 @@ begin
   else
     FUserName := TMultiLog4DCommon.GetCurrentUserName;
 
+  Result := Self as IMultiLog4D;
+end;
+
+function TMultiLog4DBase.EnableLog(const AEnable: Boolean = True): IMultiLog4D;
+begin
+  FEnableLog := AEnable;
   Result := Self as IMultiLog4D;
 end;
 

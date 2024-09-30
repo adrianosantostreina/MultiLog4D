@@ -29,6 +29,9 @@ implementation
 
 function TMultiLog4DAndroid.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   case ALogType of
     ltWarning    : LogWriteWarning(AMsg);
     ltError      : LogWriteError(AMsg);
@@ -42,6 +45,9 @@ end;
 
 function TMultiLog4DAndroid.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   {$IFDEF ANDROID}
     if FTag = EmptyStr then
       GetDefaultTag;
@@ -53,6 +59,9 @@ end;
 
 function TMultiLog4DAndroid.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   {$IFDEF ANDROID}
     if FTag = EmptyStr then
       GetDefaultTag;
@@ -64,6 +73,9 @@ end;
 
 function TMultiLog4DAndroid.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   {$IFDEF ANDROID}
     if FTag = EmptyStr then
       GetDefaultTag;
@@ -75,6 +87,9 @@ end;
 
 function TMultiLog4DAndroid.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   {$IFDEF ANDROID}
     if FTag = EmptyStr then
       GetDefaultTag;

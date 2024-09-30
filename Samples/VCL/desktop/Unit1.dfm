@@ -2,7 +2,7 @@ object Form3: TForm3
   Left = 0
   Top = 0
   Caption = 'MultiLog4D'
-  ClientHeight = 454
+  ClientHeight = 488
   ClientWidth = 398
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -121,5 +121,14 @@ object Form3: TForm3
       TabOrder = 1
       Text = '${time} ${username} ${eventid} [${log_type}] - ${message}'
     end
+  end
+  object chkActiveDeactive: TCheckBox
+    Left = 8
+    Top = 439
+    Width = 97
+    Height = 17
+    Caption = 'Disable Log'
+    TabOrder = 8
+    OnClick = chkActiveDeactiveClick
   end
 end

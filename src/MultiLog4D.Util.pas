@@ -28,6 +28,7 @@ type
     class procedure SetDateTimeFormat(const ADateTimeFormat: string); static;
     {$ENDIF}
     class procedure SetUserName(const AUserName: string); static;
+    class procedure SetEnableLog(const AEnableLog: Boolean = True); static;
     {$ENDIF}
   end;
 
@@ -81,6 +82,12 @@ class procedure TMultiLog4DUtil.SetUserName(const AUserName: string);
 begin
   if Assigned(FLogger) then
     FLogger.UserName(AUserName);
+end;
+
+class procedure TMultiLog4DUtil.SetEnableLog(const AEnableLog: Boolean = True);
+begin
+  if Assigned(FLogger) then
+    FLogger.EnableLog(AEnableLog);
 end;
 {$ENDIF}
 
