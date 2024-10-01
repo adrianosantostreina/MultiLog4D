@@ -93,7 +93,7 @@ No Windows podemos enviar os logs para Console, Visualizador de Eventos do Windo
 <li>loEventViewer: Para geração em Visualizador de Eventos
 <li>loConsole: Para geração no Console
 
-</br></br>
+</br>
 
 ```pascal
   TMultiLog4DUtil
@@ -103,6 +103,65 @@ No Windows podemos enviar os logs para Console, Visualizador de Eventos do Windo
     .LogWriteInformation('Inicializando...');
 ```
 Como pode ver, é um array de opções e você configura como desejar.
+
+### Recursos Adicionais 🏆
+
+* **Filename** </br>
+
+Você pode configurar a pasta e o nome do arquivo de log que será gerado, do contrário o MultiLog4D criará automaticamente um diretório <b>log</b> e um arquivo com nome padrão. Para configurar isso, basta chamar o método:
+
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .Tag('MultiLog4D')
+    .Output([loConsole, loFile, loEventViewer])
+    .FileName('C:\MeusLogs\ExemploDeLog')
+    .LogWriteInformation('Inicializando...');
+```
+A biblioteca acrescentará a data e a extensão do arquivo.
+
+```txt
+  ExemploDeLog_20241001_010720.log  
+```
+
+ou seja, "YYYYDDMM hhmmss.log"
+
+</br>
+
+* **SetLogFormat** </br>
+Você pode formatar a saída do log:
+
+Default: `${time} ${username} ${eventid} [${log_type}] - ${message}`
+
+Possible values: `category`
+
+Estamos avaliando outras informações que poderão fazer parte do log. Caso você tenha sugestões, envie-as através das <b>ISSUES</b>.
+
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .Tag('MultiLog4D')
+    .Output([loConsole, loFile, loEventViewer])
+    .FileName('C:\MeusLogs\ExemploDeLog')
+    .SetLogFormat('${time} ${username} ${eventid} [${log_type}] - ${message}')
+    .LogWriteInformation('Inicializando...');
+```
+</br>
+
+* **SetLogFormat** </br>
+Você pode personalizar o formato de DataHora.
+
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .Tag('MultiLog4D')
+    .Output([loConsole, loFile, loEventViewer])
+    .FileName('C:\MeusLogs\ExemploDeLog')
+    .SetLogFormat('${time} ${username} ${eventid} [${log_type}] - ${message}')
+    .SetDateTimeFormat('YYYY-DD-MM hh:mm:ss')
+    .LogWriteInformation('Inicializando...');
+```
+</br>
 
 </br></br></br>
 # Variações do LogWrite
