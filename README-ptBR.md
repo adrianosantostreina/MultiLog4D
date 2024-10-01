@@ -131,14 +131,14 @@ Default: `${time} ${username} ${eventid} [${log_type}] - ${message}`
 
 Possible values: `category`
 
-Estamos avaliando outras informações que poderão fazer parte do log. Caso você tenha sugestões, envie-as através das <b>ISSUES</b>.
-
 ```pascal
   TMultiLog4DUtil
     .Logger
     .SetLogFormat('${time} ${username} ${eventid} [${log_type}] - ${message}')
     .LogWriteInformation('Inicializando...');
 ```
+
+Estamos avaliando outras informações que poderão fazer parte do log. Caso você tenha sugestões, envie-as através das <b>ISSUES</b>.
 
 * **SetDateTimeFormat** </br>
 Você pode personalizar o formato de DataHora.
@@ -149,7 +149,6 @@ Você pode personalizar o formato de DataHora.
     .SetDateTimeFormat('YYYY-DD-MM hh:mm:ss')
     .LogWriteInformation('Inicializando...');
 ```
-
 
 * **Category** </br>
 Você pode personalizar a categoria do log para melhor encontrar os erros e informações no seu projeto. As opções de categoria estão previstas na classe <b>TEventCategory</b> no arquivo <b>MultiLog4D.Types</b>.
@@ -165,16 +164,12 @@ Os valores possíveis são:
 <li>ecTransaction
 <li>ecNetwork
 
-</br>
+</br></br>
 
 ```pascal
   TMultiLog4DUtil
     .Logger
-    .Tag('MultiLog4D')
-    .Output([loConsole, loFile, loEventViewer])
-    .FileName('C:\MeusLogs\ExemploDeLog')
-    .SetLogFormat('${time} ${username} ${eventid} [${log_type}] - ${message}')
-    .SetDateTimeFormat('YYYY-DD-MM hh:mm:ss')
+    .Category(ecApplication)
     .LogWriteInformation('Inicializando...');
 ```
 </br>
