@@ -93,16 +93,86 @@ No Windows podemos enviar os logs para Console, Visualizador de Eventos do Windo
 <li>loEventViewer: Para geração em Visualizador de Eventos
 <li>loConsole: Para geração no Console
 
+</br>
+
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .Output([loConsole, loFile, loEventViewer])
+    .LogWriteInformation('Inicializando...');
+```
+Como pode ver, é um array de opções e você configura como desejar.
+
+### Recursos Adicionais 🏆
+
+* **Filename** </br>
+
+Você pode configurar a pasta e o nome do arquivo de log que será gerado, do contrário o MultiLog4D criará automaticamente um diretório <b>log</b> e um arquivo com nome padrão. Para configurar isso, basta chamar o método:
+
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .FileName('C:\MeusLogs\ExemploDeLog')
+    .LogWriteInformation('Inicializando...');
+```
+A biblioteca acrescentará a data e a extensão do arquivo.
+
+```txt
+  ExemploDeLog_20241001_010720.log  
+```
+
+ou seja, YYYYDDMM hhmmss.log
+
+
+* **SetLogFormat** </br>
+Você pode formatar a saída do log:
+
+Default: `${time} ${username} ${eventid} [${log_type}] - ${message}`
+
+Possible values: `category`
+
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .SetLogFormat('${time} ${username} ${eventid} [${log_type}] - ${message}')
+    .LogWriteInformation('Inicializando...');
+```
+
+Estamos avaliando outras informações que poderão fazer parte do log. Caso você tenha sugestões, envie-as através das <b>ISSUES</b>.
+
+* **SetDateTimeFormat** </br>
+Você pode personalizar o formato de DataHora.
+
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .SetDateTimeFormat('YYYY-DD-MM hh:mm:ss')
+    .LogWriteInformation('Inicializando...');
+```
+
+* **Category** </br>
+Você pode personalizar a categoria do log para melhor encontrar os erros e informações no seu projeto. As opções de categoria estão previstas na classe <b>TEventCategory</b> no arquivo <b>MultiLog4D.Types</b>.
+
+Os valores possíveis são:
+<li>ecNone 
+<li>ecApplication 
+<li>ecSecurity 
+<li>ecPerformance 
+<li>ecError
+<li>ecWarning 
+<li>ecDebug 
+<li>ecTransaction
+<li>ecNetwork
 </br></br>
 
 ```pascal
   TMultiLog4DUtil
     .Logger
-    .Tag('MultiLog4D')
-    .Output([loConsole, loFile, loEventViewer])
+    .Category(ecApplication)
     .LogWriteInformation('Inicializando...');
 ```
-Como pode ver, é um array de opções e você configura como desejar.
+</br>
+
 
 </br></br></br>
 # Variações do LogWrite
