@@ -163,9 +163,7 @@ Os valores possíveis são:
 <li>ecDebug 
 <li>ecTransaction
 <li>ecNetwork
-
 </br></br>
-
 ```pascal
   TMultiLog4DUtil
     .Logger
