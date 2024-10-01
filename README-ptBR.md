@@ -103,7 +103,7 @@ No Windows podemos enviar os logs para Console, Visualizador de Eventos do Windo
 ```
 Como pode ver, é um array de opções e você configura como desejar.
 
-### Recursos Adicionais 🏆
+### 🏆 Recursos Adicionais
 
 * **Filename** </br>
 
@@ -172,6 +172,14 @@ Os valores possíveis são:
     .LogWriteInformation('Inicializando...');
 ```
 </br>
+
+# Linux
+No Linux os logs são enviados para a saída padrão do sistema operacional, ou seja, para o <b>syslog</b>. Não é possível enviar logs para arquivos, portanto basta fazer o monitoramento do log usando a linha de comando abaixo no terminal do Linux:
+
+```bash
+  tail -f /var/log/syslog  
+```
+
 
 
 </br></br></br>
