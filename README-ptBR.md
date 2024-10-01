@@ -201,6 +201,7 @@ Aplicações para macOS também podem ser monitoradas e receber logs diretamente
 Assim como no Linux, não é possível criar logs em arquivo. Caso você veja a necessidade de enviar o log também para arquivo, envie sua sugestão através das <b>ISSUES</b>. 
 
 </br>
+
 # Variações do LogWrite
 A biblioteca possui ao todo 05 (Cinco) métodos de Log, são eles: </br>
 <li>LogWrite = Nesse método você precisa definir no segundo parâmetro qual tipo de log deseja enviar, ou seja: Information, Warning, Error ou Fatal Error.
