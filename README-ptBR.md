@@ -15,20 +15,15 @@
 </p>
 
 # MultiLog4D
-MultiLog4D é uma biblioteca projetada para facilitar e agilizar o envio de logs para Android, iOS, Windows, macOS e Linux. Com apenas uma linha de código é possível enviar uma mensagem que será vista e monitorada na plataforma correspondente, como adb logcat no Android por exemplo.
+<b>MultiLog4D</b> é uma biblioteca projetada para facilitar e agilizar o envio de logs para Android, iOS, Windows, macOS e Linux. Com apenas uma linha de código é possível enviar uma mensagem que será vista e monitorada na plataforma correspondente, como <b>adb logcat</b> no Android ou <br>syslog</b> no Linux, como exemplo.
 
-Esta primeira versão cobre apenas Android. Em breve implementaremos implementações para outras plataformas também.
-
-## Instalação
-Basta cadastrar no Library Path do seu Delphi o caminho da pasta SOURCE da biblioteca, ou se preferir pode utilizar o Boss (gerenciador de dependências do Delphi) para realizar a instalação:
+## 🪄 Instalação
+Basta baixar os fontes do GitHub, descompactar em uma pasta de sua preferência e no seu projeto apontar para essa pasta no <b><i>Search Path</i></b> do projeto ou se preferir pode utilizar o Boss (gerenciador de dependências do Delphi) para realizar a instalação:
 ```
 boss install github.com/adrianosantostreina/MultiLog4D
 ```
-
-Caso não queira usar o boss, basta baixar os fontes do GitHub, descompactar em uma pasta de sua preferência e no seu projeto apontar para essa pasta no Search Path do projeto.
-
-## Uso
-Existem diversas formas de utilizar o MultiLog4D, detalharemos todas a seguir, mas a que mais gosto é utilizar a classe TMultiLog4DUtil presente na unidade MultiLog4D.Util.pas. É uma classe singleton que pode ser chamada de qualquer parte do seu projeto Delphi.
+## 📝 Uso
+Existem diversas formas de utilizar o MultiLog4D, detalharemos todas a seguir, mas a que mais gosto é utilizar a classe <b><i>TMultiLog4DUtil</i></b> presente na unidade <b>MultiLog4D.Util.pas</b>. É uma classe <u>Singleton</u> que pode ser chamada de qualquer parte do seu projeto Delphi.
 
 Declare a unidade na cláusula uses do seu formulário e chame a linha abaixo:
 ```delphi
@@ -43,14 +38,13 @@ begin
       .LogWriteInformation('Qualquer log aqui...')
 end;
 ```
-Uma observação importante é que o TAG precisa ser informada obrigatoriamente para Android e iOS, do contrário você não conseguirá filtrar os logs no Terminal do Windows em aplicativos Android e no Console do macOS para aplicativos iOS. O MultiLog4D não irá validar se o tag foi inserido ou não, então você precisa lembrar de chamar o método. Se você não indicar uma TAG, o MultiLog4D definirá a TAG padrão com o nome "MultiLog4D".
+Uma observação importante é que o <B>TAG</b> precisa ser informada obrigatoriamente para <i>Android</i> e <i>iOS</i>, do contrário você não conseguirá filtrar os logs no Terminal do Windows em aplicativos Android e no Console do macOS para aplicativos iOS. O MultiLog4D não irá validar se o tag foi inserido ou não, então você precisa lembrar de chamar o método. Se você não indicar uma TAG, o MultiLog4D definirá a TAG padrão com o nome "MultiLog4D".
 
 A TAG será utilizada para filtrar todas as mensagens da sua aplicação no Terminal quando o monitoramento for solicitado:
 
-# Como ver o log do Android?</br>
-Usando qualquer janela de Terminal no Windows, você precisa basicamente usar o adb com o comando logcat para visualizar os logs. 
+# 💡Como ver o log do Android?</br>
+Usando qualquer janela de Terminal no Windows, você precisa basicamente usar o <b>adb</b> com o comando <b>logcat</b> para visualizar os logs. 
 
-Exemplo:
 ```bash
 adb logcat <MyTAG>:D *:S
 ```
@@ -75,8 +69,8 @@ adb -s <UUID> logcat MyAppAndroid:D *:S
 
 Substitua <UUID> pelo UUID do seu dispositivo.
 
-# Como ver o log no iOS?</br>
-No iOS monitorar os logs deve ser feito pelo aplicativo Console no macOS. Busque pelo aplicativo Console na busca do macOS. Ao abrir o aplicativo, o dispositivo iPhone/iPad que estiver usando para testar seu aplicativo aparecerá na barra lateral, apenas clique nele e pronto, os logs desse dispositivo aparecerão na janela. 
+# 💡Como ver o log no iOS?</br>
+No iOS, monitorar os logs deve ser feito pelo aplicativo Console no macOS. Busque pelo aplicativo Console na busca do macOS. Ao abrir o aplicativo, o dispositivo iPhone/iPad que estiver usando para testar seu app aparecerá na barra lateral, apenas clique nele e pronto, os logs desse dispositivo aparecerão na janela. 
 
 ⚠️ Atenção: para filtrar somente os logs do seu aplicativo, digite na busca, à direita superior, o nome da TAG que você definiu no Delphi e em seguida aperte ENTER. Um combobox aparecerá à esquerda da busca. Selecione a opção "Mensagem" no combobox. E se preferir, filtre também o processo. Digite o nome do processo na busca (O nome do projeto geralmente é o nome do seu DPR no Delphi), tecle ENTER e em seguida filtre por "Processo" no combobox.
 
@@ -86,12 +80,12 @@ No iOS monitorar os logs deve ser feito pelo aplicativo Console no macOS. Busque
   </a>
 </p>
 
-# Windows
-No Windows podemos enviar os logs para Console, Visualizador de Eventos do Windows e para arquivo. Para isso há um método a ser configurado, o <b>Output</b>. Ele possui as variações:
+# 💻 Windows
+No Windows podemos enviar os logs para Console, Visualizador de Eventos e para arquivo. Para isso há um método a ser configurado, o <b>Output</b>. Ele possui as variações:
 
-<li>loFile: Para geração em arquivo
-<li>loEventViewer: Para geração em Visualizador de Eventos
-<li>loConsole: Para geração no Console
+<li><b>loFile</b>: Para geração em arquivo
+<li><b>loEventViewer</b>: Para geração em Visualizador de Eventos
+<li><b>loConsole</b>: Para geração no Console
 
 </br>
 
@@ -153,15 +147,15 @@ Você pode personalizar o formato de DataHora.
 Você pode personalizar a categoria do log para melhor encontrar os erros e informações no seu projeto. As opções de categoria estão previstas na classe <b>TEventCategory</b> no arquivo <b>MultiLog4D.Types</b>.
 
 Os valores possíveis são:
-<li>ecNone 
-<li>ecApplication 
-<li>ecSecurity 
-<li>ecPerformance 
-<li>ecError
-<li>ecWarning 
-<li>ecDebug 
-<li>ecTransaction
-<li>ecNetwork
+<li><b>ecNone</b>
+<li><b>ecApplication</b>
+<li><b>ecSecurity</b>
+<li><b>ecPerformance</b>
+<li><b>ecError</b>
+<li><b>ecWarning</b>
+<li><b>ecDebug</b>
+<li><b>ecTransaction</b>
+<li><b>ecNetwork</b>
 </br></br>
 
 ```pascal
@@ -173,9 +167,9 @@ Os valores possíveis são:
 * **EventId** </br>
 Se você possuir uma classe própria de erros e mapeou usando uma numeração, é possível usar essa numeração para mostrar no log. Por exemplo:
 
-<li>1000 = Sistema offline
-<li>1001 = Sistema online
-<li>1003 = Erro de conexão
+<li><b>1000</b> = Sistema offline
+<li><b>1001</b> = Sistema online
+<li><b>1010</b> = Erro de conexão
 
 <br>
 
@@ -187,7 +181,7 @@ Caso essa seja sua forma própria de indentificar possíveis erros, use esse nú
     .LogWriteInformation('Inicializando...');
 ```
 
-# Linux
+# 💻 Linux
 No Linux os logs são enviados para a saída padrão do sistema operacional, ou seja, para o <b>syslog</b>. Não é possível enviar logs para arquivos, portanto basta fazer o monitoramento do log usando a linha de comando abaixo no terminal do Linux:
 
 ```bash
@@ -195,24 +189,70 @@ No Linux os logs são enviados para a saída padrão do sistema operacional, ou 
 ```
 No Linux você ainda pode configurar o EventId mencionado na seção anterior. 
 
-# macOS
+# 💻 macOS
 Aplicações para macOS também podem ser monitoradas e receber logs diretamente do Delphi. A forma de monitoramento acontece exatamente como no iOS, através do Console. Retorne na seção sobre iOS para entender como visualizar os logs. A única diferença é que você verá o nome do seu dispositivo mac na barra lateral do macOS.
 
 Assim como no Linux, não é possível criar logs em arquivo. Caso você veja a necessidade de enviar o log também para arquivo, envie sua sugestão através das <b>ISSUES</b>. 
 </br>
 
+## EnableLog </br>
+Você tem a opção de desativar ou ativar o log a qualquer momento, basta usar a propriedade <b>EnableLog</b> conforme mostrado abaixo:
+
+```pascal
+  TMultiLog4DUtil
+    .EnableLog(False);
+```
+
+✍️ Observação:</b>
+O default dessa propriedade é True.
+
+<br>
+
 # Variações do LogWrite
 A biblioteca possui ao todo 05 (Cinco) métodos de Log, são eles: </br>
-<li>LogWrite = Nesse método você precisa definir no segundo parâmetro qual tipo de log deseja enviar, ou seja: Information, Warning, Error ou Fatal Error.
-
-Em seguida você terá os métodos: 
-<li> LogWriteInformation
-<li> LogWriteWarning
-<li> LogWriteError
-<li> LogWriteFatalError
+<li><b>LogWrite</b>
 </br>
 
-Nesses não é necessário informar o tipo de log pois já será direcionado internamente para a biblioteca.
+Nesse método você precisa definir no segundo parâmetro qual tipo de log deseja enviar, ou seja: Information, Warning, Error ou Fatal Error. </br>
+
+```pascal
+  TMultiLog4DUtil
+    .LogWrite('Mensagem', lgInformation);
+```
+
+Em seguida você terá os métodos: 
+<li><b>LogWriteInformation</b>
+<li><b>LogWriteWarning</b>
+<li><b>LogWriteError</b>
+<li><b>LogWriteFatalError</b>
+</br></br>
+
+Nesses não é necessário informar o tipo de log pois já será direcionado internamente para a biblioteca.</br>
+
+✍️ Observação:</b>
+Você pode também encadear várias mensagens em uma única chamada.
+
+```pascal
+  TMultiLog4DUtil
+    .LogWriteInformation('Inicializando o sistema')
+    .LogWriteInformation('Conectando ao servidor')
+    .LogWriteWarning('Validação de status de usuário');
+```
+
+✍️ Exemplo de uso em uma Exceção:
+```pascal
+procedure TForm1.Button1Click(Sender: TObject)
+begin
+  try
+   //seu código 
+  except on E:Exception do
+    begin
+      TMultiLog4DUtil
+        .LogWriteError(Format('Erro: %s | %s', [E.ClassName, E.Message]));
+    end;
+  end;
+end;    
+```
 
 
 </br></br></br>
