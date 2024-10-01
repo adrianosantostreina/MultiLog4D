@@ -304,7 +304,7 @@ Apresentação
 
 
 ## Linguagens da Documentação
-[English (en)](https://github.com/adrianosantostreina/MultiLog4D/blob/main/README.md)<br>
+[English (en)](https://github.com/adrianosantostreina/MultiLog4D/blob/master/README.md)<br>
 [Português (ptBR)](https://github.com/adrianosantostreina/MultiLog4D/blob/master/README-ptBR.md)<br>
 
 ## ⚠️ Licença
