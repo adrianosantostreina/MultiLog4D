@@ -98,7 +98,6 @@ No Windows podemos enviar os logs para Console, Visualizador de Eventos do Windo
 ```pascal
   TMultiLog4DUtil
     .Logger
-    .Tag('MultiLog4D')
     .Output([loConsole, loFile, loEventViewer])
     .LogWriteInformation('Inicializando...');
 ```
@@ -113,8 +112,6 @@ Você pode configurar a pasta e o nome do arquivo de log que será gerado, do co
 ```pascal
   TMultiLog4DUtil
     .Logger
-    .Tag('MultiLog4D')
-    .Output([loConsole, loFile, loEventViewer])
     .FileName('C:\MeusLogs\ExemploDeLog')
     .LogWriteInformation('Inicializando...');
 ```
@@ -124,9 +121,8 @@ A biblioteca acrescentará a data e a extensão do arquivo.
   ExemploDeLog_20241001_010720.log  
 ```
 
-ou seja, "YYYYDDMM hhmmss.log"
+ou seja, YYYYDDMM hhmmss.log
 
-</br>
 
 * **SetLogFormat** </br>
 Você pode formatar a saída do log:
@@ -140,16 +136,36 @@ Estamos avaliando outras informações que poderão fazer parte do log. Caso voc
 ```pascal
   TMultiLog4DUtil
     .Logger
-    .Tag('MultiLog4D')
-    .Output([loConsole, loFile, loEventViewer])
-    .FileName('C:\MeusLogs\ExemploDeLog')
     .SetLogFormat('${time} ${username} ${eventid} [${log_type}] - ${message}')
     .LogWriteInformation('Inicializando...');
 ```
-</br>
 
-* **SetLogFormat** </br>
+* **SetDateTimeFormat** </br>
 Você pode personalizar o formato de DataHora.
+
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .SetDateTimeFormat('YYYY-DD-MM hh:mm:ss')
+    .LogWriteInformation('Inicializando...');
+```
+
+
+* **Category** </br>
+Você pode personalizar a categoria do log para melhor encontrar os erros e informações no seu projeto. As opções de categoria estão previstas na classe <b>TEventCategory</b> no arquivo <b>MultiLog4D.Types</b>.
+
+Os valores possíveis são:
+<li>ecNone 
+<li>ecApplication 
+<li>ecSecurity 
+<li>ecPerformance 
+<li>ecError
+<li>ecWarning 
+<li>ecDebug 
+<li>ecTransaction
+<li>ecNetwork
+
+</br>
 
 ```pascal
   TMultiLog4DUtil
@@ -162,6 +178,7 @@ Você pode personalizar o formato de DataHora.
     .LogWriteInformation('Inicializando...');
 ```
 </br>
+
 
 </br></br></br>
 # Variações do LogWrite
