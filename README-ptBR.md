@@ -207,8 +207,8 @@ Em seguida você terá os métodos:
 <li> LogWriteWarning
 <li> LogWriteError
 <li> LogWriteFatalError
-
 </br>
+
 Nesses não é necessário informar o tipo de log pois já será direcionado internamente para a biblioteca.
 
 
