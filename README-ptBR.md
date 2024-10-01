@@ -199,7 +199,6 @@ No Linux você ainda pode configurar o EventId mencionado na seção anterior.
 Aplicações para macOS também podem ser monitoradas e receber logs diretamente do Delphi. A forma de monitoramento acontece exatamente como no iOS, através do Console. Retorne na seção sobre iOS para entender como visualizar os logs. A única diferença é que você verá o nome do seu dispositivo mac na barra lateral do macOS.
 
 Assim como no Linux, não é possível criar logs em arquivo. Caso você veja a necessidade de enviar o log também para arquivo, envie sua sugestão através das <b>ISSUES</b>. 
-
 </br>
 
 # Variações do LogWrite
