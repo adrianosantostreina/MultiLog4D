@@ -175,3 +175,10 @@ Samples/FMX/Android/Android64/Debug/Android_MultiLog4D/res/values/styles.xml
 Samples/FMX/Android/Android64/Debug/Android_MultiLog4D/res/values-night-v21/colors.xml
 Samples/FMX/Android/Android64/Debug/Android_MultiLog4D/res/values-v21/styles.xml
 Samples/FMX/Android/Android64/Debug/Android_MultiLog4D/res/values-v31/styles.xml
+Samples/FMX/iOS/iOSDevice64/Debug/iOS_MultiLog4D.entitlements
+Samples/FMX/iOS/iOSDevice64/Debug/iOS_MultiLog4D.info.plist
+Samples/FMX/iOS/iOSDevice64/Debug/iOS_MultiLog4D.launchscreen/LaunchScreen.storyboard
+Samples/FMX/iOS/iOSDevice64/Debug/iOS_MultiLog4D.launchscreen/Assets/Contents.json
+Samples/FMX/iOS/iOSDevice64/Debug/iOS_MultiLog4D.launchscreen/Assets/AppIcon.appiconset/Contents.json
+Samples/FMX/iOS/iOSDevice64/Debug/iOS_MultiLog4D.launchscreen/Assets/LaunchScreenBackgroundColor.colorset/Contents.json
+Samples/FMX/iOS/iOSDevice64/Debug/iOS_MultiLog4D.launchscreen/Assets/LaunchScreenImage.imageset/Contents.json
