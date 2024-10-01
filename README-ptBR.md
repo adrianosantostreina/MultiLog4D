@@ -3,7 +3,7 @@
     <img alt="MultiLog4D" src="https://github.com/adrianosantostreina/MultiLog4D/blob/master/logo.png">
   </a>  
 </p>
-
+</br>
 <p align="center">
   <img src="https://img.shields.io/github/v/release/adrianosantostreina/MultiLog4D?style=flat-square">
   <img src="https://img.shields.io/github/stars/adrianosantostreina/MultiLog4D?style=flat-square">
@@ -81,13 +81,30 @@ No iOS monitorar os logs deve ser feito pelo aplicativo Console no macOS. Busque
 ⚠️ Atenção: para filtrar somente os logs do seu aplicativo, digite na busca, à direita superior, o nome da TAG que você definiu no Delphi e em seguida aperte ENTER. Um combobox aparecerá à esquerda da busca. Selecione a opção "Mensagem" no combobox. E se preferir, filtre também o processo. Digite o nome do processo na busca (O nome do projeto geralmente é o nome do seu DPR no Delphi), tecle ENTER e em seguida filtre por "Processo" no combobox.
 
 <p align="center">
-  <a href="https://github.com/adrianosantostreina/MultiLog4D/blob/master/images/console.png">
-    <img alt="MultiLog4D Console" src="https://github.com/adrianosantostreina/MultiLog4D/blob/master/images/console.png">
+  <a href="https://github.com/adrianosantostreina/MultiLog4D/blob/master/console.png">
+    <img alt="MultiLog4D Console" src="https://github.com/adrianosantostreina/MultiLog4D/blob/master/console.png">
   </a>
 </p>
 
+# Windows
+No Windows podemos enviar os logs para Console, Visualizador de Eventos do Windows e para arquivo. Para isso há um método a ser configurado, o <b>Output</b>. Ele possui as variações:
 
+<li>loFile: Para geração em arquivo
+<li>loEventViewer: Para geração em Visualizador de Eventos
+<li>loConsole: Para geração no Console
 
+</br></br>
+
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .Tag('MultiLog4D')
+    .Output([loConsole, loFile, loEventViewer])
+    .LogWriteInformation('Inicializando...');
+```
+Como pode ver, é um array de opções e você configura como desejar.
+
+</br></br></br>
 # Variações do LogWrite
 A biblioteca possui ao todo 05 (Cinco) métodos de Log, são eles: </br>
 <li>LogWrite = Nesse método você precisa definir no segundo parâmetro qual tipo de log deseja enviar, ou seja: Information, Warning, Error ou Fatal Error.
