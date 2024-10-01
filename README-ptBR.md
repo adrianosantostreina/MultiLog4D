@@ -106,7 +106,6 @@ Como pode ver, é um array de opções e você configura como desejar.
 ### 🏆 Recursos Adicionais
 
 * **Filename** </br>
-
 Você pode configurar a pasta e o nome do arquivo de log que será gerado, do contrário o MultiLog4D criará automaticamente um diretório <b>log</b> e um arquivo com nome padrão. Para configurar isso, basta chamar o método:
 
 ```pascal
