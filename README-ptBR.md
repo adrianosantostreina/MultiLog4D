@@ -253,9 +253,52 @@ begin
   end;
 end;    
 ```
+---
+### ⭕ Horse
+Caso esteja procurando incluir logs em API's desenvolvidas em <b>Horse</b>, saiba que isso também é possível, tanto para Windows quanto para Linux. O processo é o mesmo, basta adicionar a biblioteca baixando-a ou instalando através do <b>boss</b> que vai funcionar exatamente como explicado até aqui. 
 
+🤔 Lembrando apenas que no Windows podemos adicionar logs no Console, EventViewer e em Arquivos. Veja um exemplo de código:
 
-</br></br></br>
+```pascal
+uses
+  Horse,
+  MultiLog4D.Common,
+  MultiLog4D.Util,
+  MultiLog4D.Types,
+  System.IOUtils,
+  System.SysUtils;
+
+begin
+  TMultiLog4DUtil
+    .Logger
+    .LogWriteInformation('Start Application');
+
+  THorse
+    .Get('/test1',
+    procedure(Req: THorseRequest; Res: THorseResponse)
+    begin
+      Randomize;
+
+      TMultiLog4DUtil
+        .Logger
+        .LogWriteInformation('Before Test1 - ' + Format('Mensagem de teste 1 de log: %d', [Random(1000)]));
+
+      Res.Send('test1');
+
+      TMultiLog4DUtil
+        .Logger
+        .LogWriteInformation('After Test1 - ' + Format('Mensagem de teste 1 de log: %d', [Random(1000)]));
+    end
+    );
+
+  THorse
+    .Listen(9000);
+end.
+```
+</br>
+
+---
+
 Apresentação
 [![Watch the video](https://github.com/adrianosantostreina/MultiLog4D/blob/master/Play.png)](https://youtu.be/wYnMtSVkRtE?si=KBhKDxnJdNFbOWwe)
 
