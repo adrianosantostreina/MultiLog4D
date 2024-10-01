@@ -171,7 +171,22 @@ Os valores possíveis são:
     .Category(ecApplication)
     .LogWriteInformation('Inicializando...');
 ```
-</br>
+* **EventId** </br>
+Se você possuir uma classe própria de erros e mapeou usando uma numeração, é possível usar essa numeração para mostrar no log. Por exemplo:
+
+<li>1000 = Sistema offline
+<li>1001 = Sistema online
+<li>1003 = Erro de conexão
+
+<br>
+
+Caso essa seja sua forma própria de indentificar possíveis erros, use esse número no log.
+```pascal
+  TMultiLog4DUtil
+    .Logger
+    .EventId(1000)
+    .LogWriteInformation('Inicializando...');
+```
 
 # Linux
 No Linux os logs são enviados para a saída padrão do sistema operacional, ou seja, para o <b>syslog</b>. Não é possível enviar logs para arquivos, portanto basta fazer o monitoramento do log usando a linha de comando abaixo no terminal do Linux:
@@ -180,6 +195,7 @@ No Linux os logs são enviados para a saída padrão do sistema operacional, ou 
   tail -f /var/log/syslog  
 ```
 
+No 
 
 
 </br></br></br>
