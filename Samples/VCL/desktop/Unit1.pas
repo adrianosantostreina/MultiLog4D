@@ -30,6 +30,7 @@ type
     GroupBox1: TGroupBox;
     lbleditDateTimeFormat: TLabeledEdit;
     lbleditLogFormat: TLabeledEdit;
+    chkActiveDeactive: TCheckBox;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -37,9 +38,11 @@ type
     procedure Button5Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure RadioGroup2Click(Sender: TObject);
+    procedure chkActiveDeactiveClick(Sender: TObject);
   private
     { Private declarations }
     FOutputLog : TLogOutputSet;
+    FEnableLog : Boolean;
   public
     { Public declarations }
   end;
@@ -86,6 +89,7 @@ begin
    .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
    .UserName('adrianosantos')
    .EventID(Random(1000))
+   .EnableLog(FEnableLog)
    .LogWrite(Format('LogWrite Type: %s', [LStrTypeMsg]), LTypeMsg);
 end;
 
@@ -98,6 +102,7 @@ begin
    .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
    .UserName('adrianosantos')
    .EventID(1000)
+   .EnableLog(FEnableLog)
    .LogWriteInformation('LogWrite Type Information');
 end;
 
@@ -110,6 +115,7 @@ begin
    .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
    .UserName('adrianosantos')
    .EventID(1000)
+   .EnableLog(FEnableLog)
    .LogWriteInformation('LogWrite Type Warning');
 end;
 
@@ -122,6 +128,7 @@ begin
    .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
    .UserName('adrianosantos')
    .EventID(1000)
+   .EnableLog(FEnableLog)
    .LogWriteInformation('LogWrite Type Error');
 end;
 
@@ -134,12 +141,19 @@ begin
    .SetDateTimeFormat(lbleditDateTimeFormat.Text) //Format DateTime
    .UserName('adrianosantos')
    .EventID(Random(1000))
+   .EnableLog(FEnableLog)
    .LogWriteInformation('LogWrite Type Fatal Error');
+end;
+
+procedure TForm3.chkActiveDeactiveClick(Sender: TObject);
+begin
+  FEnableLog := not chkActiveDeactive.Checked;
 end;
 
 procedure TForm3.FormCreate(Sender: TObject);
 begin
   FOutputLog := [loFile];
+  FEnableLog := True;
 end;
 
 procedure TForm3.RadioGroup2Click(Sender: TObject);

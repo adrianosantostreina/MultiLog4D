@@ -24,7 +24,7 @@ uses
     {$ELSEIF DEFINED(LINUX)}
       MultiLog4D.Linux,
     {$ELSEIF DEFINED(MACOS)}
-      MultiLog4D.MacOs.Desktop,
+      MultiLog4D.MacOS,
     {$ENDIF}
   {$ELSE}
     {$IFDEF ANDROID}

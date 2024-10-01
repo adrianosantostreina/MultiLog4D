@@ -58,30 +58,45 @@ end;
 
 function TMultiLog4DLinux.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ALogType);
   Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DLinux.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ltInformation);
   Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DLinux.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ltWarning);
   Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DLinux.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ltError);
   Result := Self as IMultiLog4D;
 end;
 
 function TMultiLog4DLinux.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   LogWriteToDestination(AMsg, ltFatalError);
   Result := Self as IMultiLog4D;
 end;

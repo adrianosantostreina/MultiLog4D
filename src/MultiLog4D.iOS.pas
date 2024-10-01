@@ -31,6 +31,9 @@ implementation
 
 function TMultiLog4DiOS.LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   case ALogType of
     ltWarning:     LogWriteWarning(AMsg);
     ltError:       LogWriteError(AMsg);
@@ -42,6 +45,9 @@ end;
 
 function TMultiLog4DiOS.LogWriteInformation(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   {$IFDEF IOS}
     NSLog(StringToID(FTag + GetLogPrefix(ltInformation) + AMsg));
   {$ENDIF}
@@ -50,6 +56,9 @@ end;
 
 function TMultiLog4DiOS.LogWriteWarning(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   {$IFDEF IOS}
     NSLog(StringToID(FTag + GetLogPrefix(ltWarning) + AMsg));
   {$ENDIF}
@@ -59,6 +68,9 @@ end;
 
 function TMultiLog4DiOS.LogWriteError(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   {$IFDEF IOS}
     NSLog(StringToID(FTag + GetLogPrefix(ltError) + AMsg));
   {$ENDIF}
@@ -68,6 +80,9 @@ end;
 
 function TMultiLog4DiOS.LogWriteFatalError(const AMsg: string): IMultiLog4D;
 begin
+  if not FEnableLog then
+    Exit(Self);
+
   {$IFDEF IOS}
     NSLog(StringToID(FTag + GetLogPrefix(ltFatalError) + AMsg));
   {$ENDIF}

@@ -345,10 +345,19 @@
         <VerInfo_UIDeviceFamily>iPhoneAndiPad</VerInfo_UIDeviceFamily>
         <VerInfo_BundleId>br.com.adrianosantostreina.MultiLog4D</VerInfo_BundleId>
         <PF_DevDebug>Apple Development: adrianosantospro@gmail.com (S885332266)</PF_DevDebug>
-        <PF_MobileProvisionDebug>f85c2b01-940e-4819-8e9a-de05fad00a06</PF_MobileProvisionDebug>
+        <PF_MobileProvisionDebug>f0701fd5-2a87-4f52-a613-959b668a67c7</PF_MobileProvisionDebug>
         <PF_AutoMobileProvisionDebug>False</PF_AutoMobileProvisionDebug>
         <PF_AutoCertificateDebug>False</PF_AutoCertificateDebug>
         <DCC_UnitSearchPath>..\..\..\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <PF_DevTeamIdDebug>664YJA4Q63</PF_DevTeamIdDebug>
+        <PF_MobileProvisionPathDebug>/Users/adrianosantosmac/Library/MobileDevice/Provisioning Profiles/f0701fd5-2a87-4f52-a613-959b668a67c7.mobileprovision</PF_MobileProvisionPathDebug>
+        <PF_KeyChainAccessDebug>664YJA4Q63.br.com.adrianosantostreina.MultiLog4D;</PF_KeyChainAccessDebug>
+        <PF_AppIdentifierDebug>664YJA4Q63.br.com.adrianosantostreina.MultiLog4D</PF_AppIdentifierDebug>
+        <PF_EntitlementExtraKeyValuesDebug>&lt;key&gt;get-task-allow&lt;/key&gt;
+	&lt;true/&gt;
+	&lt;key&gt;com.apple.developer.team-identifier&lt;/key&gt;
+	&lt;string&gt;664YJA4Q63&lt;/string&gt;
+	</PF_EntitlementExtraKeyValuesDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
