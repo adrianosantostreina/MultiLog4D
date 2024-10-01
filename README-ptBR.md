@@ -3,7 +3,7 @@
     <img alt="MultiLog4D" src="https://github.com/adrianosantostreina/MultiLog4D/blob/master/logo.png">
   </a>  
 </p>
-
+</br>
 <p align="center">
   <img src="https://img.shields.io/github/v/release/adrianosantostreina/MultiLog4D?style=flat-square">
   <img src="https://img.shields.io/github/stars/adrianosantostreina/MultiLog4D?style=flat-square">
