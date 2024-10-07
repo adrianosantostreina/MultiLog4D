@@ -12,6 +12,7 @@ uses
   ,Androidapi.Helpers
   ,Androidapi.JNI.JavaTypes
   ,Androidapi.JNI.Util
+  ,MultiLog4D.Java.Interfaces
   {$ENDIF}
   ;
 
