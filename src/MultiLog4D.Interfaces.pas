@@ -34,8 +34,8 @@ type
         function EventID(const AEventID: UInt32): IMultiLog4D;
       {$ENDIF}
       function UserName(const AUserName: string): IMultiLog4D;
-      function EnableLog(const AEnable: Boolean = True): IMultiLog4D;
     {$ENDIF}
+    function EnableLog(const AEnable: Boolean = True): IMultiLog4D;
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D;
     function LogWriteInformation(const AMsg: string): IMultiLog4D;
     function LogWriteWarning(const AMsg: string): IMultiLog4D;
