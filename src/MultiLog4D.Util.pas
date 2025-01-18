@@ -28,8 +28,8 @@ type
     class procedure SetDateTimeFormat(const ADateTimeFormat: string); static;
     {$ENDIF}
     class procedure SetUserName(const AUserName: string); static;
-    class procedure SetEnableLog(const AEnableLog: Boolean = True); static;
     {$ENDIF}
+    class procedure SetEnableLog(const AEnableLog: Boolean = True); static;
   end;
 
 implementation
@@ -37,6 +37,7 @@ implementation
 class constructor TMultiLog4DUtil.Create;
 begin
   FLogger := TLogFactory.GetLogger;
+  SetEnableLog();
 end;
 
 class function TMultiLog4DUtil.Logger: IMultiLog4D;
@@ -83,13 +84,13 @@ begin
   if Assigned(FLogger) then
     FLogger.UserName(AUserName);
 end;
+{$ENDIF}
 
 class procedure TMultiLog4DUtil.SetEnableLog(const AEnableLog: Boolean = True);
 begin
   if Assigned(FLogger) then
     FLogger.EnableLog(AEnableLog);
 end;
-{$ENDIF}
 
 initialization
 TMultiLog4DUtil.Create;
