@@ -65,8 +65,8 @@ type
         function EventID(const AEventID: UInt32): IMultiLog4D; virtual;
       {$ENDIF}
       function UserName(const AUserName: string): IMultiLog4D; virtual;
-      function EnableLog(const AEnable: Boolean = True): IMultiLog4D; virtual;
     {$ENDIF}
+    function EnableLog(const AEnable: Boolean = True): IMultiLog4D; virtual;
     function LogWrite(const AMsg: string; const ALogType: TLogType): IMultiLog4D; virtual; abstract;
     function LogWriteInformation(const AMsg: string): IMultiLog4D; virtual; abstract;
     function LogWriteWarning(const AMsg: string): IMultiLog4D; virtual; abstract;
@@ -131,12 +131,6 @@ begin
   Result := Self as IMultiLog4D;
 end;
 
-function TMultiLog4DBase.EnableLog(const AEnable: Boolean = True): IMultiLog4D;
-begin
-  FEnableLog := AEnable;
-  Result := Self as IMultiLog4D;
-end;
-
 {$IFDEF MSWINDOWS}
 function TMultiLog4DBase.Output(const AOutput: TLogOutputSet): IMultiLog4D;
 begin
@@ -163,6 +157,11 @@ begin
 end;
 {$ENDIF}
 {$ENDIF}
+function TMultiLog4DBase.EnableLog(const AEnable: Boolean = True): IMultiLog4D;
+begin
+  FEnableLog := AEnable;
+  Result := Self as IMultiLog4D;
+end;
 
 function TMultiLog4DBase.GetLogPrefix(const ALogType: TLogType): string;
 begin
