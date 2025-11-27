@@ -92,12 +92,19 @@ begin
     FLogger.EnableLog(AEnableLog);
 end;
 
+{$IFDEF MSWINDOWS}
+var
+  FMulti: TMultiLog4DUtil;
+{$ENDIF}
+
 initialization
-TMultiLog4DUtil.Create;
+{$IFDEF MSWINDOWS}FMulti := {$ENDIF}TMultiLog4DUtil.Create;
 
 finalization
+{$IFDEF MSWINDOWS}
+FMulti.Free;
+{$ELSE}
 TMultiLog4DUtil.FLogger := nil;
+{$ENDIF}
 
 end.
-
-

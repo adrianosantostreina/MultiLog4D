@@ -157,4 +157,13 @@ end;
 initialization
   TMultiLogWriteToFile.FInstance := nil;
 
+{$IFDEF MSWINDOWS}
+finalization
+if Assigned(TMultiLogWriteToFile.FInstance) then
+begin
+  TMultiLogWriteToFile.FInstance.Free;
+  TMultiLogWriteToFile.FInstance := nil;
+end;
+{$ENDIF}
+
 end.
