@@ -16,6 +16,25 @@
 
 <b>MultiLog4D</b> is a library designed to facilitate and speed up the sending of logs to Android, iOS, Windows, macOS and Linux. With just one line of code, it is possible to send a message that will be seen and monitored on the corresponding platform, such as <b>adb logcat</b> on Android or <br>syslog</b> on Linux, for example.
 
+> ## ⚠️ Security notice — Telegram provider (v1.2.5)
+>
+> **v1.2.5** — the only release that shipped the Telegram provider before this one —
+> embedded a **third-party bot token and chat_id** inside the library itself (`MultiLog4D.Provider.Telegram.inc`), used as the constructor's
+> default values. Anyone calling `TMultiLog4DProviderTelegram.Create` **with no
+> arguments** was silently **publishing their logs to a third-party chat**.
+>
+> **What to do now:**
+> 1. **Upgrade to 2.0.0 or later.** Token and chat_id are now required: `Create`
+>    with no arguments no longer compiles, and empty values raise `EMultiLog4DConfig`.
+> 2. **Review what was exposed.** Treat every log message sent to Telegram by a
+>    v1.2.5 without an explicit destination as leaked — error messages,
+>    stack traces, user data, identifiers.
+> 3. **If you used the token that shipped in the `.inc`, it is compromised** — revoke
+>    it via [@BotFather](https://t.me/BotFather) with `/revoke` and use your own bot.
+>
+> Details in the [CHANGELOG](CHANGELOG.md) and [`docs/providers/telegram.md`](docs/providers/telegram.md).
+
+
 ## 🪄 Installation
 Just download the sources from GitHub, unzip them in a folder of your choice and point to this folder in your project's <b><i>Search Path</i></b> or, if you prefer, you can use Boss (Delphi's dependency manager) to perform the installation:
 ```
@@ -271,6 +290,13 @@ Sends log messages directly to a Telegram chat or group via Bot API.
 **Setup:**
 1. Talk to [@BotFather](https://t.me/BotFather) on Telegram → `/newbot` → copy the token
 2. Get your Chat ID via [@userinfobot](https://t.me/userinfobot) or the `getUpdates` API endpoint
+
+> **Token and Chat ID are required.** The library has **no default destination**:
+> `Create` with no arguments does not compile, and an empty token or chat_id raises
+> `EMultiLog4DConfig`. Read the credentials from your application's configuration
+> (`.ini`, `.json`, environment variable, secret vault) — never hardcode or commit
+> them. See the [security notice](#️-security-notice--telegram-provider-v125)
+> if you used the provider on v1.2.5.
 
 **Minimal usage:**
 ```pascal
