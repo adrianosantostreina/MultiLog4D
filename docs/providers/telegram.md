@@ -25,29 +25,53 @@ O `TMultiLog4DProviderTelegram` envia mensagens de log diretamente para um chat 
 
 ---
 
-## 3. Configuração via `.inc`
+## 3. Credenciais: obrigatórias e externas à biblioteca
 
-### Biblioteca (`src/Providers/MultiLog4D.Provider.Telegram.inc`)
+> **Aviso de segurança.** Até a versão **1.2.5**, o construtor aceitava valores
+> padrão para token e chat_id, definidos em `MultiLog4D.Provider.Telegram.inc`.
+> Chamar `TMultiLog4DProviderTelegram.Create` sem argumentos enviava os logs
+> para o destino embutido — um chat de terceiros. Se você usou o provider
+> Telegram na v1.2.5, veja a
+> [nota de segurança no CHANGELOG](../../CHANGELOG.md#200---2026-08-29).
 
-Edite os valores padrão usados quando nenhum parâmetro é passado ao construtor:
+A partir da **2.0.0**, `AToken` e `AChatID` são **parâmetros obrigatórios**.
+A biblioteca não tem destino padrão: `Create` sem argumentos **não compila**, e
+token ou chat_id vazio levanta `EMultiLog4DConfig`.
+
+As credenciais devem vir da configuração da **sua aplicação** — arquivo
+`.ini`/`.json`, variável de ambiente, cofre de segredos — nunca de uma constante
+da biblioteca e nunca commitadas.
+
+```pascal
+LProvider := TMultiLog4DProviderTelegram.Create(
+  LConfig.ReadString('Telegram', 'Token', ''),
+  LConfig.ReadString('Telegram', 'ChatID', ''));
+```
+
+### Defaults de comportamento (`src/Providers/MultiLog4D.Provider.Telegram.inc`)
+
+O `.inc` da biblioteca guarda apenas defaults de comportamento — **nenhuma
+credencial**:
 
 ```pascal
 const
-  ML4D_TELEGRAM_DEFAULT_TOKEN      = 'seu_token_aqui';
-  ML4D_TELEGRAM_DEFAULT_CHAT_ID    = 'seu_chat_id_aqui';
   ML4D_TELEGRAM_DEFAULT_PARSE_MODE = tpmMarkdown;
   ML4D_TELEGRAM_DEFAULT_LOG_FILTER = [ltWarning, ltError, ltFatalError];
 ```
 
 ### Samples (`Samples/Providers/Telegram/TelegramConfig.inc`)
 
-Compartilhado pelos três samples. Preencha antes de compilar qualquer sample:
+Usado pelo sample console. Preencha **localmente** antes de compilar e não
+commite os valores preenchidos:
 
 ```pascal
 const
   TELEGRAM_BOT_TOKEN = 'seu_token_aqui';
   TELEGRAM_CHAT_ID   = 'seu_chat_id_aqui';
 ```
+
+Os samples desktop e Android leem token e chat_id de campos do formulário — não
+há credencial embutida neles.
 
 ---
 
