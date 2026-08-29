@@ -27,7 +27,7 @@ um dos vazamentos estava.
 
 | # | Local | Achado | Tratamento |
 |---|---|---|---|
-| 1 | `src/Providers/MultiLog4D.Provider.Telegram.inc:14-15` | Token de bot e chat_id reais, usados como valor padrão do construtor | Constantes **removidas**. O `.inc` guarda apenas defaults de comportamento. Token **a revogar** no @BotFather. |
+| 1 | `src/Providers/MultiLog4D.Provider.Telegram.inc:14-15` | Token de bot e chat_id reais, usados como valor padrão do construtor | Constantes **removidas**. O `.inc` guarda apenas defaults de comportamento. Token **revogado** no @BotFather. |
 | 2 | `Samples/Providers/Telegram/desktop/UMain.dfm:42,51` | Mesmo token e chat_id pré-preenchidos nas propriedades `Text` dos `TEdit` | Propriedades `Text` **removidas**; os campos abrem vazios, com `TextHint`. |
 
 Nenhum outro provider embute credenciais: hoje existem apenas
@@ -60,4 +60,4 @@ A remoção só limpa o **HEAD**. O token continua no **histórico do Git** (des
 commit `ac9a88e`) e em todo clone ou fork feito antes desta correção. Reescrever
 o histórico com `git filter-repo` reescreveria todos os SHAs e ainda assim não
 alcançaria clones de terceiros. **O que efetivamente resolve é a revogação do
-token no @BotFather** — tratada como o passo 1 desta correção.
+token no @BotFather** — feita como o passo 1 desta correção, antes da publicação.

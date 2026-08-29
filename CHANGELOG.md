@@ -47,9 +47,16 @@ São dois defeitos somados:
    comprometido.** Revogue-o no [@BotFather](https://t.me/BotFather) com `/revoke`
    e crie um bot próprio.
 
-O token exposto permanece no histórico do Git — clones e forks antigos seguem com
-ele, e removê-lo do HEAD não o invalida. Por isso o que efetivamente resolve é a
-**revogação do token no @BotFather**, e não a limpeza do código.
+**O token exposto foi revogado no @BotFather e não autentica mais.** Essa é a
+medida que efetivamente resolve: o token permanece no histórico do Git — clones e
+forks anteriores a esta correção seguem com ele — e removê-lo do HEAD não o
+invalidaria.
+
+Consequência prática: uma aplicação ainda rodando a v1.2.5 e apoiada no destino
+padrão simplesmente **deixa de entregar** os logs (a Bot API passa a responder
+`401 Unauthorized`). O provider não levanta exceção nesse caso — a resposta HTTP
+não é checada —, então a falha é silenciosa. Atualize para a 2.0.0 e configure um
+bot próprio.
 
 ### Changed — BREAKING
 

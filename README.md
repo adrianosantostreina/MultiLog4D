@@ -29,8 +29,10 @@
 > 2. **Review what was exposed.** Treat every log message sent to Telegram by a
 >    v1.2.5 without an explicit destination as leaked — error messages,
 >    stack traces, user data, identifiers.
-> 3. **If you used the token that shipped in the `.inc`, it is compromised** — revoke
->    it via [@BotFather](https://t.me/BotFather) with `/revoke` and use your own bot.
+> 3. **The token that shipped in the `.inc` has been revoked** and no longer
+>    authenticates. If your application relied on it, it **stopped delivering logs
+>    silently** — create your own bot via [@BotFather](https://t.me/BotFather) and
+>    pass token and chat_id explicitly.
 >
 > Details in the [CHANGELOG](CHANGELOG.md) and [`docs/providers/telegram.md`](docs/providers/telegram.md).
 

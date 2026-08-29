@@ -31,8 +31,10 @@
 > 2. **Revise o que foi exposto.** Considere vazado todo conteúdo de log enviado ao
 >    Telegram pela v1.2.5 sem destino explícito — mensagens de erro,
 >    stack traces, dados de usuário, identificadores.
-> 3. **Se você usou o token que vinha no `.inc`, ele está comprometido** — revogue-o
->    no [@BotFather](https://t.me/BotFather) com `/revoke` e use um bot próprio.
+> 3. **O token que vinha no `.inc` já foi revogado** e não autentica mais. Se sua
+>    aplicação dependia dele, ela **parou de entregar logs em silêncio** — crie um
+>    bot próprio no [@BotFather](https://t.me/BotFather) e informe token e chat_id
+>    explicitamente.
 >
 > Detalhes no [CHANGELOG](CHANGELOG.md) e em [`docs/providers/telegram.md`](docs/providers/telegram.md).
 
