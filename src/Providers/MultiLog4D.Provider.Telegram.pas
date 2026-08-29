@@ -27,9 +27,9 @@ type
     function FormatMessage(const AEntry: TMultiLog4DLogEntry): string;
     function LogTypeLabel(const ALogType: TLogType): string;
   public
-    constructor Create(
-      const AToken  : string = ML4D_TELEGRAM_DEFAULT_TOKEN;
-      const AChatID : string = ML4D_TELEGRAM_DEFAULT_CHAT_ID);
+    { AToken e AChatID sao OBRIGATORIOS. A biblioteca nao possui destino padrao:
+      chamar Create sem informar o destino levanta EMultiLog4DConfig. }
+    constructor Create(const AToken, AChatID: string);
     procedure WriteLog(const AEntry: TMultiLog4DLogEntry); override;
     property ParseMode: TMultiLog4DTelegramParseMode
       read FParseMode write FParseMode default tpmMarkdown;
@@ -39,8 +39,18 @@ implementation
 
 constructor TMultiLog4DProviderTelegram.Create(const AToken, AChatID: string);
 begin
-  inherited Create(Format('https://api.telegram.org/bot%s/sendMessage', [AToken]));
-  FChatID       := AChatID;
+  if AToken.Trim.IsEmpty then
+    raise EMultiLog4DConfig.Create(
+      'MultiLog4D: informe o token do seu bot do Telegram. ' +
+      'A biblioteca nao possui um destino padrao.');
+
+  if AChatID.Trim.IsEmpty then
+    raise EMultiLog4DConfig.Create(
+      'MultiLog4D: informe o chat_id de destino do Telegram. ' +
+      'A biblioteca nao possui um destino padrao.');
+
+  inherited Create(Format('https://api.telegram.org/bot%s/sendMessage', [AToken.Trim]));
+  FChatID       := AChatID.Trim;
   FParseMode    := ML4D_TELEGRAM_DEFAULT_PARSE_MODE;
   LogTypeFilter := ML4D_TELEGRAM_DEFAULT_LOG_FILTER;
   AddHeader('Content-Type', 'application/json');

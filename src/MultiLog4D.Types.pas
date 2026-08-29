@@ -22,6 +22,11 @@ type
   TLogOutputSet = set of TLogOutput;
   {$ENDIF}
 
+  { Levantada quando um provider e instanciado sem a configuracao obrigatoria
+    (token, chave, endpoint, destino). A biblioteca nao possui destinos padrao:
+    configuracao ausente falha alto, nunca envia para um lugar arbitrario. }
+  EMultiLog4DConfig = class(Exception);
+
 const
   EventCategoryNames: array[TEventCategory] of string = (
     'None',

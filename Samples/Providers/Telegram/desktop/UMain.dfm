@@ -39,7 +39,6 @@ object FormTelegramDesktop: TFormTelegramDesktop
       Width = 432
       Height = 21
       TabOrder = 0
-      Text = '8793713206:AAFNz985vaIYmX91gnH_8LwSXqh3uKHWcc8'
       TextHint = 'Cole seu bot token aqui'
     end
     object edtChatID: TEdit
@@ -48,7 +47,6 @@ object FormTelegramDesktop: TFormTelegramDesktop
       Width = 432
       Height = 21
       TabOrder = 1
-      Text = '-5287646884'
       TextHint = 'Cole seu chat ID aqui'
     end
   end

@@ -17,6 +17,28 @@
 # MultiLog4D
 <b>MultiLog4D</b> é uma biblioteca projetada para facilitar e agilizar o envio de logs para Android, iOS, Windows, macOS e Linux. Com apenas uma linha de código é possível enviar uma mensagem que será vista e monitorada na plataforma correspondente, como <b>adb logcat</b> no Android ou <br>syslog</b> no Linux, como exemplo.
 
+> ## ⚠️ Aviso de segurança — provider Telegram (v1.2.5)
+>
+> A **v1.2.5** — única release que trouxe o provider Telegram antes desta — embutia
+> um **token e um chat_id de terceiros** no código da
+> biblioteca (`MultiLog4D.Provider.Telegram.inc`), usados como valores padrão do
+> construtor. Quem chamou `TMultiLog4DProviderTelegram.Create` **sem argumentos**
+> estava, sem qualquer erro ou aviso, **publicando seus logs em um chat de terceiros**.
+>
+> **O que fazer agora:**
+> 1. **Atualize para a 2.0.0 ou superior.** Nela token e chat_id são obrigatórios:
+>    `Create` sem argumentos não compila e valores vazios levantam `EMultiLog4DConfig`.
+> 2. **Revise o que foi exposto.** Considere vazado todo conteúdo de log enviado ao
+>    Telegram pela v1.2.5 sem destino explícito — mensagens de erro,
+>    stack traces, dados de usuário, identificadores.
+> 3. **O token que vinha no `.inc` já foi revogado** e não autentica mais. Se sua
+>    aplicação dependia dele, ela **parou de entregar logs em silêncio** — crie um
+>    bot próprio no [@BotFather](https://t.me/BotFather) e informe token e chat_id
+>    explicitamente.
+>
+> Detalhes no [CHANGELOG](CHANGELOG.md) e em [`docs/providers/telegram.md`](docs/providers/telegram.md).
+
+
 ## 🪄 Instalação
 Basta baixar os fontes do GitHub, descompactar em uma pasta de sua preferência e no seu projeto apontar para essa pasta no <b><i>Search Path</i></b> do projeto ou se preferir pode utilizar o Boss (gerenciador de dependências do Delphi) para realizar a instalação:
 ```
@@ -269,6 +291,13 @@ Envia mensagens de log diretamente para um chat ou grupo do Telegram via Bot API
 **Configuração:**
 1. Converse com [@BotFather](https://t.me/BotFather) no Telegram → `/newbot` → copie o token
 2. Obtenha o Chat ID via [@userinfobot](https://t.me/userinfobot) ou pelo endpoint `getUpdates` da API
+
+> **Token e Chat ID são obrigatórios.** A biblioteca **não tem destino padrão**:
+> `Create` sem argumentos não compila, e token ou chat_id vazio levanta
+> `EMultiLog4DConfig`. Leia as credenciais da configuração da sua aplicação
+> (`.ini`, `.json`, variável de ambiente, cofre de segredos) — nunca as escreva no
+> código nem as commite. Veja o [aviso de segurança](#️-aviso-de-segurança--provider-telegram-v125)
+> se você usou o provider na v1.2.5.
 
 **Uso mínimo:**
 ```pascal
